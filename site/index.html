@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Penny – a private budget app for Windows</title>
 <meta name="description" content="Write what you spent the way you'd say it. Penny reads your bank statements, keeps every number on your PC, and tells you what's safe to spend today. Free during the beta.">
 <meta property="og:title" content="Penny – every cent, in focus">
 <meta property="og:description" content="A private budget app for Windows. No account, no bank login, no cloud.">
-<meta property="og:image" content="img/og.jpg">
+<meta property="og:image" content="https://abdallhhelles.github.io/Penny/img/og.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#10201D">
 <link rel="icon" type="image/svg+xml" href="img/penny-mark.svg">
 <link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preload" href="fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face{font-family:'Sora';src:url('fonts/sora-latin.woff2') format('woff2');font-weight:100 800;font-display:swap;
   unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+FEFF,U+FFFD}
@@ -20,211 +21,338 @@
   unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1EFF,U+20A0-20C0,U+2C60-2C7F,U+A720-A7FF}
 
 :root{
-  --ever:#10201D;      /* evergreen night: the app's dark theme */
-  --fir:#1B302C;       /* raised evergreen */
+  --ever:#10201D;      /* evergreen night (the app's dark theme) */
+  --fir:#1A2E2A;       /* raised evergreen */
   --moss:#2C4540;      /* lines on evergreen */
-  --paper:#FBF6EF;     /* receipt paper / cream */
-  --sand:#EFE6D8;      /* paper shade */
-  --ink:#14211F;       /* text on paper */
-  --muted:#5B6664;     /* quiet text on paper */
-  --sage:#A9B8B4;      /* quiet text on evergreen */
-  --copper:#C9632F;    /* the coin */
-  --copper-hi:#EE9A5C; /* copper on dark */
-  --slice:#2BB89A;     /* the green slice */
-  --red:#E2675C;
-  --font:'Sora',"Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;
-  --wrap:1180px;
-  --gut:clamp(20px,5vw,56px);
+  --paper:#FBF6EF;     /* receipt paper */
+  --sand:#F1E8DB;      /* paper shade */
+  --rule:#E3D8C8;      /* lines on paper */
+  --ink:#14211F;
+  --muted:#5B6664;
+  --sage:#A9B8B4;
+  --copper:#C9632F;
+  --copper-dk:#B5532A;
+  --copper-hi:#EE9A5C;
+  --slice:#2BB89A;
+  --greenbar:#DDEBDD;  /* the bank printout's green bands */
+  --red:#D9574A;
+  --font:'Sora',"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"Cascadia Mono","Consolas","SF Mono","Menlo",ui-monospace,monospace;
+  --wrap:1200px;
+  --gut:clamp(20px,5vw,64px);
+  --sect:clamp(88px,11vw,152px);
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:var(--font);background:var(--ever);color:var(--paper);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 0;overflow-x:hidden}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:84px}
+body{font-family:var(--font);background:var(--ever);color:var(--paper);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit}
-img{display:block;max-width:100%}
+img,svg{display:block}
 button,input{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--copper-hi);outline-offset:3px;border-radius:6px}
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
+:focus-visible{outline:3px solid var(--copper-hi);outline-offset:3px;border-radius:8px}
+.wrap{width:100%;max-width:calc(var(--wrap) + 2*var(--gut));margin:0 auto;padding:0 var(--gut)}
 .num{font-variant-numeric:tabular-nums}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ---------- type scale (major third on 17px) ---------- */
+h1,h2{font-weight:700;letter-spacing:-.042em;line-height:1.02;text-wrap:balance}
+h1{font-size:clamp(42px,5.6vw,80px)}
+h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
+.sub{margin-top:20px;font-size:clamp(17px,1.45vw,20px);line-height:1.55;max-width:34em;text-wrap:pretty}
 
 /* ---------- top bar ---------- */
-.bar{position:sticky;top:0;z-index:20;background:rgba(16,32,29,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s}
-.bar.scrolled{border-color:var(--moss)}
-.bar .wrap{display:flex;align-items:center;gap:20px;height:68px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:23px;letter-spacing:-.8px}
+.bar{position:sticky;top:0;z-index:30;background:rgba(16,32,29,.86);backdrop-filter:saturate(1.2) blur(16px);-webkit-backdrop-filter:saturate(1.2) blur(16px);box-shadow:0 1px 0 transparent;transition:box-shadow .3s}
+.bar.scrolled{box-shadow:0 1px 0 var(--moss)}
+.bar .wrap{display:flex;align-items:center;gap:28px;height:72px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:24px;letter-spacing:-.04em}
 .brand svg{width:30px;height:30px}
-.bar nav{margin-left:auto;display:flex;gap:26px;font-size:15px;color:var(--sage)}
-.bar nav a{text-decoration:none}.bar nav a:hover{color:var(--paper)}
-.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 22px;border-radius:999px;border:0;font-weight:600;font-size:16px;text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform .15s,background .2s}
+.bar nav{margin-left:auto;display:flex;gap:28px;font-size:15px;color:var(--sage)}
+.bar nav a{text-decoration:none;padding:6px 0}.bar nav a:hover{color:var(--paper)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 24px;border-radius:999px;border:0;font-weight:600;font-size:16px;letter-spacing:-.01em;text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform .15s,background-color .2s,box-shadow .2s}
 .btn:active{transform:scale(.97)}
-.btn.copper{background:var(--copper);color:#fff}.btn.copper:hover{background:#B5532A}
-.btn.ghost{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 1.5px var(--moss)}.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--sage)}
-.btn.sm{height:40px;padding:0 18px;font-size:15px}
 .btn svg{width:18px;height:18px;flex:none}
-@media(max-width:760px){.bar nav{display:none}.bar .btn{margin-left:auto}}
+.btn.copper{background:var(--copper);color:#fff}.btn.copper:hover{background:var(--copper-dk)}
+.btn.ghost{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 1.5px var(--moss)}.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--sage)}
+.btn.sm{height:42px;padding:0 20px;font-size:15px}
+@media(max-width:820px){.bar nav{display:none}.bar .btn{margin-left:auto}}
 
-/* ---------- hero: say it, and the receipt prints ---------- */
-.hero{position:relative;padding:56px 0 110px;overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(32px,6vw,90px);align-items:start}
-.hero h1{font-weight:700;font-size:clamp(40px,5.2vw,74px);line-height:1;letter-spacing:-.045em;max-width:12ch}
-.hero h1 span{display:block;color:var(--sage);font-weight:500}
-.lede{margin-top:22px;font-size:clamp(18px,1.6vw,21px);color:var(--sage);max-width:34em}
-.say{margin-top:32px;background:var(--fir);border-radius:22px;padding:8px;box-shadow:inset 0 0 0 1px var(--moss)}
-.say form{display:flex;gap:8px}
-.say input{flex:1;min-width:0;height:60px;background:var(--ever);border:0;border-radius:16px;padding:0 20px;font-size:19px;letter-spacing:-.2px;outline:0}
-.say input::placeholder{color:#6F807C}
-.say input:focus{box-shadow:inset 0 0 0 2px var(--copper-hi)}
-.say button{height:60px;padding:0 24px;border-radius:16px;border:0;background:var(--copper);color:#fff;font-weight:600;cursor:pointer}
-.say button:hover{background:#B5532A}
-.read{display:flex;flex-wrap:wrap;gap:6px;padding:12px 10px 6px;min-height:52px;align-items:center}
-.read .k{display:inline-flex;align-items:baseline;gap:7px;padding:6px 12px;border-radius:10px;background:var(--ever);font-size:14px}
-.read .k small{color:var(--sage);font-size:12px}
-.read .hint{color:var(--sage);font-size:14px;padding:6px 4px}
-.tries{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;align-items:center}
-.tries .lbl{font-size:14px;color:var(--sage);margin-right:4px}
-.tries button{border:0;background:none;box-shadow:inset 0 0 0 1px var(--moss);border-radius:999px;padding:7px 14px;font-size:14px;cursor:pointer;color:var(--paper)}
-.tries button:hover{box-shadow:inset 0 0 0 1px var(--copper-hi);color:var(--copper-hi)}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:44px;align-items:center}
-.cta small{color:var(--sage);font-size:14px;flex-basis:100%}
+/* =====================================================================
+   HERO — say it, and the receipt prints
+   ===================================================================== */
+.hero{position:relative;padding:clamp(40px,6vw,88px) 0 clamp(96px,10vw,140px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,400px);gap:clamp(36px,5vw,72px);align-items:start}
+.hero h1{font-size:clamp(40px,4.15vw,62px);line-height:1.04}
+.hero h1 .l1,.hero h1 .l2{display:block;white-space:nowrap}
+.hero h1 .l2{color:var(--sage);font-weight:500}
+@media(max-width:960px){.hero h1{font-size:clamp(40px,8.4vw,64px)}}
+@media(max-width:520px){.hero h1 .l1,.hero h1 .l2{white-space:normal}}
+.hero .sub{color:var(--sage);margin-top:24px;max-width:31em}
 
-/* the receipt: the one memorable object on the page */
-.till{position:relative;justify-self:end;width:min(100%,400px);padding-top:18px}
-.slot{position:absolute;top:0;left:-14px;right:-14px;height:30px;border-radius:15px;background:#0A1513;box-shadow:inset 0 3px 10px rgba(0,0,0,.6),0 1px 0 var(--moss);z-index:2}
-.paper{position:relative;margin-top:-4px;background:var(--paper);color:var(--ink);padding:34px 28px 26px;transform:rotate(-1.4deg);transform-origin:top center;
-  box-shadow:0 30px 60px rgba(0,0,0,.35),0 2px 0 rgba(0,0,0,.05);
-  -webkit-mask:radial-gradient(circle 7px at 50% 100%,#0000 98%,#000) 0 0/18px 100% repeat-x;mask:radial-gradient(circle 7px at 50% 100%,#0000 98%,#000) 0 0/18px 100% repeat-x;
-  padding-bottom:40px;transition:transform .5s}
-.paper::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 27px,rgba(20,33,31,.025) 27px 28px);pointer-events:none}
-.r-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:16px;border-bottom:1.5px dashed #D9CDBB}
-.r-head b{font-size:20px;letter-spacing:-.6px;display:flex;align-items:center;gap:8px}.r-head b svg{width:22px;height:22px}
+.say{margin-top:36px;max-width:620px}
+.say form{display:flex;align-items:center;gap:8px;padding:8px;background:var(--fir);border-radius:20px;box-shadow:inset 0 0 0 1px var(--moss);transition:box-shadow .2s}
+.say form:focus-within{box-shadow:inset 0 0 0 2px var(--copper-hi)}
+.say .ic{margin-left:12px;color:var(--copper-hi);width:22px;height:22px}
+.say input{flex:1;min-width:0;height:56px;background:transparent;border:0;padding:0 6px;font-size:19px;letter-spacing:-.01em;outline:0}
+.say input::placeholder{color:#71837F}
+.say button{flex:none;height:56px;padding:0 22px;border-radius:14px;border:0;background:var(--copper);color:#fff;font-weight:600;cursor:pointer;transition:background-color .2s}
+.say button:hover{background:var(--copper-dk)}
+.read{display:grid;grid-template-columns:repeat(4,minmax(0,auto));justify-content:start;gap:8px;margin-top:12px;min-height:60px}
+.read .k{display:flex;flex-direction:column;justify-content:center;padding:8px 14px;border-radius:12px;background:var(--fir);min-width:0}
+.read .k small{color:var(--sage);font-size:12px;line-height:1.3}
+.read .k span{font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:6px}
+.read .k .ic{width:16px;height:16px;color:var(--copper-hi)}
+.read .hint{grid-column:1/-1;color:var(--sage);font-size:15px;align-self:center;padding:0 4px}
+.tries{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.tries button{border:0;background:none;box-shadow:inset 0 0 0 1px var(--moss);border-radius:999px;padding:8px 14px;font-size:14px;line-height:1.2;cursor:pointer;color:var(--sage);transition:color .2s,box-shadow .2s}
+.tries button:hover{box-shadow:inset 0 0 0 1px var(--copper-hi);color:var(--paper)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px;align-items:center}
+.cta p{color:var(--sage);font-size:14px;flex-basis:100%;margin-top:2px}
+
+/* the till: a printer slot with a strip of paper coming out of it */
+.till{position:relative;width:100%;max-width:420px;justify-self:end;align-self:center}
+.slot{position:relative;z-index:2;height:34px;margin:0 -14px;border-radius:17px;background:linear-gradient(#08120F,#0C1916);box-shadow:inset 0 2px 8px rgba(0,0,0,.7),0 1px 0 rgba(255,255,255,.06)}
+.slot::after{content:"";position:absolute;right:20px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--slice);box-shadow:0 0 10px var(--slice);opacity:.9}
+.slot.busy::after{animation:blink .25s steps(2) 4}
+@keyframes blink{50%{opacity:.2}}
+.paper{position:relative;margin:-17px 0 0;padding:44px 28px 46px;background:var(--paper);color:var(--ink);transform:rotate(-1.2deg);transform-origin:50% 0;
+  box-shadow:0 34px 60px -18px rgba(0,0,0,.55);
+  --zz:radial-gradient(circle 7.5px at 50% 100%,#0000 97%,#000) 0 0/18px 100% repeat-x;-webkit-mask:var(--zz);mask:var(--zz)}
+.paper::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.08),transparent 26px)}
+.r-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:16px;border-bottom:1.5px dashed #D3C6B3}
+.r-head b{font-size:21px;letter-spacing:-.05em;display:flex;align-items:center;gap:8px}.r-head b svg{width:22px;height:22px;align-self:center}
 .r-head span{font-size:13px;color:var(--muted)}
-.lines{list-style:none;overflow:hidden}
-.line{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;padding:13px 0;border-bottom:1px dotted #DDD2C2}
-.line .dot{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:15px;background:var(--sand)}
-.line b{font-weight:600;font-size:16px;letter-spacing:-.2px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.line small{display:block;font-size:12.5px;color:var(--muted);font-weight:400;margin-top:1px}
-.line .amt{font-weight:600;font-size:16px}
+.lines{list-style:none}
+.line{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:14px;align-items:center;padding:13px 0;border-bottom:1px dotted #D9CDBC}
+.line i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--sand);color:var(--ink)}
+.line i .ic{width:18px;height:18px;stroke-width:1.8}
+.line b{display:block;font-weight:600;font-size:16px;letter-spacing:-.015em;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.line small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.line .amt{font-weight:600;font-size:16px;text-align:right}
 .line .amt.in{color:#0F7563}
-.line.new{animation:feed .7s cubic-bezier(.2,.8,.2,1)}
-@keyframes feed{from{opacity:0;transform:translateY(-34px);max-height:0}to{opacity:1;transform:none;max-height:90px}}
-.r-foot{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding-top:16px;font-size:14px;color:var(--muted)}
-.r-foot .big{color:var(--ink);font-weight:700;font-size:26px;letter-spacing:-.8px;grid-column:2}
-.r-foot .lab{align-self:end;padding-bottom:5px}
-.r-note{margin-top:14px;font-size:12.5px;color:var(--muted);text-align:center}
-@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}.till{justify-self:center;margin-top:20px}}
-@media(max-width:520px){.say form{flex-direction:column}.say input{flex:none;height:56px;font-size:17px}.say button{height:52px}.coin{width:360px;height:360px;right:-160px;top:-40px}}
+.line.new{animation:print .9s cubic-bezier(.25,.9,.3,1) both}
+@keyframes print{0%{opacity:0;clip-path:inset(0 0 100% 0)}35%{opacity:1}100%{opacity:1;clip-path:inset(0 0 0 0)}}
+.paper.feed{animation:feed .9s cubic-bezier(.25,.9,.3,1)}
+@keyframes feed{0%{translate:0 -56px}100%{translate:0 0}}
+.totals{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:4px 16px;padding-top:18px;font-size:14px;color:var(--muted)}
+.totals .big,.totals .safe{justify-self:end;text-align:right}
+.totals .big{font-size:30px;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1.1}
+.totals .safe{font-weight:600;color:var(--ink);font-size:15px}
+.totals .safe.low{color:var(--red)}
+.r-note{margin-top:18px;padding-top:14px;border-top:1.5px dashed #D3C6B3;font-size:12.5px;color:var(--muted);text-align:center}
+@media(max-width:960px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.till{justify-self:center;margin-top:12px}}
+@media(max-width:560px){
+  .say form{flex-wrap:wrap}.say input{flex-basis:calc(100% - 48px);height:52px;font-size:17px}.say form button{flex-basis:100%;height:50px}
+  .read{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cta .btn{flex:1 1 100%}
+  .paper{padding:40px 20px 44px}
+}
 
-/* ---------- paper sections ---------- */
+/* =====================================================================
+   STATEMENTS — the bank's printout next to Penny's list
+   ===================================================================== */
 .paperband{background:var(--paper);color:var(--ink)}
-section{padding:clamp(80px,11vw,140px) 0}
-h2{font-weight:700;font-size:clamp(34px,4.6vw,60px);line-height:1.02;letter-spacing:-.04em;max-width:16ch}
-.sub{margin-top:20px;font-size:19px;max-width:36em}
+.shead{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,80px);align-items:end}
+.shead h2{max-width:none}.shead .sub{margin-top:0;padding-bottom:6px}
+@media(max-width:900px){.shead{grid-template-columns:minmax(0,1fr);gap:0}.shead .sub{margin-top:20px}}
 .paperband .sub{color:var(--muted)}
-.ever .sub{color:var(--sage)}
+.statements{padding:var(--sect) 0}
+.compare{margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:minmax(0,1.15fr) 88px minmax(0,1fr);align-items:stretch}
+.form{position:relative;padding:22px 34px 22px 44px;background:#fff;box-shadow:0 1px 0 var(--rule),0 18px 40px -24px rgba(20,33,31,.35);
+}
+.form::before,.form::after{content:"";position:absolute;top:0;bottom:0;width:30px;background:radial-gradient(circle 5px,var(--paper) 96%,#0000) 50% 6px/30px 26px repeat-y}
+.form::before{left:0;border-right:1px dashed #CFC5B7}.form::after{right:0;border-left:1px dashed #CFC5B7;width:22px;background-size:22px 26px}
+.form .t{display:flex;align-items:center;height:32px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#6E8A73}
+.form .row:nth-child(odd){background:var(--greenbar);box-shadow:-44px 0 0 var(--greenbar),34px 0 0 var(--greenbar)}
+.form .row{height:52px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:13.5px;color:#2C3B33;letter-spacing:-.01em}
+.form .row span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.form .row span:last-child{flex:none;color:#4F6655}
+.arrows{display:flex;flex-direction:column;padding-top:54px}
+.arrows i{height:52px;display:grid;place-items:center;color:#C8BBA8;transition:color .4s}
+.arrows svg{width:44px;height:14px}
+.list-clean{padding:22px 0 22px 4px}
+.list-clean .t{display:flex;align-items:center;height:32px;font-size:13px;color:var(--muted)}
+.list-clean .row{height:52px;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:14px;align-items:center;border-bottom:1px solid var(--rule)}
+.list-clean .row:last-child{border-bottom:0}
+.list-clean i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--sand)}
+.list-clean i .ic{width:18px;height:18px}
+.list-clean b{font-weight:600;font-size:17px;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list-clean small{display:block;font-weight:400;font-size:12.5px;color:var(--muted);letter-spacing:0}
+.list-clean .amt{font-weight:600;font-size:15px}
+.list-clean .row>*{opacity:.13;filter:grayscale(1);transition:opacity .45s,filter .45s}
+.tidied .list-clean .row>*{opacity:1;filter:none}
+.tidied .arrows i{color:var(--copper)}
+.tidied .list-clean .row:nth-child(3)>*{transition-delay:.06s}.tidied .list-clean .row:nth-child(4)>*{transition-delay:.12s}.tidied .list-clean .row:nth-child(5)>*{transition-delay:.18s}
+.tidied .list-clean .row:nth-child(6)>*{transition-delay:.24s}.tidied .list-clean .row:nth-child(7)>*{transition-delay:.3s}.tidied .list-clean .row:nth-child(8)>*{transition-delay:.36s}
+.tidied .arrows i:nth-child(3){transition-delay:.06s}.tidied .arrows i:nth-child(4){transition-delay:.12s}.tidied .arrows i:nth-child(5){transition-delay:.18s}.tidied .arrows i:nth-child(6){transition-delay:.24s}.tidied .arrows i:nth-child(7){transition-delay:.3s}
+.waiting{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-weight:600;font-size:16px;color:var(--ink);transition:opacity .3s;pointer-events:none}
+.list-clean{position:relative}.tidied .waiting{opacity:0}
+.tidy-act{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;align-items:center}
+.tidy-act .own{flex:1 1 360px;display:flex;align-items:center;gap:10px;height:50px;padding:0 6px 0 20px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--rule)}
+.tidy-act .own:focus-within{box-shadow:inset 0 0 0 2px var(--copper)}
+.tidy-act input{flex:1;min-width:0;height:100%;border:0;background:none;outline:0;font-family:var(--mono);font-size:14px;color:var(--ink)}
+.tidy-act output{flex:none;max-width:48%;padding:7px 14px;border-radius:999px;background:var(--sand);font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tidy-act output:empty{display:none}
+.banks{margin-top:40px;font-size:15px;color:var(--muted);max-width:56em}
+.banks b{color:var(--ink);font-weight:600}
+@media(max-width:880px){
+  .compare{grid-template-columns:minmax(0,1fr)}
+  .arrows{flex-direction:row;justify-content:center;padding:14px 0}.arrows i{display:none}.arrows i:first-child{display:grid;height:auto;transform:rotate(90deg)}
+  .form{padding:20px 22px 20px 40px}.form::after{display:none}
+  .form .row:nth-child(odd){box-shadow:-40px 0 0 var(--greenbar),22px 0 0 var(--greenbar)}
+}
 
-/* bank text tidy-up */
-.tidy{margin-top:56px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-top:2px solid var(--ink)}
-.tidy .col-h{display:flex;justify-content:space-between;align-items:center;padding:14px 0;font-size:14px;color:var(--muted);border-bottom:1px solid #E3D8C8}
-.tidy .col:last-child{padding-left:clamp(16px,4vw,48px);border-left:1px solid #E3D8C8}
-.tidy .col:first-child{padding-right:clamp(16px,4vw,48px)}
-.row{height:58px;display:flex;align-items:center;border-bottom:1px solid #EDE4D7;overflow:hidden}
-.raw{font-family:"Cascadia Mono",Consolas,"SFMono-Regular",ui-monospace,monospace;font-size:13.5px;color:#6C625A;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.clean{font-weight:600;font-size:18px;letter-spacing:-.3px;opacity:.18;transition:opacity .45s,transform .45s;transform:translateX(-10px)}
-.tidied .clean{opacity:1;transform:none}
-.tidied .row:nth-child(2) .clean{transition-delay:.05s}.tidied .row:nth-child(3) .clean{transition-delay:.12s}.tidied .row:nth-child(4) .clean{transition-delay:.19s}.tidied .row:nth-child(5) .clean{transition-delay:.26s}.tidied .row:nth-child(6) .clean{transition-delay:.33s}.tidied .row:nth-child(7) .clean{transition-delay:.4s}
-.tidy-act{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;align-items:center}
-.tidy-act input{flex:1;min-width:240px;height:48px;border-radius:999px;border:1.5px solid #DCCFBD;background:#fff;padding:0 20px;font-family:"Cascadia Mono",Consolas,ui-monospace,monospace;font-size:14px;color:var(--ink)}
-.tidy-act input:focus{outline:0;border-color:var(--copper)}
-.tidy-act output{flex-basis:100%;font-size:17px;font-weight:600;min-height:28px}
-.banks{margin-top:44px;font-size:15px;color:var(--muted);max-width:52em}
-@media(max-width:700px){.tidy{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.raw{font-size:11.5px}.clean{font-size:15px}}
-
-/* privacy: one switch for the whole page */
-.priv{background:var(--ever)}
-.priv .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center}
-.switch{display:flex;align-items:center;gap:22px;cursor:pointer;background:none;border:0;padding:12px;border-radius:24px;text-align:left}
-.switch .track{position:relative;width:132px;height:72px;border-radius:999px;background:var(--moss);transition:background .3s;flex:none}
-.switch .knob{position:absolute;top:8px;left:8px;width:56px;height:56px;border-radius:50%;background:var(--paper);display:grid;place-items:center;transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
-.switch .knob svg{width:28px;height:28px;color:var(--ever)}
+/* =====================================================================
+   PRIVACY — one switch for the whole page
+   ===================================================================== */
+.priv{padding:var(--sect) 0}
+.priv .top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:48px;align-items:end}
+.priv .sub{color:var(--sage)}
+.switch{display:flex;align-items:center;gap:20px;background:var(--fir);border:0;padding:14px 26px 14px 14px;border-radius:999px;cursor:pointer;text-align:left;box-shadow:inset 0 0 0 1px var(--moss)}
+.switch:hover{box-shadow:inset 0 0 0 1px var(--sage)}
+.switch .track{position:relative;width:96px;height:56px;border-radius:999px;background:var(--moss);transition:background-color .3s;flex:none}
+.switch .knob{position:absolute;top:6px;left:6px;width:44px;height:44px;border-radius:50%;background:var(--paper);color:var(--ever);display:grid;place-items:center;transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
+.switch .knob .ic{width:22px;height:22px}
 .switch[aria-checked=true] .track{background:var(--copper)}
-.switch[aria-checked=true] .knob{transform:translateX(60px)}
-.switch .eye-off{display:none}.switch[aria-checked=true] .eye-off{display:block}.switch[aria-checked=true] .eye-on{display:none}
-.switch span b{display:block;font-size:22px;letter-spacing:-.4px}
-.switch span small{color:var(--sage);font-size:15px}
-.facts{margin-top:64px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--moss)}
-.facts div{padding:28px 28px 0 0}
-.facts div+div{padding-left:28px;border-left:1px solid var(--moss)}
-.facts b{display:block;font-size:20px;letter-spacing:-.4px;margin-bottom:8px}
-.facts p{color:var(--sage);font-size:16px}
-@media(max-width:860px){.priv .wrap{grid-template-columns:1fr}.facts{grid-template-columns:1fr}.facts div+div{padding-left:0;border-left:0;border-top:1px solid var(--moss);margin-top:24px}}
-body.masked .num{letter-spacing:.06em}
+.switch[aria-checked=true] .knob{transform:translateX(40px)}
+.switch .off{display:none}.switch[aria-checked=true] .off{display:block}.switch[aria-checked=true] .on{display:none}
+.switch b{display:block;font-size:19px;letter-spacing:-.02em;line-height:1.3}
+.switch small{display:block;color:var(--sage);font-size:14px}
+.facts{margin-top:clamp(56px,7vw,88px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--moss)}
+.facts div{padding:30px 32px 0 0}
+.facts div+div{padding-left:32px;border-left:1px solid var(--moss)}
+.facts .ic{width:26px;height:26px;color:var(--copper-hi);margin-bottom:16px}
+.facts b{display:block;font-size:19px;letter-spacing:-.02em;margin-bottom:8px}
+.facts p{color:var(--sage);font-size:16px;line-height:1.55}
+@media(max-width:900px){.priv .top{grid-template-columns:minmax(0,1fr);align-items:start}.switch{justify-self:start}
+  .facts{grid-template-columns:minmax(0,1fr)}.facts div{padding:26px 0}.facts div+div{padding-left:0;border-left:0;border-top:1px solid var(--moss)}}
 
-/* screens: a strip of the real app */
-.screens{padding-top:0;padding-bottom:0}
-.strip{margin-top:56px;display:flex;gap:28px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px var(--gut) 40px;scrollbar-width:thin;scrollbar-color:var(--moss) transparent}
-.shot{flex:0 0 min(78vw,860px);scroll-snap-align:center}
-.shot img{border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.4);aspect-ratio:16/9;width:100%;background:var(--fir)}
-.shot p{margin-top:16px;color:var(--sage);font-size:16px;max-width:40em}
-.shot p b{color:var(--paper);font-weight:600}
-.strip-nav{display:flex;gap:10px;justify-content:flex-end}
-.strip-nav button{width:48px;height:48px;border-radius:50%;border:0;background:var(--fir);cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--moss)}
-.strip-nav button:hover{box-shadow:inset 0 0 0 1px var(--sage)}
-.strip-nav svg{width:20px;height:20px}
-.screens .head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+/* =====================================================================
+   SCREENS — the real app, in a Windows window
+   ===================================================================== */
+.screens{padding:0 0 var(--sect)}
+.screens .head{display:flex;justify-content:space-between;align-items:end;gap:24px}
+.strip-nav{display:flex;gap:10px;flex:none}
+.strip-nav button{width:50px;height:50px;border-radius:50%;border:0;background:var(--fir);cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--moss);color:var(--paper)}
+.strip-nav button:hover:not(:disabled){box-shadow:inset 0 0 0 1px var(--sage)}
+.strip-nav button:disabled{opacity:.35;cursor:default}
+.strip{margin-top:clamp(40px,5vw,64px);display:flex;gap:clamp(20px,3vw,36px);overflow-x:auto;scroll-snap-type:x mandatory;--edge:max(var(--gut),calc((100vw - var(--wrap))/2));scroll-padding-inline:var(--edge);
+  padding:8px var(--edge) 12px;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.shot{flex:0 0 min(84vw,880px);scroll-snap-align:start;margin:0}
+.win{border-radius:12px;overflow:hidden;background:#1F1F1F;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 70px -20px rgba(0,0,0,.7)}
+.win .tb{height:32px;display:flex;align-items:center;gap:8px;padding:0 0 0 12px;background:#202020;color:#C8C8C8;font-size:12px;font-family:"Segoe UI",system-ui,sans-serif}
+.win .tb svg{width:14px;height:14px}
+.win .tb .ctl{margin-left:auto;display:flex}
+.win .tb .ctl span{width:44px;height:32px;display:grid;place-items:center}
+.win .tb .ctl svg{width:10px;height:10px;stroke:#C8C8C8;stroke-width:1.1;fill:none}
+.win img{width:100%;height:auto;aspect-ratio:16/9;background:var(--paper)}
+.shot figcaption{margin-top:18px;color:var(--sage);font-size:16px;max-width:38em}
+.shot figcaption b{color:var(--paper);font-weight:600}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:24px}
+.dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--moss);cursor:pointer;transition:background-color .2s,width .2s}
+.dots button[aria-current=true]{background:var(--copper-hi);width:24px;border-radius:4px}
+@media(max-width:640px){.strip-nav{display:none}.win .tb{height:24px;font-size:10px}.win .tb .ctl span{width:30px;height:24px}}
 
-/* everything else, as a plain list */
-.list{margin-top:56px;columns:2;column-gap:clamp(32px,6vw,96px)}
-.list p{break-inside:avoid;padding:18px 0;border-top:1px solid #E3D8C8;font-size:16.5px;color:var(--muted)}
-.list p b{display:block;color:var(--ink);font-size:18px;letter-spacing:-.3px;margin-bottom:2px}
-@media(max-width:760px){.list{columns:1}}
+/* =====================================================================
+   EVERYTHING ELSE + LANGUAGES (paper)
+   ===================================================================== */
+.more{padding:var(--sect) 0 calc(var(--sect) * .6)}
+.feats{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(28px,4vw,56px)}
+.feats div{padding:24px 0 26px;border-top:1px solid var(--rule)}
+.feats .ic{width:22px;height:22px;color:var(--copper);margin-bottom:12px}
+.feats b{display:block;font-size:18px;letter-spacing:-.02em;margin-bottom:4px}
+.feats p{color:var(--muted);font-size:15.5px;line-height:1.55}
+@media(max-width:900px){.feats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.feats{grid-template-columns:minmax(0,1fr)}}
 
-/* languages: the same sentence, read the same way */
-.langs{margin-top:44px;display:grid;gap:0;border-top:2px solid var(--ink)}
-.lang{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:center;padding:16px 0;border-bottom:1px solid #E3D8C8}
-.lang small{color:var(--muted);font-size:14px}
-.lang q{quotes:none;font-size:19px;letter-spacing:-.2px}
-.lang .got{font-size:15px;color:var(--muted)}.lang .got b{color:var(--ink);font-weight:600}
-@media(max-width:760px){.lang{grid-template-columns:1fr}.lang small{order:-1}}
+.langs-s{padding:calc(var(--sect) * .4) 0 var(--sect)}
+.ltable{margin-top:clamp(36px,4.5vw,56px);width:100%;border-collapse:collapse;table-layout:fixed}
+.ltable th{text-align:left;font-weight:500;font-size:13px;color:var(--muted);padding:0 12px 12px 0;border-bottom:2px solid var(--ink)}
+.ltable td{padding:16px 12px 16px 0;border-bottom:1px solid var(--rule);vertical-align:middle;font-size:15px}
+.ltable td:first-child{color:var(--muted);font-size:14px}
+.ltable q{quotes:none;font-size:18px;letter-spacing:-.01em;color:var(--ink)}
+.ltable .num{font-weight:600}
+.ltable td.cat{display:table-cell}.ltable td.cat span{display:inline-flex;align-items:center;gap:6px}
+.ltable col.c1{width:110px}.ltable col.c2{width:36%}.ltable col.c3{width:13%}
+@media(max-width:820px){
+  .ltable thead{display:none}.ltable,.ltable tbody,.ltable tr{display:block}
+  .ltable tr{display:grid;grid-template-columns:repeat(3,auto) 1fr;gap:6px 16px;padding:16px 0;border-bottom:1px solid var(--rule)}
+  .ltable td{border:0;padding:0}.ltable td:first-child{grid-column:1/-1}.ltable td:nth-child(2){grid-column:1/-1;padding-bottom:4px}
+}
 
-/* get it */
-.get{background:var(--copper);color:#fff;text-align:left}
-.get .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end}
-.get h2{max-width:13ch}
-.get .sub{color:rgba(255,255,255,.86)}
-.get .btns{display:flex;flex-direction:column;gap:12px;min-width:280px}
-.get .btn{justify-content:center;height:56px;font-size:17px}
+/* =====================================================================
+   GET IT
+   ===================================================================== */
+.get{background:var(--copper);color:#fff;padding:clamp(80px,9vw,120px) 0}
+.get .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,320px);gap:48px;align-items:center}
+.get h2{max-width:12ch}
+.get .sub{color:rgba(255,255,255,.88)}
+.get .btns{display:flex;flex-direction:column;gap:12px}
+.get .btn{height:56px;font-size:17px;width:100%}
 .get .btn.white{background:#fff;color:var(--ink)}.get .btn.white:hover{background:var(--paper)}
-.get .btn.outline{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.6)}.get .btn.outline:hover{box-shadow:inset 0 0 0 1.5px #fff}
-.get .fine{margin-top:16px;font-size:14px;color:rgba(255,255,255,.8)}
-@media(max-width:820px){.get .wrap{grid-template-columns:1fr}.get .btns{min-width:0}}
+.get .btn.outline{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}.get .btn.outline:hover{box-shadow:inset 0 0 0 1.5px #fff}
+@media(max-width:820px){.get .wrap{grid-template-columns:minmax(0,1fr)}}
 
-footer{padding:44px 0 56px;color:var(--sage);font-size:14px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center}
+footer{padding:40px 0 calc(48px + env(safe-area-inset-bottom));color:var(--sage);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px 30px;align-items:center}
 footer a{text-decoration:none}footer a:hover{color:var(--paper)}
-footer .brand{color:var(--paper);font-size:19px;margin-right:auto}
-footer .brand svg{width:24px;height:24px}
+footer .brand{color:var(--paper);font-size:20px;margin-right:auto}footer .brand svg{width:24px;height:24px}
+@media(max-width:600px){footer .brand{flex-basis:100%;margin-bottom:6px}}
 
-/* the coin behind the hero: rolls once on load */
-.coin{position:absolute;right:-120px;top:-60px;width:520px;height:520px;opacity:.07;pointer-events:none;animation:roll 1.6s cubic-bezier(.2,.8,.2,1) both}
-@keyframes roll{from{transform:translateX(260px) rotate(120deg);opacity:0}to{transform:none;opacity:.07}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+/* privacy mode on the page */
+body.masked .num{letter-spacing:.08em}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <symbol id="mark" viewBox="0 0 100 100"><path d="M50 50 L88.04 37.64 A40 40 0 1 1 50 10 Z" fill="#C9632F"/><path d="M53.53 45.15 L53.53 5.15 A40 40 0 0 1 91.57 32.79 Z" fill="#2BB89A"/></symbol>
   <symbol id="win" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5.2 10.4 4v7.3H3zm8.4-1.3L21 2.5v8.8h-9.6zM3 12.7h7.4V20L3 18.8zm8.4 0H21v8.8l-9.6-1.4z"/></symbol>
   <symbol id="gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9V21c0 .3.2.6.7.5A10 10 0 0 0 12 2z"/></symbol>
-  <symbol id="eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></g></symbol>
-  <symbol id="eyeoff" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l18 18M10.6 5.1A9.6 9.6 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.6 7 10 7a9.8 9.8 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2"/></g></symbol>
-  <symbol id="prev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-  <symbol id="next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="discord" viewBox="0 0 24 24"><path fill="currentColor" d="M19.3 5.3A16 16 0 0 0 15.4 4l-.5 1a15 15 0 0 0-5.8 0L8.6 4a16 16 0 0 0-3.9 1.3C2.2 9 1.6 12.6 1.9 16.2a16 16 0 0 0 4.8 2.4l1-1.6a10 10 0 0 1-1.6-.8l.4-.3a11.5 11.5 0 0 0 11 0l.4.3-1.6.8 1 1.6a16 16 0 0 0 4.8-2.4c.4-4.2-.6-7.8-2.8-10.9zM8.7 14c-.9 0-1.7-.9-1.7-2s.8-2 1.7-2 1.7.9 1.7 2-.8 2-1.7 2zm6.6 0c-.9 0-1.7-.9-1.7-2s.8-2 1.7-2 1.7.9 1.7 2-.7 2-1.7 2z"/></symbol>
+  <!-- Penny's own line icons (renderer/icons.js) -->
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3.5 4.5h2.2l2 10.2h9.6l1.8-7.4H6.6"/><circle cx="9.5" cy="19" r="1.3"/><circle cx="16.5" cy="19" r="1.3"/></symbol>
+  <symbol id="i-utensils" viewBox="0 0 24 24"><path d="M7 3.5v7.5M4.5 3.5v5a2.5 2.5 0 0 0 5 0v-5M7 11v9.5"/><path d="M17 20.5V3.5c-2.4 1.4-3.5 4-3.5 7H17"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24"><path d="M3.5 17v-4.5l2-5.2a1.5 1.5 0 0 1 1.4-1h10.2a1.5 1.5 0 0 1 1.4 1l2 5.2V17z"/><path d="M3.5 12.5h17M6 17v2.5M18 17v2.5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h5v-5.5h3V20h5V9.5"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 17.5h6M10 20.5h4"/><path d="M12 3.5a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3.5z"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="M9.5 9.5l5 5"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12h-11z"/><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><path d="M8 4.5v15M16 4.5v15M3.5 9H8M3.5 15H8M16 9h4.5M16 15h4.5"/></symbol>
+  <symbol id="i-tv" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="12" rx="2.5"/><path d="M8.5 20.5h7"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M20.5 3.5L3.5 10.5l6.5 3 3 6.5z"/><path d="M10 13.5l10.5-10"/></symbol>
+  <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2.5 9L12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11.2V16c0 1.4 2.5 2.7 5.5 2.7s5.5-1.3 5.5-2.7v-4.8M21.5 9v5"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="4" rx="1"/><path d="M5 13v7.5h14V13M12 9v11.5"/><path d="M12 9S9 8.5 8 6.8 9 3.8 10.5 4.6 12 9 12 9zM12 9s3-.5 4-2.2-1-3-2.5-2.2S12 9 12 9z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2.5"/><path d="M9 7.5V6a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 6v1.5M3.5 13h17"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="5" y="5.5" width="14" height="10" rx="2"/><path d="M3 19h18"/></symbol>
+  <symbol id="i-coins" viewBox="0 0 24 24"><circle cx="9.5" cy="9.5" r="6"/><path d="M15.5 8.5a6 6 0 1 1-6.9 8.2"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M7 4.5 3.5 8 7 11.5M3.5 8h13M17 12.5l3.5 3.5-3.5 3.5M20.5 16h-13"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3.5 3.5l17 17M10.5 5.6c.5-.1 1-.1 1.5-.1 6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.9 3.7M6.5 6.9C3.9 8.7 2.5 12 2.5 12S6 18.5 12 18.5c1.8 0 3.3-.6 4.6-1.4M9.9 9.9a3 3 0 0 0 4.2 4.2"/></symbol>
+  <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3.5 9.5 12 4.5l8.5 5zM5.5 10v7M9.8 10v7M14.2 10v7M18.5 10v7M3.5 20h17"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.5 19.5 6v5.5c0 4.5-3.2 8-7.5 9-4.3-1-7.5-4.5-7.5-9V6z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.8"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3.5 17 9 11.5l4 4 7.5-8"/><path d="M15 7.5h5.5V13"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4.5 5.5h15a1 1 0 0 1 1 1V16a1 1 0 0 1-1 1H10l-4.5 3.5V17h-1a1 1 0 0 1-1-1V6.5a1 1 0 0 1 1-1z"/></symbol>
+  <symbol id="i-wand" viewBox="0 0 24 24"><path d="M4 20 15 9M14 4v2.5M19.5 9.5H17M18 5.5l-1.8 1.8"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M18.5 11.5l-6.8 6.8a4.5 4.5 0 0 1-6.4-6.4l7.3-7.3a3 3 0 0 1 4.2 4.2l-7.2 7.2a1.5 1.5 0 0 1-2.1-2.1l6.5-6.5"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M4.5 19.5h15"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.6 2.4 3.8 5.2 3.8 8.5s-1.2 6.1-3.8 8.5c-2.6-2.4-3.8-5.2-3.8-8.5S9.4 5.9 12 3.5z"/></symbol>
+  <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3.5v8"/><path d="M7 6.6a7.5 7.5 0 1 0 10 0"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 44 14"><path d="M1 7h40M35 1.5 41.5 7 35 12.5"/></symbol>
 </svg>
 
 <header class="bar" id="bar">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Penny home"><svg><use href="#mark"/></svg>penny</a>
-    <nav aria-label="Sections"><a href="#statements">Bank statements</a><a href="#privacy">Privacy</a><a href="#screens">Screens</a><a href="#languages">Languages</a></nav>
+    <a class="brand" href="#top" aria-label="Penny, back to the top"><svg aria-hidden="true"><use href="#mark"/></svg>penny</a>
+    <nav aria-label="Sections"><a href="#statements">Bank statements</a><a href="#privacy">Privacy</a><a href="#screens">The app</a><a href="#languages">Languages</a></nav>
     <a class="btn copper sm" href="#get">Get Penny</a>
   </div>
 </header>
@@ -232,135 +360,136 @@ footer .brand svg{width:24px;height:24px}
 <main id="top">
 <!-- ===================== hero ===================== -->
 <section class="hero" aria-labelledby="h1">
-  <svg class="coin" aria-hidden="true"><use href="#mark"/></svg>
   <div class="wrap">
     <div>
-      <h1 id="h1">Say what you spent. <span>Penny keeps the books.</span></h1>
-      <p class="lede">A budget app for Windows that understands plain sentences, reads your bank statements and keeps every number on your own PC.</p>
+      <h1 id="h1"><span class="l1">Say what you spent.</span> <span class="l2">Penny keeps the books.</span></h1>
+      <p class="sub">A private budget app for Windows. It understands plain sentences, reads your bank statements and keeps every number on your own PC.</p>
 
       <div class="say">
         <form id="sayForm" autocomplete="off">
+          <svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg>
           <label class="sr" for="say">Type a purchase the way you'd say it</label>
-          <input id="say" placeholder="coffee 4.50 at Starbucks yesterday" maxlength="80" spellcheck="false">
-          <button type="submit">Add to receipt</button>
+          <input id="say" placeholder="Type something you bought…" maxlength="80" spellcheck="false" enterkeyhint="done">
+          <button type="submit">Print it</button>
         </form>
-        <div class="read" id="read" aria-live="polite"><span class="hint">Type something you bought. This is Penny's real parser, running in your browser.</span></div>
-      </div>
-      <div class="tries" aria-label="Examples">
-        <span class="lbl">Try</span>
-        <button type="button">lunch 12.80 at Chipotle</button>
-        <button type="button">+2400 salary</button>
-        <button type="button">netflix 15.49</button>
-        <button type="button">groceries 62.18 at Trader Joe's 2 days ago</button>
+        <div class="read" id="read" aria-live="polite"></div>
+        <div class="tries" aria-label="Examples to try"></div>
       </div>
 
       <div class="cta">
-        <a class="btn copper" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><svg><use href="#win"/></svg>Get it from Microsoft</a>
-        <a class="btn ghost" href="https://github.com/abdallhhelles/Penny/releases/latest"><svg><use href="#gh"/></svg>Download for Windows</a>
-        <small>Free during the beta. No account, no bank login, no ads.</small>
+        <a class="btn copper" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><svg aria-hidden="true"><use href="#win"/></svg>Get it from Microsoft</a>
+        <a class="btn ghost" href="https://github.com/abdallhhelles/Penny/releases/latest"><svg aria-hidden="true"><use href="#gh"/></svg>Download for Windows</a>
+        <p>Free during the beta. No account, no bank login, no ads.</p>
       </div>
     </div>
 
-    <div class="till" aria-label="Receipt of what you added">
-      <div class="slot" aria-hidden="true"></div>
+    <div class="till" role="region" aria-label="Your receipt">
+      <div class="slot" id="slot" aria-hidden="true"></div>
       <div class="paper" id="paper">
         <div class="r-head"><b><svg aria-hidden="true"><use href="#mark"/></svg>penny</b><span id="today"></span></div>
-        <ul class="lines" id="lines"></ul>
-        <div class="r-foot">
-          <span class="lab">Spent</span><span class="big num" id="spent"></span>
-          <span>Safe to spend today</span><span class="num" id="safe" style="text-align:right;color:var(--ink);font-weight:600"></span>
+        <ul class="lines" id="lines" aria-live="polite"></ul>
+        <div class="totals">
+          <span>Spent</span><span class="big num" id="spent"></span>
+          <span>Safe to spend today</span><span class="safe num" id="safe"></span>
         </div>
-        <p class="r-note">Kept on this device. Nothing is sent anywhere.</p>
+        <p class="r-note">Printed on this device. Nothing leaves it.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===================== bank statements ===================== -->
-<div class="paperband" id="statements">
-<section aria-labelledby="h2a">
+<div class="paperband">
+<section class="statements" id="statements" aria-labelledby="h2a">
   <div class="wrap">
-    <h2 id="h2a">Bank statements are written for machines.</h2>
-    <p class="sub">Download the file from your bank's website and drop it into Penny. It recognizes the bank, tidies every payee, files it in the right category and records card payments as transfers, not spending.</p>
+    <div class="shead"><h2 id="h2a">Your bank writes for machines. Penny rewrites it for you.</h2>
+    <p class="sub">Download a statement from your bank's website and drop it into Penny. It recognizes the bank, tidies every payee, files it in the right category, and records card payments as transfers instead of spending.</p></div>
 
-    <div class="tidy" id="tidy">
-      <div class="col"><div class="col-h"><span>What your bank sends</span></div><div id="rawCol"></div></div>
-      <div class="col"><div class="col-h"><span>What Penny shows</span></div><div id="cleanCol"></div></div>
+    <div class="compare" id="compare">
+      <div class="form" aria-label="Lines as they appear in a bank statement">
+        <span class="t">STATEMENT · CHECKING ••7731</span>
+        <div id="rawRows"></div>
+      </div>
+      <div class="arrows" aria-hidden="true" id="arrows"></div>
+      <div class="list-clean" aria-label="The same lines in Penny">
+        <span class="t">In Penny</span>
+        <div id="cleanRows"></div>
+      </div>
     </div>
+
     <div class="tidy-act">
-      <button class="btn copper" id="tidyBtn" type="button">Tidy these up</button>
-      <label class="sr" for="own">Paste a line from your own statement</label>
-      <input id="own" placeholder="Paste a line from your own statement" spellcheck="false" maxlength="140">
-      <output id="ownOut" for="own"></output>
+      <button class="btn copper" id="tidyBtn" type="button" aria-controls="compare">Tidy it up</button>
+      <label class="own">
+        <span class="sr">Paste a line from your own statement</span>
+        <input id="own" placeholder="Or paste a line from your own statement" spellcheck="false" maxlength="140">
+        <output id="ownOut" for="own"></output>
+      </label>
     </div>
-    <p class="banks">Recognized automatically: Chase, Bank of America, Wells Fargo, Capital One, Citi, American Express, Discover, Apple Card, U.S. Bank and Ally, plus Mint, YNAB and Monarch exports. Any other CSV, OFX or QFX file works too.</p>
+    <p class="banks">Recognized automatically: <b>Chase, Bank of America, Wells Fargo, Capital One, Citi, American Express, Discover, Apple Card, U.S. Bank</b> and <b>Ally</b>, plus <b>Mint, YNAB</b> and <b>Monarch</b> exports. Any other CSV, OFX or QFX file works too.</p>
   </div>
 </section>
 </div>
 
 <!-- ===================== privacy ===================== -->
-<section class="priv ever" id="privacy" aria-labelledby="h2b">
+<section class="priv" id="privacy" aria-labelledby="h2b">
   <div class="wrap">
-    <div>
-      <h2 id="h2b">Your money stays on your PC.</h2>
-      <p class="sub">Penny never asks for your bank password and has no servers to send your data to. Turn on privacy mode and every number disappears, on this page too.</p>
+    <div class="top">
+      <div>
+        <h2 id="h2b">Nobody sees your money. Not even us.</h2>
+        <p class="sub">Penny never asks for your bank password and has no servers to send your data to. Privacy mode hides every number at once. Try it on this page.</p>
+      </div>
+      <button class="switch" id="privSwitch" role="switch" aria-checked="false" type="button">
+        <span class="track"><span class="knob"><svg class="ic on" aria-hidden="true"><use href="#i-eye"/></svg><svg class="ic off" aria-hidden="true"><use href="#i-eyeoff"/></svg></span></span>
+        <span><b>Privacy mode</b><small id="privState">Numbers are showing</small></span>
+      </button>
     </div>
-    <button class="switch" id="privSwitch" role="switch" aria-checked="false" type="button">
-      <span class="track"><span class="knob"><svg class="eye-on"><use href="#eye"/></svg><svg class="eye-off"><use href="#eyeoff"/></svg></span></span>
-      <span><b>Privacy mode</b><small id="privState">Numbers are showing</small></span>
-    </button>
-    <div class="facts" style="grid-column:1/-1">
-      <div><b>No bank login</b><p>Penny reads the files you download yourself. It never connects to your bank.</p></div>
-      <div><b>Encrypted on disk</b><p>AES-256, tied to your Windows account. Add a passcode and a recovery key for a second lock.</p></div>
-      <div><b>Backed up for you</b><p>Verified backups every day and before big changes, so a bad import is one click to undo.</p></div>
+    <div class="facts">
+      <div><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg><b>No bank login</b><p>Penny reads the files you download yourself. It never connects to your bank.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><b>Encrypted on your PC</b><p>AES-256, tied to your Windows account. Add a passcode and a recovery key for a second lock.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><b>Backed up for you</b><p>Verified backups every day and before big changes, so a bad import is one click to undo.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== screens ===================== -->
-<section class="screens ever" id="screens" aria-labelledby="h2c">
+<!-- ===================== the app ===================== -->
+<section class="screens" id="screens" aria-labelledby="h2c">
   <div class="wrap head">
-    <h2 id="h2c">One look at today, and the rest when you want it.</h2>
-    <div class="strip-nav"><button type="button" id="prevShot" aria-label="Previous screen"><svg><use href="#prev"/></svg></button><button type="button" id="nextShot" aria-label="Next screen"><svg><use href="#next"/></svg></button></div>
+    <h2 id="h2c">One look at today. The rest when you want it.</h2>
+    <div class="strip-nav"><button type="button" id="prevShot" aria-label="Previous screen"><svg class="ic"><use href="#i-prev"/></svg></button><button type="button" id="nextShot" aria-label="Next screen"><svg class="ic"><use href="#i-next"/></svg></button></div>
   </div>
-  <div class="strip" id="strip" tabindex="0" aria-label="Screens from Penny">
-    <figure class="shot"><img src="img/01-overview.webp" alt="Penny's overview: net worth, income, spending and safe to spend today" loading="lazy" width="1600" height="900"><p><b>Overview.</b> What's safe to spend today after upcoming bills, your net worth, budgets and goals.</p></figure>
-    <figure class="shot"><img src="img/02-type-it.webp" alt="Adding a transaction by typing a sentence" loading="lazy" width="1600" height="900"><p><b>Type it.</b> One line fills in the amount, payee, category and date.</p></figure>
-    <figure class="shot"><img src="img/03-bank-import.webp" alt="Importing a Chase credit card statement" loading="lazy" width="1600" height="900"><p><b>Import.</b> A Chase card file, recognized and tidied before anything is saved.</p></figure>
-    <figure class="shot"><img src="img/04-desktop-widget.webp" alt="Penny's desktop widget next to the app" loading="lazy" width="1600" height="900"><p><b>Desktop widget.</b> Today's numbers and a quick-add box, always on your desktop.</p></figure>
-    <figure class="shot"><img src="img/05-budgets.webp" alt="Budgets with pace warnings" loading="lazy" width="1600" height="900"><p><b>Budgets.</b> A warning before you overspend, not after.</p></figure>
-    <figure class="shot"><img src="img/08-health-report.webp" alt="Financial Health Report" loading="lazy" width="1600" height="900"><p><b>Health report.</b> Your numbers against published research, with a short plan.</p></figure>
-    <figure class="shot"><img src="img/09-calendar.webp" alt="Calendar of spending, income and bills" loading="lazy" width="1600" height="900"><p><b>Calendar.</b> Spending, income and every bill on one month.</p></figure>
-    <figure class="shot"><img src="img/07-achievements.webp" alt="Achievements and streaks" loading="lazy" width="1600" height="900"><p><b>Habits.</b> Streaks and 24 badges for the good stuff, never shared.</p></figure>
-  </div>
+  <div class="strip" id="strip" tabindex="0" aria-label="Screens from Penny, scroll sideways"></div>
+  <div class="dots" id="dots" aria-label="Choose a screen"></div>
 </section>
 
-<!-- ===================== the rest ===================== -->
+<!-- ===================== everything else ===================== -->
 <div class="paperband">
-<section aria-labelledby="h2d">
+<section class="more" aria-labelledby="h2d">
   <div class="wrap">
-    <h2 id="h2d">Everything else it does.</h2>
-    <div class="list">
-      <p><b>Bills and reminders</b>Rent, subscriptions and paydays on one calendar, with Windows notifications even when Penny is in the tray.</p>
-      <p><b>Savings goals</b>How much to put aside each month to get there on time.</p>
-      <p><b>Debt payoff plan</b>Avalanche or snowball, your debt-free date, and what an extra payment saves.</p>
-      <p><b>Cash-flow forecast</b>Your balance for the next 60 days, with the dips marked before they happen.</p>
-      <p><b>Ask Penny</b>"How much did I spend on dining last month?" answered instantly, on your PC.</p>
-      <p><b>Rules that learn</b>File a payee once and Penny remembers it for next time.</p>
-      <p><b>Receipts</b>Attach photos and PDFs to any transaction.</p>
-      <p><b>Excel export</b>Real dates and amounts, plus totals by category.</p>
-      <p><b>Any currency</b>Accounts in any currency, totals in yours, at rates you choose.</p>
-      <p><b>Works offline</b>No ads, no tracking, no sign-up. It just opens.</p>
+    <div class="shead"><h2 id="h2d">And the rest of it.</h2><p class="sub">The everyday tools, all on your PC and all included.</p></div>
+    <div class="feats">
+      <div><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg><b>Budgets that warn early</b><p>See the pace of each category and get a nudge before you overspend, not after.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><b>Bills on one calendar</b><p>Rent, subscriptions and paydays, with Windows reminders even when Penny is in the tray.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg><b>Next 60 days, forecast</b><p>Your balance ahead of time, with the dips marked before they happen.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><b>Ask Penny</b><p>"How much did I spend on dining last month?" answered right away, on your PC.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-coins"/></svg><b>Savings goals and debt plans</b><p>What to set aside each month, and your debt-free date with avalanche or snowball.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-wand"/></svg><b>Rules that learn</b><p>File a payee once and Penny remembers it next time.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-clip"/></svg><b>Receipts attached</b><p>Keep photos and PDFs with the transaction they belong to.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg><b>Excel export</b><p>Real dates and amounts, plus totals by category, ready to sort and sum.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-power"/></svg><b>A widget on your desktop</b><p>Today's numbers and a quick-add box, without opening the app.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ===================== languages ===================== -->
-<section id="languages" aria-labelledby="h2e" style="padding-top:0">
+<section class="langs-s" id="languages" aria-labelledby="h2e">
   <div class="wrap">
-    <h2 id="h2e">Five languages, one parser.</h2>
-    <p class="sub">Penny speaks English, Español, 简体中文, हिन्दी and العربية. Each sentence below is read live by the same code as the box at the top.</p>
-    <div class="langs" id="langs"></div>
+    <div class="shead"><h2 id="h2e">Five languages. One way of reading.</h2>
+    <p class="sub">Penny speaks English, Español, 简体中文, हिन्दी and العربية. Every row below is read live by the same code that prints your receipt.</p></div>
+    <table class="ltable">
+      <colgroup><col class="c1"><col class="c2"><col class="c3"><col><col><col></colgroup>
+      <thead><tr><th>Language</th><th>You type</th><th>Amount</th><th>Payee</th><th>Category</th><th>When</th></tr></thead>
+      <tbody id="langs"></tbody>
+    </table>
   </div>
 </section>
 </div>
@@ -373,9 +502,9 @@ footer .brand svg{width:24px;height:24px}
       <p class="sub">Penny is free during the beta, for Windows 10 and 11.</p>
     </div>
     <div class="btns">
-      <a class="btn white" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><svg><use href="#win"/></svg>Get it from Microsoft</a>
-      <a class="btn outline" href="https://github.com/abdallhhelles/Penny/releases/latest"><svg><use href="#gh"/></svg>Download from GitHub</a>
-      <a class="btn outline" href="https://discord.gg/r5kNGC6p29">Join the Discord</a>
+      <a class="btn white" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><svg aria-hidden="true"><use href="#win"/></svg>Get it from Microsoft</a>
+      <a class="btn outline" href="https://github.com/abdallhhelles/Penny/releases/latest"><svg aria-hidden="true"><use href="#gh"/></svg>Download from GitHub</a>
+      <a class="btn outline" href="https://discord.gg/r5kNGC6p29"><svg aria-hidden="true"><use href="#discord"/></svg>Join the Discord</a>
     </div>
   </div>
 </section>
@@ -383,8 +512,8 @@ footer .brand svg{width:24px;height:24px}
 
 <footer>
   <div class="wrap">
-    <a class="brand" href="#top"><svg aria-hidden="true"><use href="#mark"/></svg>penny</a>
-    <a href="https://github.com/abdallhhelles/Penny">GitHub</a>
+    <a class="brand" href="#top" aria-label="Penny, back to the top"><svg aria-hidden="true"><use href="#mark"/></svg>penny</a>
+    <a href="https://github.com/abdallhhelles/Penny">Source on GitHub</a>
     <a href="https://github.com/abdallhhelles/Penny/issues">Support</a>
     <a href="https://discord.gg/r5kNGC6p29">Discord</a>
     <span>© <span id="yr"></span> Akrot Software</span>
@@ -395,102 +524,161 @@ footer .brand svg{width:24px;height:24px}
 <script>
 'use strict';
 (() => {
-  const C = window.PennyCore, $ = s => document.querySelector(s);
+  const C = window.PennyCore, $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const pad = n => String(n).padStart(2, '0');
   const ymd = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   const TODAY = ymd(new Date());
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  let masked = false;   // privacy mode: amounts are replaced, not blurred (the same as in the app)
-  const money = n => masked ? '•••' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(n);
-  const dayFmt = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-  const shortFmt = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
+  const icon = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+  let masked = false;   // privacy mode: amounts are replaced, not blurred (exactly like the app)
+  const USD = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+  const money = n => masked ? '•••' : USD.format(n);
   const asDate = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
-  const rel = s => { const diff = Math.round((asDate(TODAY) - asDate(s)) / 864e5); return diff === 0 ? 'Today' : diff === 1 ? 'Yesterday' : shortFmt.format(asDate(s)); };
-  $('#today').textContent = dayFmt.format(new Date());
+  const shortFmt = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
+  const rel = s => { const diff = Math.round((asDate(TODAY) - asDate(s)) / 864e5); return diff === 0 ? 'Today' : diff === 1 ? 'Yesterday' : diff > 1 && diff < 7 ? `${diff} days ago` : shortFmt.format(asDate(s)); };
+  $('#today').textContent = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).format(new Date());
   $('#yr').textContent = new Date().getFullYear();
 
-  /* Penny's default categories (same ids as the app) */
-  const CATS = [['Groceries', '🛒'], ['Dining', '🍽️'], ['Transport', '🚗'], ['Housing', '🏠'], ['Utilities', '💡'], ['Health', '💊'], ['Shopping', '🛍️'], ['Entertainment', '🎬'],
-    ['Subscriptions', '📺'], ['Travel', '✈️'], ['Education', '🎓'], ['Gifts', '🎁'], ['Other', '🧩'], ['Salary', '💼', 1], ['Freelance', '💻', 1], ['Other income', '💰', 1]]
-    .map(([name, e, inc]) => ({ id: 'c_' + name.toLowerCase().replace(/\W+/g, '_'), name, e, type: inc ? 'income' : 'expense' }));
+  /* Penny's default categories (same ids and icons as the app) */
+  const CATS = [['Groceries', 'cart'], ['Dining', 'utensils'], ['Transport', 'car'], ['Housing', 'home'], ['Utilities', 'bulb'], ['Health', 'pill'], ['Shopping', 'bag'],
+    ['Entertainment', 'film'], ['Subscriptions', 'tv'], ['Travel', 'plane'], ['Education', 'cap'], ['Gifts', 'gift'], ['Other', 'grid'],
+    ['Salary', 'briefcase', 1], ['Freelance', 'laptop', 1], ['Other income', 'coins', 1]]
+    .map(([name, ic, inc]) => ({ id: 'c_' + name.toLowerCase().replace(/\W+/g, '_'), name, ic, type: inc ? 'income' : 'expense' }));
   const catOf = id => CATS.find(c => c.id === id);
-  const fallback = type => type === 'income' ? catOf('c_other_income') : catOf('c_other');
+  const guess = (t, type) => C.RulesEngine.keyword(t, type, CATS);
   const parse = text => {
     if (!C) return null;
-    const r = C.Smart.parseSmart(text, { today: TODAY, guessCategory: (t, type) => C.RulesEngine.keyword(t, type, CATS) });
+    const r = C.Smart.parseSmart(text, { today: TODAY, guessCategory: guess });
     if (!r) return null;
-    r.cat = catOf(r.category) || fallback(r.type);
+    r.cat = catOf(r.category) || (r.type === 'income' ? catOf('c_other_income') : catOf('c_other'));
     return r;
   };
 
-  /* ---------- the receipt ---------- */
-  const BUDGET = 96;   // what this pretend day may spend
+  /* ============ the receipt ============ */
+  const DAY_BUDGET = 96, MAX_LINES = 5;
   const lines = [];
-  const lineHtml = (r, fresh) => `<li class="line${fresh ? ' new' : ''}"><span class="dot" aria-hidden="true">${r.cat.e}</span>
-    <b>${esc(r.merchant || r.cat.name)}<small>${esc(r.cat.name)} · ${rel(r.date)}</small></b>
-    <span class="amt num${r.type === 'income' ? ' in' : ''}">${r.type === 'income' ? '+' : '−'}${money(r.amount || 0)}</span></li>`;
-  const draw = fresh => {
-    $('#lines').innerHTML = lines.slice(0, 6).map((r, i) => lineHtml(r, fresh && i === 0)).join('');
-    const today = lines.filter(r => r.type === 'expense' && r.date === TODAY).reduce((s, r) => s + (r.amount || 0), 0);
+  const lineHtml = (r, fresh) => `<li class="line${fresh ? ' new' : ''}"><i>${icon(r.cat.ic)}</i>
+    <span><b>${esc(r.merchant || r.cat.name)}</b><small>${esc(r.cat.name)} · ${rel(r.date)}</small></span>
+    <span class="amt num${r.type === 'income' ? ' in' : ''}">${masked ? '•••' : (r.type === 'income' ? '+' : '−') + USD.format(r.amount || 0)}</span></li>`;
+  const drawReceipt = fresh => {
+    const shown = lines.slice(-MAX_LINES);
+    $('#lines').innerHTML = shown.map((r, i) => lineHtml(r, fresh && i === shown.length - 1)).join('');
+    const spentToday = lines.filter(r => r.type === 'expense' && r.date === TODAY).reduce((s, r) => s + (r.amount || 0), 0);
     const spent = lines.filter(r => r.type === 'expense').reduce((s, r) => s + (r.amount || 0), 0);
     $('#spent').textContent = money(spent);
-    const left = BUDGET - today; $('#safe').textContent = money(Math.max(0, left)); $('#safe').style.color = left < 0 ? 'var(--red)' : 'var(--ink)';
+    const left = DAY_BUDGET - spentToday, safe = $('#safe');
+    safe.textContent = money(Math.max(0, left)); safe.classList.toggle('low', left < 0);
   };
-  ['groceries 62.18 at Trader Joe\'s', 'uber 18.40 yesterday', 'coffee 4.50 at Starbucks'].forEach(t => { const r = parse(t); if (r) lines.unshift(r); });
-  draw(false);
+  const print = r => {
+    lines.push(r); drawReceipt(!reduce);
+    if (reduce) return;
+    const p = $('#paper'), s = $('#slot');
+    p.classList.remove('feed'); s.classList.remove('busy'); void p.offsetWidth; p.classList.add('feed'); s.classList.add('busy');
+  };
+  ['groceries 62.18 at Trader Joe\'s', 'uber 18.40 yesterday'].forEach(t => { const r = parse(t); if (r) lines.push(r); });
+  drawReceipt(false);
 
+  /* ============ say it ============ */
   const input = $('#say'), read = $('#read');
+  const HINT = 'Penny reads it as you type. This is its real parser, running in your browser.';
   const preview = () => {
-    const r = input.value.trim() ? parse(input.value) : null;
-    if (!r || !(r.amount > 0)) { read.innerHTML = `<span class="hint">${input.value.trim() ? 'Add an amount, like "lunch 12.80".' : 'Type something you bought. This is Penny\'s real parser, running in your browser.'}</span>`; return; }
-    read.innerHTML = [['Amount', `<span class="num">${money(r.amount)}</span>`], [r.type === 'income' ? 'From' : 'Payee', esc(r.merchant || '–')], ['Category', `${r.cat.e} ${esc(r.cat.name)}`], ['Date', rel(r.date)]]
-      .map(([k, v]) => `<span class="k"><small>${k}</small>${v}</span>`).join('');
+    const v = input.value.trim(), r = v ? parse(v) : null;
+    if (!r || !(r.amount > 0)) { read.innerHTML = `<span class="hint">${v ? 'Add an amount, like "lunch 12.80".' : HINT}</span>`; return; }
+    read.innerHTML = [['Amount', `<span class="num">${money(r.amount)}</span>`], [r.type === 'income' ? 'From' : 'Payee', `<span>${esc(r.merchant || '–')}</span>`],
+      ['Category', `<span>${icon(r.cat.ic)}${esc(r.cat.name)}</span>`], ['When', `<span>${rel(r.date)}</span>`]]
+      .map(([k, v]) => `<div class="k"><small>${k}</small>${v}</div>`).join('');
   };
-  input.addEventListener('input', preview);
+  let demo = null;   // the one orchestrated moment: Penny types a first example by itself
+  const stopDemo = () => { if (demo) { clearTimeout(demo); demo = null; } };
+  input.addEventListener('input', () => { stopDemo(); preview(); });
+  input.addEventListener('focus', stopDemo);
   $('#sayForm').addEventListener('submit', e => {
-    e.preventDefault();
+    e.preventDefault(); stopDemo();
     const r = parse(input.value);
     if (!r || !(r.amount > 0)) { input.focus(); read.innerHTML = '<span class="hint">Add an amount, like "lunch 12.80".</span>'; return; }
-    lines.unshift(r); draw(true); input.value = ''; preview();
+    print(r); input.value = ''; preview();
   });
-  document.querySelectorAll('.tries button').forEach(b => b.addEventListener('click', () => { input.value = b.textContent; preview(); input.focus(); }));
+  const EX = ['lunch 12.80 at Chipotle', '+2400 salary', 'netflix 15.49', 'gas 41.20 at Shell'];
+  $('.tries').innerHTML = EX.map(t => `<button type="button">${esc(t)}</button>`).join('');
+  $$('.tries button').forEach(b => b.addEventListener('click', () => { stopDemo(); input.value = b.textContent; preview(); input.focus(); }));
+  preview();
+  if (!reduce) {
+    const text = 'coffee 4.50 at Starbucks', step = i => {
+      if (i <= text.length) { input.value = text.slice(0, i); preview(); demo = setTimeout(() => step(i + 1), i ? 55 : 900); }
+      else demo = setTimeout(() => { const r = parse(input.value); if (r) print(r); input.value = ''; preview(); demo = null; }, 700);
+    };
+    step(0);
+  } else { const r = parse('coffee 4.50 at Starbucks'); if (r) { lines.push(r); drawReceipt(false); } }
 
-  /* ---------- bank statements ---------- */
-  const RAW = ['SQ *BLUE BOTTLE COFFEE 0123 OAKLAND CA', 'AMZN Mktp US*2K4L19ZQ0', 'TRADER JOE S #552 SAN JOSE CA', 'PURCHASE AUTHORIZED ON 10/08 CHIPOTLE 1234 AUSTIN TX S386274',
-    'NETFLIX.COM 866-579-7172 CA', 'SHELL OIL 57444 DALLAS TX', 'UBER *TRIP HELP.UBER.COM'];
-  $('#rawCol').innerHTML = RAW.map(r => `<div class="row"><span class="raw" title="${esc(r)}">${esc(r)}</span></div>`).join('');
-  $('#cleanCol').innerHTML = RAW.map(r => `<div class="row"><span class="clean">${esc(C ? C.Importers.cleanPayee(r) : r)}</span></div>`).join('');
-  const tidy = $('#tidy'), tb = $('#tidyBtn');
-  tb.addEventListener('click', () => { const on = !tidy.classList.contains('tidied'); tidy.classList.toggle('tidied', on); tb.textContent = on ? 'Show the bank\'s version' : 'Tidy these up'; });
+  /* ============ bank statements ============ */
+  const RAW = [['SQ *BLUE BOTTLE COFFEE 0123 OAKLAND CA', 6.25], ['AMZN Mktp US*2K4L19ZQ0', 34.99], ['TRADER JOE S #552 SAN JOSE CA', 62.18],
+    ['PURCHASE AUTHORIZED ON 10/08 CHIPOTLE 1234 AUSTIN TX', 12.80], ['NETFLIX.COM 866-579-7172 CA', 15.49], ['SHELL OIL 57444 DALLAS TX', 41.20], ['UBER *TRIP HELP.UBER.COM', 18.40]];
+  const tidyName = r => C ? C.Importers.cleanPayee(r) : r;
+  const drawStatements = () => {
+    $('#rawRows').innerHTML = RAW.map(([r, a]) => `<div class="row"><span title="${esc(r)}">${esc(r)}</span><span class="num">${masked ? '•••' : '-' + a.toFixed(2)}</span></div>`).join('');
+    $('#arrows').innerHTML = RAW.map(() => `<i><svg viewBox="0 0 44 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></i>`).join('');
+    $('#cleanRows').innerHTML = RAW.map(([r, a]) => { const n = tidyName(r), c = catOf(guess(n + ' ' + r, 'expense')) || catOf('c_other');
+      return `<div class="row"><i>${icon(c.ic)}</i><b>${esc(n)}<small>${esc(c.name)}</small></b><span class="amt num">${money(a)}</span></div>`; }).join('');
+  };
+  drawStatements();
+  const compare = $('#compare'), tb = $('#tidyBtn');
+  tb.addEventListener('click', () => {
+    const on = !compare.classList.contains('tidied'); compare.classList.toggle('tidied', on);
+    tb.textContent = on ? 'Show the bank\'s version' : 'Tidy it up'; tb.setAttribute('aria-pressed', String(on));
+  });
   const own = $('#own'), out = $('#ownOut');
   own.addEventListener('input', () => {
     const v = own.value.trim(); if (!v || !C) { out.textContent = ''; return; }
-    const name = C.Importers.cleanPayee(v), cat = C.RulesEngine.keyword(name + ' ' + v, 'expense', CATS);
-    out.textContent = `${name}${cat ? '  ·  ' + catOf(cat).e + ' ' + catOf(cat).name : ''}`;
+    const n = tidyName(v), c = catOf(guess(n + ' ' + v, 'expense'));
+    out.textContent = c ? `${n} · ${c.name}` : n;
   });
 
-  /* ---------- privacy mode, for the whole page ---------- */
+  /* ============ privacy mode for the whole page ============ */
   const sw = $('#privSwitch');
   sw.addEventListener('click', () => {
-    const on = sw.getAttribute('aria-checked') !== 'true';
-    sw.setAttribute('aria-checked', String(on)); document.body.classList.toggle('masked', on);
-    masked = on; draw(false); preview(); drawLangs();
-    $('#privState').textContent = on ? 'Every number on this page is hidden' : 'Numbers are showing';
+    masked = sw.getAttribute('aria-checked') !== 'true';
+    sw.setAttribute('aria-checked', String(masked)); document.body.classList.toggle('masked', masked);
+    $('#privState').textContent = masked ? 'Every number on this page is hidden' : 'Numbers are showing';
+    drawReceipt(false); preview(); drawStatements(); drawLangs();
   });
 
-  /* ---------- languages ---------- */
-  const drawLangs = () => { $('#langs').innerHTML = LANGS.map(([name, code, s]) => {
-    const r = parse(s);
-    return `<div class="lang"><small>${name}</small><q lang="${code}" dir="auto">${esc(s)}</q><span class="got">${r ? `<b class="num">${money(r.amount)}</b> · <b>${esc(r.merchant)}</b> · ${r.cat.e} ${esc(r.cat.name)} · ${rel(r.date)}` : ''}</span></div>`;
-  }).join(''); };
+  /* ============ languages ============ */
   const LANGS = [['English', 'en', 'coffee 4.50 at Starbucks yesterday'], ['Español', 'es', 'café 4,50 en Starbucks ayer'], ['简体中文', 'zh', '昨天在星巴克咖啡 4.50'],
     ['हिन्दी', 'hi', 'कल Starbucks पर कॉफ़ी 4.50'], ['العربية', 'ar', 'قهوة ٤٫٥٠ في ستاربكس أمس']];
+  const drawLangs = () => {
+    $('#langs').innerHTML = LANGS.map(([name, code, s]) => {
+      const r = parse(s); if (!r) return '';
+      return `<tr><td>${name}</td><td><q lang="${code}" dir="auto">${esc(s)}</q></td><td class="num">${money(r.amount)}</td><td><bdi>${esc(r.merchant)}</bdi></td><td class="cat"><span>${icon(r.cat.ic)}${esc(r.cat.name)}</span></td><td>${rel(r.date)}</td></tr>`;
+    }).join('');
+  };
   drawLangs();
 
-  /* ---------- screens strip ---------- */
-  const strip = $('#strip'), step = () => strip.querySelector('.shot').getBoundingClientRect().width + 28;
-  $('#prevShot').addEventListener('click', () => strip.scrollBy({ left: -step(), behavior: 'smooth' }));
-  $('#nextShot').addEventListener('click', () => strip.scrollBy({ left: step(), behavior: 'smooth' }));
+  /* ============ the app, in a window ============ */
+  const SHOTS = [['01-overview', 'Overview', 'What\'s safe to spend today after upcoming bills, your net worth, budgets and goals.'],
+    ['02-type-it', 'Type it', 'One line fills in the amount, payee, category and date.'],
+    ['03-bank-import', 'Import', 'A Chase card file, recognized and tidied before anything is saved.'],
+    ['04-desktop-widget', 'Desktop widget', 'Today\'s numbers and a quick-add box, always on your desktop.'],
+    ['05-budgets', 'Budgets', 'A warning before you overspend, not after.'],
+    ['08-health-report', 'Health report', 'Your numbers against published research, with a short plan.'],
+    ['09-calendar', 'Calendar', 'Spending, income and every bill on one month.'],
+    ['07-achievements', 'Habits', 'Streaks and 24 badges for the good stuff, never shared.']];
+  const strip = $('#strip');
+  strip.innerHTML = SHOTS.map(([f, t, d], i) => `<figure class="shot" id="s${i}"><div class="win"><div class="tb"><svg aria-hidden="true"><use href="#mark"/></svg>Penny<span class="ctl" aria-hidden="true"><span><svg viewBox="0 0 10 10"><path d="M0 5h10"/></svg></span><span><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9"/></svg></span><span><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0 0 10"/></svg></span></span></div>
+    <img src="img/${f}.webp" alt="Penny: ${esc(t)}. ${esc(d)}" loading="${i < 2 ? 'eager' : 'lazy'}" width="1600" height="900"></div><figcaption><b>${esc(t)}.</b> ${esc(d)}</figcaption></figure>`).join('');
+  const dots = $('#dots');
+  dots.innerHTML = SHOTS.map(([, t], i) => `<button type="button" aria-label="${esc(t)}" data-i="${i}"></button>`).join('');
+  const shots = $$('.shot');
+  const go = i => { const s = shots[Math.max(0, Math.min(shots.length - 1, i))]; strip.scrollTo({ left: s.offsetLeft - strip.offsetLeft - parseFloat(getComputedStyle(strip).paddingLeft), behavior: reduce ? 'auto' : 'smooth' }); };
+  const current = () => { const x = strip.scrollLeft; let best = 0, d = Infinity; shots.forEach((s, i) => { const dd = Math.abs(s.offsetLeft - strip.offsetLeft - parseFloat(getComputedStyle(strip).paddingLeft) - x); if (dd < d) { d = dd; best = i; } }); return best; };
+  const sync = () => { const c = current(); $$('#dots button').forEach((b, i) => b.setAttribute('aria-current', String(i === c)));
+    $('#prevShot').disabled = c === 0; $('#nextShot').disabled = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 4; };
+  $('#prevShot').addEventListener('click', () => go(current() - 1));
+  $('#nextShot').addEventListener('click', () => go(current() + 1));
+  dots.addEventListener('click', e => { const b = e.target.closest('button'); if (b) go(+b.dataset.i); });
+  strip.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+  strip.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); } });
+  addEventListener('resize', sync); sync();
 
   /* the top bar gets a line once you scroll */
   const bar = $('#bar'); addEventListener('scroll', () => bar.classList.toggle('scrolled', scrollY > 8), { passive: true });
