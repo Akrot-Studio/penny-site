@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Penny – the private budget app for Windows and Android</title>
+<title>Penny – Every cent counted. Nobody watching.</title>
 <meta name="description" content="Write what you spent the way you'd say it. Penny reads your bank statements, keeps every number on your PC, and tells you what's safe to spend today. Free during the beta.">
-<meta property="og:title" content="Penny – every cent, in focus">
+<meta property="og:title" content="Penny – Every cent counted. Nobody watching.">
 <meta property="og:description" content="A private budget app for Windows and Android. It reads your bank alerts and receipts on your device. No account, no bank login, no cloud.">
 <meta property="og:image" content="https://studdit.app/img/og.jpg">
 <meta property="og:type" content="website">
@@ -158,58 +158,13 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 }
 
 /* =====================================================================
-   STATEMENTS — the bank's printout next to Penny's list
+   PAPER BANDS — shared section heads
    ===================================================================== */
 .paperband{background:var(--paper);color:var(--ink)}
 .shead{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,80px);align-items:end}
 .shead h2{max-width:none}.shead .sub{margin-top:0;padding-bottom:6px}
 @media(max-width:900px){.shead{grid-template-columns:minmax(0,1fr);gap:0}.shead .sub{margin-top:20px}}
 .paperband .sub{color:var(--muted)}
-.statements{padding:var(--sect) 0}
-.compare{margin-top:clamp(48px,6vw,72px);display:grid;grid-template-columns:minmax(0,1.15fr) 88px minmax(0,1fr);align-items:stretch}
-.form{position:relative;padding:22px 34px 22px 44px;background:#fff;box-shadow:0 1px 0 var(--rule),0 18px 40px -24px rgba(20,33,31,.35);
-}
-.form::before,.form::after{content:"";position:absolute;top:0;bottom:0;width:30px;background:radial-gradient(circle 5px,var(--paper) 96%,#0000) 50% 6px/30px 26px repeat-y}
-.form::before{left:0;border-right:1px dashed #CFC5B7}.form::after{right:0;border-left:1px dashed #CFC5B7;width:22px;background-size:22px 26px}
-.form .t{display:flex;align-items:center;height:32px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#6E8A73}
-.form .row:nth-child(odd){background:var(--greenbar);box-shadow:-44px 0 0 var(--greenbar),34px 0 0 var(--greenbar)}
-.form .row{height:52px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:13.5px;color:#2C3B33;letter-spacing:-.01em}
-.form .row span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.form .row span:last-child{flex:none;color:#4F6655}
-.arrows{display:flex;flex-direction:column;padding-top:54px}
-.arrows i{height:52px;display:grid;place-items:center;color:#C8BBA8;transition:color .4s}
-.arrows svg{width:44px;height:14px}
-.list-clean{padding:22px 0 22px 4px}
-.list-clean .t{display:flex;align-items:center;height:32px;font-size:13px;color:var(--muted)}
-.list-clean .row{height:52px;display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:14px;align-items:center;border-bottom:1px solid var(--rule)}
-.list-clean .row:last-child{border-bottom:0}
-.list-clean i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--sand)}
-.list-clean i .ic{width:18px;height:18px}
-.list-clean b{font-weight:600;font-size:17px;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.list-clean small{display:block;font-weight:400;font-size:12.5px;color:var(--muted);letter-spacing:0}
-.list-clean .amt{font-weight:600;font-size:15px}
-.list-clean .row>*{opacity:.13;filter:grayscale(1);transition:opacity .45s,filter .45s}
-.tidied .list-clean .row>*{opacity:1;filter:none}
-.tidied .arrows i{color:var(--copper)}
-.tidied .list-clean .row:nth-child(3)>*{transition-delay:.06s}.tidied .list-clean .row:nth-child(4)>*{transition-delay:.12s}.tidied .list-clean .row:nth-child(5)>*{transition-delay:.18s}
-.tidied .list-clean .row:nth-child(6)>*{transition-delay:.24s}.tidied .list-clean .row:nth-child(7)>*{transition-delay:.3s}.tidied .list-clean .row:nth-child(8)>*{transition-delay:.36s}
-.tidied .arrows i:nth-child(3){transition-delay:.06s}.tidied .arrows i:nth-child(4){transition-delay:.12s}.tidied .arrows i:nth-child(5){transition-delay:.18s}.tidied .arrows i:nth-child(6){transition-delay:.24s}.tidied .arrows i:nth-child(7){transition-delay:.3s}
-.waiting{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-weight:600;font-size:16px;color:var(--ink);transition:opacity .3s;pointer-events:none}
-.list-clean{position:relative}.tidied .waiting{opacity:0}
-.tidy-act{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px;align-items:center}
-.tidy-act .own{flex:1 1 360px;display:flex;align-items:center;gap:10px;height:50px;padding:0 6px 0 20px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--rule)}
-.tidy-act .own:focus-within{box-shadow:inset 0 0 0 2px var(--copper)}
-.tidy-act input{flex:1;min-width:0;height:100%;border:0;background:none;outline:0;font-family:var(--mono);font-size:14px;color:var(--ink)}
-.tidy-act output{flex:none;max-width:48%;padding:7px 14px;border-radius:999px;background:var(--sand);font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tidy-act output:empty{display:none}
-.banks{margin-top:40px;font-size:15px;color:var(--muted);max-width:56em}
-.banks b{color:var(--ink);font-weight:600}
-@media(max-width:880px){
-  .compare{grid-template-columns:minmax(0,1fr)}
-  .arrows{flex-direction:row;justify-content:center;padding:14px 0}.arrows i{display:none}.arrows i:first-child{display:grid;height:auto;transform:rotate(90deg)}
-  .form{padding:20px 22px 20px 40px}.form::after{display:none}
-  .form .row:nth-child(odd){box-shadow:-40px 0 0 var(--greenbar),22px 0 0 var(--greenbar)}
-}
 
 /* =====================================================================
    PRIVACY — one switch for the whole page
@@ -264,24 +219,9 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 @media(max-width:640px){.strip-nav{display:none}.win .tb{height:24px;font-size:10px}.win .tb .ctl span{width:30px;height:24px}}
 
 /* =====================================================================
-   EVERYTHING ELSE + LANGUAGES (paper)
+   EVERYTHING ELSE (paper)
    ===================================================================== */
 .more{padding:var(--sect) 0 calc(var(--sect) * .6)}
-
-.langs-s{padding:calc(var(--sect) * .4) 0 var(--sect)}
-.ltable{margin-top:clamp(36px,4.5vw,56px);width:100%;border-collapse:collapse;table-layout:fixed}
-.ltable th{text-align:left;font-weight:500;font-size:13px;color:var(--muted);padding:0 12px 12px 0;border-bottom:2px solid var(--ink)}
-.ltable td{padding:16px 12px 16px 0;border-bottom:1px solid var(--rule);vertical-align:middle;font-size:15px}
-.ltable td:first-child{color:var(--muted);font-size:14px}
-.ltable q{quotes:none;font-size:18px;letter-spacing:-.01em;color:var(--ink)}
-.ltable .num{font-weight:600}
-.ltable td.cat{display:table-cell}.ltable td.cat span{display:inline-flex;align-items:center;gap:6px}
-.ltable col.c1{width:110px}.ltable col.c2{width:36%}.ltable col.c3{width:13%}
-@media(max-width:820px){
-  .ltable thead{display:none}.ltable,.ltable tbody,.ltable tr{display:block}
-  .ltable tr{display:grid;grid-template-columns:repeat(3,auto) 1fr;gap:6px 16px;padding:16px 0;border-bottom:1px solid var(--rule)}
-  .ltable td{border:0;padding:0}.ltable td:first-child{grid-column:1/-1}.ltable td:nth-child(2){grid-column:1/-1;padding-bottom:4px}
-}
 
 /* =====================================================================
    GET IT
@@ -320,11 +260,6 @@ footer .brand{color:var(--paper);font-size:20px;margin-right:auto}footer .brand 
 @keyframes glow{to{transform:translate3d(-4%,3%,0) scale(1.06)}}
 .hero .wrap{position:relative}
 
-/* statements: a scan line sweeps the tidy list */
-.list-clean::before{content:"";position:absolute;left:-8px;right:-8px;height:48px;top:20px;opacity:0;pointer-events:none;z-index:2;
-  background:linear-gradient(180deg,transparent,rgba(201,99,47,.16) 70%,rgba(201,99,47,.55) 96%,transparent);border-radius:8px}
-.scan .list-clean::before{animation:scan 1.1s cubic-bezier(.4,0,.2,1) both}
-@keyframes scan{0%{opacity:1;transform:translateY(0)}90%{opacity:1}100%{opacity:0;transform:translateY(calc(var(--rows,7)*52px))}}
 
 /* ---------- health playground (paper) ---------- */
 .health{padding:var(--sect) 0}
@@ -442,36 +377,29 @@ body.masked .num{letter-spacing:.08em}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}.fc-line{stroke-dashoffset:0}.fc-area,.fc-dip{opacity:1}}
 
 /* =====================================================================
-   AUTO — the phone does the typing (bank alerts, receipts, gestures)
+   AUTO — your spending, written down for you (real phone screenshots)
    ===================================================================== */
-.auto{padding:0 0 var(--sect)}
-.auto .grid3{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.acard{background:#fff;border-radius:24px;padding:22px 22px 26px;box-shadow:0 1px 0 var(--rule),0 18px 40px -30px rgba(20,33,31,.35);display:flex;flex-direction:column}
-.acard .stage{position:relative;height:208px;margin:0 0 22px;border-radius:18px;background:var(--ever);overflow:hidden;padding:18px 16px;display:flex;flex-direction:column;justify-content:center;gap:12px}
-.acard .lbl{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--copper);margin-bottom:8px}
-.acard b.h{display:block;font-size:20px;letter-spacing:-.025em;line-height:1.25;margin-bottom:6px}
-.acard p{color:var(--muted);font-size:15.5px;line-height:1.55}
-.note{display:flex;gap:10px;align-items:flex-start;background:rgba(251,246,239,.1);border:1px solid var(--moss);border-radius:14px;padding:10px 12px;color:var(--paper);font-size:13px;line-height:1.4}
-.note .app{flex:none;width:26px;height:26px;border-radius:7px;background:#117ACA;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff}
-.note small{display:block;color:var(--sage);font-size:11.5px}
-.txrow{display:flex;align-items:center;gap:10px;background:var(--fir);border-radius:14px;padding:10px 12px;color:var(--paper);font-size:14px}
-.txrow .ic{width:30px;height:30px;padding:6px;border-radius:50%;background:rgba(201,99,47,.18);color:var(--copper-hi)}
-.txrow .g{flex:1;min-width:0}.txrow .g small{display:block;color:var(--sage);font-size:11.5px}
-.txrow .amt{font-weight:650}.txrow .add{padding:4px 12px;border-radius:999px;background:var(--copper);color:#fff;font-size:12px;font-weight:650}
-.flow{display:grid;place-items:center;color:var(--sage)}.flow svg{width:44px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;transform:rotate(90deg)}
-.slip{align-self:center;width:62%;background:var(--paper);color:var(--ink);border-radius:6px 6px 2px 2px;padding:10px 12px;font-family:var(--mono);font-size:11px;line-height:1.55;box-shadow:0 10px 24px -14px #000}
-.slip div{display:flex;justify-content:space-between}.slip .t{border-top:1px dashed var(--rule);margin-top:4px;padding-top:4px;font-weight:700}
-.slip .scanline{position:absolute;left:19%;right:19%;height:2px;background:var(--copper-hi);box-shadow:0 0 12px var(--copper-hi);animation:scan 2.6s ease-in-out infinite}
-@keyframes scan{0%,100%{top:22px}50%{top:118px}}
-.swipe{position:relative;border-radius:14px;overflow:hidden;background:var(--red)}
-.swipe .under{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;gap:6px;padding:0 16px;color:#fff;font-size:13px;font-weight:650}
-.swipe .txrow{position:relative;border-radius:0;animation:swipe 3.2s ease-in-out infinite}
-@keyframes swipe{0%,30%,100%{transform:translateX(0)}45%,70%{transform:translateX(-34%)}}
-.widget{display:flex;align-items:center;gap:12px;background:var(--paper);color:var(--ink);border-radius:18px;padding:12px 14px}
-.widget .g{flex:1}.widget small{display:block;color:var(--muted);font-size:11.5px}.widget b{font-size:20px;letter-spacing:-.02em}
-.widget .plus{width:34px;height:34px;border-radius:50%;background:var(--copper);color:#fff;display:grid;place-items:center;font-size:22px;line-height:1}
-.auto .local{margin-top:28px;display:flex;gap:10px;align-items:center;color:var(--muted);font-size:15px}.auto .local .ic{color:var(--slice)}
-@media(max-width:960px){.auto .grid3{grid-template-columns:minmax(0,1fr)}.acard .stage{height:190px}}
+.auto{padding:var(--sect) 0}
+.phones{margin-top:clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px);align-items:start}
+.phone{margin:0}
+.phone .frame{max-width:300px;margin:0 auto;padding:9px;border-radius:46px;background:#0B1513;box-shadow:0 0 0 1px rgba(20,33,31,.15),0 40px 70px -34px rgba(20,33,31,.55),inset 0 0 0 1.5px #2C4540}
+.phone img{width:100%;height:auto;aspect-ratio:390/844;object-fit:cover;object-position:top;border-radius:37px;background:var(--ever)}
+.phone.mid{transform:translateY(-28px)}
+.phone figcaption{max-width:300px;margin:28px auto 0;color:var(--muted);font-size:15.5px;line-height:1.55}
+.phone figcaption b{display:block;color:var(--ink);font-size:18px;letter-spacing:-.02em;line-height:1.3;margin-bottom:6px}
+.phone .k{display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--copper)}
+.phone .k .ic{width:15px;height:15px}
+.minis{list-style:none;margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.minis li{display:flex;align-items:center;gap:10px;padding:14px 16px;border-radius:16px;background:#fff;box-shadow:0 1px 0 var(--rule);font-size:14.5px;font-weight:550;line-height:1.35}
+.minis .ic{color:var(--copper);width:20px;height:20px}
+@media(max-width:1000px){.minis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:820px){
+  .phones{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:20px;margin-inline:calc(-1*var(--gut));padding:20px var(--gut) 8px;scrollbar-width:none}
+  .phones::-webkit-scrollbar{display:none}
+  .phone{flex:0 0 min(78vw,300px);scroll-snap-align:center}.phone.mid{transform:none}
+}
+@media(max-width:520px){.minis{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.phone.mid{transform:none}}
 
 /* store buttons and the "coming soon" chip */
 .soon{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 20px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--moss);color:var(--sage);font-size:15px;font-weight:600}
@@ -481,7 +409,6 @@ footer .social{display:flex;gap:10px;margin-top:4px}
 footer .social a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--moss);color:var(--sage);transition:color .2s,box-shadow .2s}
 footer .social a:hover{color:var(--paper);box-shadow:inset 0 0 0 1px var(--sage)}
 footer .social svg{width:18px;height:18px}
-@media(prefers-reduced-motion:reduce){.slip .scanline,.swipe .txrow{animation:none}}
 </style>
 </head>
 <body>
@@ -539,7 +466,7 @@ footer .social svg{width:18px;height:18px}
 <header class="bar" id="bar">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Penny, back to the top"><svg aria-hidden="true"><use href="#mark"/></svg>penny</a>
-    <nav aria-label="Sections"><a href="#auto">Automatic</a><a href="#statements">Statements</a><a href="#privacy">Privacy</a><a href="#health">Health score</a><a href="#faq">FAQ</a></nav>
+    <nav aria-label="Sections"><a href="#auto">Features</a><a href="#privacy">Privacy</a><a href="#health">Health score</a><a href="#screens">The app</a><a href="#faq">FAQ</a></nav>
     <a class="btn copper sm" href="#get">Get Penny</a>
   </div>
 </header>
@@ -550,13 +477,13 @@ footer .social svg{width:18px;height:18px}
   <div class="wrap">
     <div>
       <a class="news" href="#auto"><b>NEW</b>Penny on Android: bank alerts and receipts, added for you<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a>
-      <h1 id="h1"><span class="l1">Say what you spent.</span> <span class="l2">Penny keeps the books.</span></h1>
-      <p class="sub">A private budget app for Windows and Android. It understands plain sentences, turns bank alerts and receipt photos into transactions, and keeps every number on your own device.</p>
+      <h1 id="h1"><span class="l1">Every cent counted.</span> <span class="l2">Nobody watching.</span></h1>
+      <p class="sub">Penny writes down your spending from your bank's alerts, your receipts and plain words, then tells you what's safe to spend today. It all stays on your device: no account, no bank login, no cloud.</p>
 
       <div class="say">
         <form id="sayForm" autocomplete="off">
           <svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg>
-          <label class="sr" for="say">Type a purchase the way you'd say it</label>
+          <label class="sr" for="say">Try it: type a purchase the way you'd say it</label>
           <input id="say" placeholder="Type something you bought…" maxlength="80" spellcheck="false" enterkeyhint="done">
           <button type="submit">Print it</button>
         </form>
@@ -592,73 +519,26 @@ footer .social svg{width:18px;height:18px}
   </div>
 </section>
 
-<!-- ===================== bank statements ===================== -->
+<!-- ===================== written down for you ===================== -->
 <div class="paperband">
-<section class="statements" id="statements" aria-labelledby="h2a">
-  <div class="wrap">
-    <div class="shead rv"><h2 id="h2a">Your bank writes for machines. Penny rewrites it for you.</h2>
-    <p class="sub">Download a statement from your bank's website and drop it into Penny. It recognizes the bank, tidies every payee, files it in the right category, and records card payments as transfers instead of spending.</p></div>
-
-    <div class="compare rv" id="compare">
-      <div class="form" aria-label="Lines as they appear in a bank statement">
-        <span class="t">STATEMENT · CHECKING ••7731</span>
-        <div id="rawRows"></div>
-      </div>
-      <div class="arrows" aria-hidden="true" id="arrows"></div>
-      <div class="list-clean" aria-label="The same lines in Penny">
-        <span class="t">In Penny</span>
-        <div id="cleanRows"></div>
-      </div>
-    </div>
-
-    <div class="tidy-act">
-      <button class="btn copper" id="tidyBtn" type="button" aria-controls="compare">Tidy it up</button>
-      <label class="own">
-        <span class="sr">Paste a line from your own statement</span>
-        <input id="own" placeholder="Or paste a line from your own statement" spellcheck="false" maxlength="140">
-        <output id="ownOut" for="own"></output>
-      </label>
-    </div>
-    <p class="banks">Recognized automatically: <b>Chase, Bank of America, Wells Fargo, Capital One, Citi, American Express, Discover, Apple Card, U.S. Bank</b> and <b>Ally</b>, plus <b>Mint, YNAB</b> and <b>Monarch</b> exports. Any other CSV, OFX or QFX file works too.</p>
-  </div>
-</section>
-
-<!-- ===================== automatic (Android) ===================== -->
 <section class="auto" id="auto" aria-labelledby="h2auto">
   <div class="wrap">
-    <div class="shead rv"><h2 id="h2auto">On your phone, Penny does the typing.</h2>
-    <p class="sub">Your bank already tells you about every purchase, and the shop hands you a receipt. Penny turns both into transactions you confirm with one tap, read right on your phone.</p></div>
-    <div class="grid3">
-      <article class="acard rv">
-        <div class="stage" aria-hidden="true">
-          <div class="note"><span class="app">C</span><span><small>Chase · now</small>You made a $14.99 transaction with AMZN Mktp US*2K4</span></div>
-          <div class="flow"><svg><use href="#i-arrow"/></svg></div>
-          <div class="txrow"><svg class="ic"><use href="#i-bag"/></svg><span class="g">Amazon<small>Shopping · Visa ••4821</small></span><span class="amt">−$14.99</span><span class="add">Add</span></div>
-        </div>
-        <span class="lbl"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>Bank alerts</span>
-        <b class="h">Purchases from your bank's notifications</b>
-        <p>Pick your bank and card apps once. Penny reads their purchase alerts in 5 languages and about 40 currencies, tidies the shop's name, picks the right card's account and waits for your tap. Codes, balances and adverts are never kept.</p>
-      </article>
-      <article class="acard rv d1">
-        <div class="stage" aria-hidden="true">
-          <div class="slip"><span class="scanline"></span><div><span>STARBUCKS</span></div><div><span>Latte</span><span>5.45</span></div><div><span>Croissant</span><span>3.95</span></div><div><span>Tax</span><span>0.82</span></div><div class="t"><span>TOTAL</span><span>$10.22</span></div></div>
-          <div class="txrow"><svg class="ic"><use href="#i-utensils"/></svg><span class="g">Starbucks<small>Dining · Oct 27 · receipt attached</small></span><span class="amt">−$10.22</span></div>
-        </div>
-        <span class="lbl"><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg>Receipts</span>
-        <b class="h">Snap a receipt, get a transaction</b>
-        <p>Penny finds the total (never the subtotal, tax or change), the shop and the date, then attaches the photo. It reads English, Spanish, Chinese and Hindi receipts, and amounts in any currency.</p>
-      </article>
-      <article class="acard rv d2">
-        <div class="stage" aria-hidden="true">
-          <div class="widget"><span class="g"><small>Safe to spend today</small><b>$42.80</b></span><span class="plus">+</span></div>
-          <div class="swipe"><span class="under">Delete</span><div class="txrow"><svg class="ic"><use href="#i-car"/></svg><span class="g">Uber<small>Transport · Today</small></span><span class="amt">−$18.40</span></div></div>
-        </div>
-        <span class="lbl"><svg class="ic" aria-hidden="true"><use href="#i-hand"/></svg>Quick hands</span>
-        <b class="h">Swipe, pull, done</b>
-        <p>Swipe a purchase to delete it or repeat it, swipe a bill to mark it paid, pull down to add. Keep today's safe-to-spend on your home screen with a one-tap add button.</p>
-      </article>
+    <div class="shead rv"><h2 id="h2auto">Your spending, written down for you.</h2>
+    <p class="sub">Your bank already tells you about every purchase, and the shop hands you a receipt. Penny turns both into transactions you confirm with one tap. Or just type “coffee 4.50”.</p></div>
+    <div class="phones">
+      <figure class="phone rv"><div class="frame"><img src="img/p2-capture.webp" alt="Penny on Android: three purchases found in bank notifications, Amazon, Uber Eats and Blue Bottle Coffee, each ready to add" width="780" height="1688" loading="lazy"></div>
+        <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>Bank alerts</span><b>Every purchase, from your bank's own alerts.</b> Pick your bank apps once. Penny tidies the shop's name, picks the right card and waits for your tap.</figcaption></figure>
+      <figure class="phone mid rv d1"><div class="frame"><img src="img/p3-receipt.webp" alt="Penny on Android: a receipt read into a new transaction, $10.22 at Starbucks, filed under Dining" width="780" height="1688" loading="lazy"></div>
+        <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg>Receipts</span><b>Snap a receipt, get a transaction.</b> The total, never the subtotal or tax, plus the shop and the date. The photo stays with it.</figcaption></figure>
+      <figure class="phone rv d2"><div class="frame"><img src="img/p1-overview.webp" alt="Penny on Android: the Overview with what is safe to spend today and net worth over 30 days" width="780" height="1688" loading="lazy"></div>
+        <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg>Today</span><b>One number you can trust.</b> What's safe to spend today, after the bills still to come. On your home screen too.</figcaption></figure>
     </div>
-    <p class="local rv"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Notifications and receipt photos are read on your phone. Nothing is uploaded, and nothing is added until you say so.</p>
+    <ul class="minis rv" aria-label="Also on your phone">
+      <li><svg class="ic" aria-hidden="true"><use href="#i-hand"/></svg>Swipe to delete, repeat or mark paid</li>
+      <li><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>A nudge only on days you forget</li>
+      <li><svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg>5 languages, about 40 currencies</li>
+      <li><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Read on your phone, never uploaded</li>
+    </ul>
   </div>
 </section>
 </div>
@@ -721,7 +601,7 @@ footer .social svg{width:18px;height:18px}
 <!-- ===================== the app ===================== -->
 <section class="screens" id="screens" aria-labelledby="h2c">
   <div class="wrap head rv">
-    <h2 id="h2c">One look at today. The rest when you want it.</h2>
+    <h2 id="h2c">Calm on the surface. Thorough underneath.</h2>
     <div class="strip-nav"><button type="button" id="prevShot" aria-label="Previous screen"><svg class="ic"><use href="#i-prev"/></svg></button><button type="button" id="nextShot" aria-label="Next screen"><svg class="ic"><use href="#i-next"/></svg></button></div>
   </div>
   <div class="strip" id="strip" tabindex="0" aria-label="Screens from Penny, scroll sideways"></div>
@@ -732,7 +612,7 @@ footer .social svg{width:18px;height:18px}
 <div class="paperband">
 <section class="more" aria-labelledby="h2d">
   <div class="wrap">
-    <div class="shead rv"><h2 id="h2d">And the rest of it.</h2><p class="sub">The everyday tools, on your PC and your phone.</p></div>
+    <div class="shead rv"><h2 id="h2d">Everything else, done properly.</h2><p class="sub">The tools a budget needs, on your PC and your phone, without the clutter.</p></div>
     <div class="bento">
       <div class="tile w2 dark rv" id="fcTile"><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg><b>The next 60 days, forecast</b>
         <div class="viz" aria-hidden="true"><svg viewBox="0 0 520 132" preserveAspectRatio="none"><defs><linearGradient id="fcg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2BB89A" stop-opacity=".35"/><stop offset="1" stop-color="#2BB89A" stop-opacity="0"/></linearGradient></defs>
@@ -750,28 +630,16 @@ footer .social svg{width:18px;height:18px}
       <div class="tile w2 dark rv"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><b>Ask Penny</b>
         <div class="chat" aria-hidden="true"><span class="bubble me">How much did I spend on dining last month?</span><span class="bubble"><span class="num">$291.66</span> across 14 visits. That's <span class="num">$71.66</span> over your budget.</span></div>
         <p>Plain questions, answered on your device in a moment.</p></div>
-      <div class="tile rv d1"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><b>Bills on one calendar</b><p>Rent, subscriptions and paydays, with a heads-up the day before a subscription renews.</p></div>
+      <div class="tile rv d1"><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg><b>Statements, tidied</b><p>Drop in a CSV, OFX or QFX file. Chase, Amex and other big banks are recognized, payees cleaned, duplicates skipped.</p></div>
       <div class="tile rv d2"><svg class="ic" aria-hidden="true"><use href="#i-coins"/></svg><b>Goals and debt plans</b><p>What to set aside each month, and your debt-free month with avalanche or snowball.</p></div>
       <div class="tile rv"><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg><b>Insights that rank</b><p>Findings ordered by the money at stake: overspending before it happens, fees, price rises and habits.</p></div>
       <div class="tile rv d1"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><b>Reminders that respect you</b><p>An evening nudge only on days with nothing added, a monthly recap, and every one has its own switch.</p></div>
       <div class="tile rv d2"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg><b>Four looks</b><p>Light, dark, pure white and true black, which is easy on the eyes and on phone batteries.</p></div>
-      <div class="tile rv d3"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg><b>Your data, your way</b><p>Excel export, statement import, rules that learn your payees, and daily verified backups.</p></div>
+      <div class="tile rv d3"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg><b>Yours to keep</b><p>Excel export, rules that learn your payees, and verified backups every day.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ===================== languages ===================== -->
-<section class="langs-s" id="languages" aria-labelledby="h2e">
-  <div class="wrap">
-    <div class="shead rv"><h2 id="h2e">Five languages. One way of reading.</h2>
-    <p class="sub">Penny speaks English, Español, 简体中文, हिन्दी and العربية. Every row below is read live by the same code that prints your receipt.</p></div>
-    <table class="ltable rv">
-      <colgroup><col class="c1"><col class="c2"><col class="c3"><col><col><col></colgroup>
-      <thead><tr><th>Language</th><th>You type</th><th>Amount</th><th>Payee</th><th>Category</th><th>When</th></tr></thead>
-      <tbody id="langs"></tbody>
-    </table>
-  </div>
-</section>
 </div>
 
 <!-- ===================== FAQ ===================== -->
@@ -922,58 +790,21 @@ footer .social svg{width:18px;height:18px}
     step(0);
   } else { const r = parse('coffee 4.50 at Starbucks'); if (r) { lines.push(r); drawReceipt(false); } }
 
-  /* ============ bank statements ============ */
-  const RAW = [['SQ *BLUE BOTTLE COFFEE 0123 OAKLAND CA', 6.25], ['AMZN Mktp US*2K4L19ZQ0', 34.99], ['TRADER JOE S #552 SAN JOSE CA', 62.18],
-    ['PURCHASE AUTHORIZED ON 10/08 CHIPOTLE 1234 AUSTIN TX', 12.80], ['NETFLIX.COM 866-579-7172 CA', 15.49], ['SHELL OIL 57444 DALLAS TX', 41.20], ['UBER *TRIP HELP.UBER.COM', 18.40]];
-  const tidyName = r => C ? C.Importers.cleanPayee(r) : r;
-  const drawStatements = () => {
-    $('#rawRows').innerHTML = RAW.map(([r, a]) => `<div class="row"><span title="${esc(r)}">${esc(r)}</span><span class="num">${masked ? '•••' : '-' + a.toFixed(2)}</span></div>`).join('');
-    $('#arrows').innerHTML = RAW.map(() => `<i><svg viewBox="0 0 44 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><use href="#i-arrow"/></svg></i>`).join('');
-    $('#cleanRows').innerHTML = RAW.map(([r, a]) => { const n = tidyName(r), c = catOf(guess(n + ' ' + r, 'expense')) || catOf('c_other');
-      return `<div class="row"><i>${icon(c.ic)}</i><b>${esc(n)}<small>${esc(c.name)}</small></b><span class="amt num">${money(a)}</span></div>`; }).join('');
-  };
-  drawStatements();
-  const compare = $('#compare'), tb = $('#tidyBtn');
-  tb.addEventListener('click', () => {
-    const on = !compare.classList.contains('tidied'); compare.classList.toggle('tidied', on);
-    tb.textContent = on ? 'Show the bank\'s version' : 'Tidy it up'; tb.setAttribute('aria-pressed', String(on));
-  });
-  const own = $('#own'), out = $('#ownOut');
-  own.addEventListener('input', () => {
-    const v = own.value.trim(); if (!v || !C) { out.textContent = ''; return; }
-    const n = tidyName(v), c = catOf(guess(n + ' ' + v, 'expense'));
-    out.textContent = c ? `${n} · ${c.name}` : n;
-  });
-
   /* ============ privacy mode for the whole page ============ */
   const sw = $('#privSwitch');
   sw.addEventListener('click', () => {
     masked = sw.getAttribute('aria-checked') !== 'true';
     sw.setAttribute('aria-checked', String(masked)); document.body.classList.toggle('masked', masked);
     $('#privState').textContent = masked ? 'Every number on this page is hidden' : 'Numbers are showing';
-    drawReceipt(false); preview(); drawStatements(); drawLangs(); if (window.__drawHealth) window.__drawHealth();
+    drawReceipt(false); preview(); if (window.__drawHealth) window.__drawHealth();
   });
-
-  /* ============ languages ============ */
-  const LANGS = [['English', 'en', 'coffee 4.50 at Starbucks yesterday'], ['Español', 'es', 'café 4,50 en Starbucks ayer'], ['简体中文', 'zh', '昨天在星巴克咖啡 4.50'],
-    ['हिन्दी', 'hi', 'कल Starbucks पर कॉफ़ी 4.50'], ['العربية', 'ar', 'قهوة ٤٫٥٠ في ستاربكس أمس']];
-  const drawLangs = () => {
-    $('#langs').innerHTML = LANGS.map(([name, code, s]) => {
-      const r = parse(s); if (!r) return '';
-      return `<tr><td>${name}</td><td><q lang="${code}" dir="auto">${esc(s)}</q></td><td class="num">${money(r.amount)}</td><td><bdi>${esc(r.merchant)}</bdi></td><td class="cat"><span>${icon(r.cat.ic)}${esc(r.cat.name)}</span></td><td>${rel(r.date)}</td></tr>`;
-    }).join('');
-  };
-  drawLangs();
 
   /* ============ the app, in a window ============ */
   const SHOTS = [['01-overview', 'Overview', 'What\'s safe to spend today after upcoming bills, your net worth, budgets and goals.'],
-    ['02-type-it', 'Type it', 'One line fills in the amount, payee, category and date.'],
-    ['03-bank-import', 'Import', 'A Chase card file, recognized and tidied before anything is saved.'],
-    ['04-desktop-widget', 'Desktop widget', 'Today\'s numbers and a quick-add box, always on your desktop.'],
-    ['05-budgets', 'Budgets', 'A warning before you overspend, not after.'],
-    ['08-health-report', 'Health report', 'Your numbers against Penny Research benchmarks, with a short plan.'],
-    ['09-calendar', 'Calendar', 'Spending, income and every bill on one month.'],
-    ['07-achievements', 'Habits', 'Streaks and 24 badges for the good stuff, never shared.']];
+    ['02-insights', 'Insights', 'What needs attention first, ranked by the money at stake, with what changed and why.'],
+    ['03-transactions', 'Transactions', 'One list, day by day, with search that understands “coffee >5”.'],
+    ['05-budgets', 'Budgets', 'The ones closest to their limit at the top, so you act before you overspend.'],
+    ['08-health-report', 'Health report', 'Your numbers against research benchmarks, a short plan, and your score month by month.']]
   const strip = $('#strip');
   strip.innerHTML = SHOTS.map(([f, t, d], i) => `<figure class="shot" id="s${i}"><div class="win"><div class="tb"><svg aria-hidden="true"><use href="#mark"/></svg>Penny<span class="ctl" aria-hidden="true"><span><svg viewBox="0 0 10 10"><path d="M0 5h10"/></svg></span><span><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9"/></svg></span><span><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0 0 10"/></svg></span></span></div>
     <img src="img/${f}.webp" alt="Penny: ${esc(t)}. ${esc(d)}" loading="${i < 2 ? 'eager' : 'lazy'}" width="1600" height="900"></div><figcaption><b>${esc(t)}.</b> ${esc(d)}</figcaption></figure>`).join('');
@@ -1064,7 +895,7 @@ footer .social svg{width:18px;height:18px}
     window.__drawHealth = draw;
   } else if (knobs) knobs.closest('.hgrid').hidden = true;
 
-  /* ============ reveal on scroll, bento visuals, auto-tidy ============ */
+  /* ============ reveal on scroll, bento visuals ============ */
   const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return; const t = e.target; t.classList.add('in'); io.unobserve(t);
     if (t.id === 'paceTile') $$('#paceTile .tr i').forEach(i => { i.style.width = i.dataset.w + '%'; });
@@ -1072,11 +903,6 @@ footer .social svg{width:18px;height:18px}
   $$('.rv').forEach(el => io ? io.observe(el) : el.classList.add('in'));
   if (!io) $$('#paceTile .tr i').forEach(i => { i.style.width = i.dataset.w + '%'; });
   window.__rvReady = true;
-  /* the statement tidies itself the first time you scroll to it (the button still flips between the two) */
-  compare.style.setProperty('--rows', RAW.length);
-  const tidyOnce = () => { if (compare.classList.contains('tidied')) return; if (!reduce) { compare.classList.add('scan'); setTimeout(() => compare.classList.remove('scan'), 1200); } tb.click(); };
-  if (io) { const tio = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { tio.disconnect(); setTimeout(tidyOnce, reduce ? 0 : 450); } }, { threshold: .45 }); tio.observe(compare); }
-
   /* the top bar gets a line once you scroll */
   const bar = $('#bar'); addEventListener('scroll', () => bar.classList.toggle('scrolled', scrollY > 8), { passive: true });
 })();
