@@ -387,17 +387,12 @@ body.masked .num{letter-spacing:.08em}
 .auto{padding:var(--sect) 0}
 .phones{margin-top:clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px);align-items:start}
 .phone{margin:0}
-/* an unbranded Android phone in the Pixel style: flat sides, even bezels, a centred punch-hole camera, buttons on the right */
-.phone .frame{position:relative;max-width:290px;margin:0 auto;padding:8px;border-radius:40px;background:linear-gradient(145deg,#2A2E2D,#121615);
-  box-shadow:0 0 0 1px #3A403E,0 44px 70px -34px rgba(20,33,31,.6)}
-.phone .frame::before,.phone .frame::after{content:"";position:absolute;right:-3px;width:3px;border-radius:0 3px 3px 0;background:#2A2E2D}
-.phone .frame::before{top:22%;height:9%}.phone .frame::after{top:35%;height:15%}
-.phone .screen{position:relative;border-radius:32px;overflow:hidden;background:var(--ever)}
-.phone .sbar{height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 22px 0 24px;color:#E8EFEC;font-size:12px;font-weight:600;letter-spacing:.01em}
-.phone .sbar::after{content:"";position:absolute;left:50%;top:9px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#050807;box-shadow:inset 0 0 0 2px #1B211F}
-.phone .sbar svg{width:44px;height:12px}
+/* a clean, unbranded phone: one smooth bezel, no status bar or buttons; a little of the app's own background
+   above and below the screenshot so nothing meets the rounded corners */
+.phone .frame{max-width:290px;margin:0 auto;padding:7px;border-radius:44px;background:#0D1412;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06) inset,0 1px 0 rgba(255,255,255,.08) inset,0 0 0 1px rgba(20,33,31,.18),0 50px 80px -40px rgba(20,33,31,.65)}
+.phone .screen{border-radius:37px;overflow:hidden;background:#10201D;padding:14px 0 12px}
 .phone img{display:block;width:100%;height:auto;aspect-ratio:390/844;object-fit:cover;object-position:top}
-.phone .gbar{height:18px;display:grid;place-items:center}.phone .gbar::before{content:"";width:96px;height:4px;border-radius:2px;background:rgba(232,239,236,.6)}
 .phone.mid{transform:translateY(-28px)}
 .phone figcaption{max-width:300px;margin:28px auto 0;color:var(--muted);font-size:15.5px;line-height:1.55}
 .phone figcaption b{display:block;color:var(--ink);font-size:18px;letter-spacing:-.02em;line-height:1.3;margin-bottom:6px}
@@ -540,11 +535,11 @@ footer .social svg{width:18px;height:18px}
     <div class="shead rv"><h2 id="h2auto">Your spending, written down for you.</h2>
     <p class="sub">Your bank already tells you about every purchase, and the shop hands you a receipt. Penny turns both into transactions you confirm with one tap. Or just type “coffee 4.50”.</p></div>
     <div class="phones">
-      <figure class="phone rv"><div class="frame"><div class="screen"><div class="sbar" aria-hidden="true"><span>9:30</span><svg viewBox="0 0 44 12"><path fill="currentColor" d="M2 10h2V8H2zm3.5 0h2V6h-2zM9 10h2V4H9zm3.5 0h2V2h-2z"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="M20.5 5.2a6.5 6.5 0 0 1 9 0M22.3 7.2a3.8 3.8 0 0 1 5.4 0"/><circle cx="25" cy="9.6" r="1.1" fill="currentColor"/><rect x="33.5" y="2.5" width="8" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="35" y="4" width="4.6" height="4.5" rx=".6" fill="currentColor"/><rect x="42" y="4.6" width="1.2" height="3.2" rx=".5" fill="currentColor"/></svg></div><img src="img/p2-capture.webp" alt="Penny on Android: three purchases found in bank notifications, Amazon, Uber Eats and Blue Bottle Coffee, each ready to add" width="780" height="1688" loading="lazy"><div class="gbar" aria-hidden="true"></div></div></div>
+      <figure class="phone rv"><div class="frame"><div class="screen"><img src="img/p2-capture.webp" alt="Penny on Android: three purchases found in bank notifications, Amazon, Uber Eats and Blue Bottle Coffee, each ready to add" width="780" height="1688" loading="lazy"></div></div>
         <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>Bank alerts</span><b>Every purchase, from your bank's own alerts.</b> Pick your bank apps once. Penny tidies the shop's name, picks the right card and waits for your tap.</figcaption></figure>
-      <figure class="phone mid rv d1"><div class="frame"><div class="screen"><div class="sbar" aria-hidden="true"><span>9:30</span><svg viewBox="0 0 44 12"><path fill="currentColor" d="M2 10h2V8H2zm3.5 0h2V6h-2zM9 10h2V4H9zm3.5 0h2V2h-2z"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="M20.5 5.2a6.5 6.5 0 0 1 9 0M22.3 7.2a3.8 3.8 0 0 1 5.4 0"/><circle cx="25" cy="9.6" r="1.1" fill="currentColor"/><rect x="33.5" y="2.5" width="8" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="35" y="4" width="4.6" height="4.5" rx=".6" fill="currentColor"/><rect x="42" y="4.6" width="1.2" height="3.2" rx=".5" fill="currentColor"/></svg></div><img src="img/p3-receipt.webp" alt="Penny on Android: a receipt read into a new transaction, $10.22 at Starbucks, filed under Dining" width="780" height="1688" loading="lazy"><div class="gbar" aria-hidden="true"></div></div></div>
+      <figure class="phone mid rv d1"><div class="frame"><div class="screen"><img src="img/p3-receipt.webp" alt="Penny on Android: a receipt read into a new transaction, $10.22 at Starbucks, filed under Dining" width="780" height="1688" loading="lazy"></div></div>
         <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg>Receipts</span><b>Snap a receipt, get a transaction.</b> The total, never the subtotal or tax, plus the shop and the date. The photo stays with it.</figcaption></figure>
-      <figure class="phone rv d2"><div class="frame"><div class="screen"><div class="sbar" aria-hidden="true"><span>9:30</span><svg viewBox="0 0 44 12"><path fill="currentColor" d="M2 10h2V8H2zm3.5 0h2V6h-2zM9 10h2V4H9zm3.5 0h2V2h-2z"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="M20.5 5.2a6.5 6.5 0 0 1 9 0M22.3 7.2a3.8 3.8 0 0 1 5.4 0"/><circle cx="25" cy="9.6" r="1.1" fill="currentColor"/><rect x="33.5" y="2.5" width="8" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="35" y="4" width="4.6" height="4.5" rx=".6" fill="currentColor"/><rect x="42" y="4.6" width="1.2" height="3.2" rx=".5" fill="currentColor"/></svg></div><img src="img/p1-overview.webp" alt="Penny on Android: the Overview with what is safe to spend today and net worth over 30 days" width="780" height="1688" loading="lazy"><div class="gbar" aria-hidden="true"></div></div></div>
+      <figure class="phone rv d2"><div class="frame"><div class="screen"><img src="img/p1-overview.webp" alt="Penny on Android: the Overview with what is safe to spend today and net worth over 30 days" width="780" height="1688" loading="lazy"></div></div>
         <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg>Today</span><b>One number you can trust.</b> What's safe to spend today, after the bills still to come. On your home screen too.</figcaption></figure>
     </div>
     <ul class="minis rv" aria-label="Also on your phone">
