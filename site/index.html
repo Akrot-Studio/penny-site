@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Penny – a private budget app for Windows</title>
+<title>Penny – the private budget app for Windows and Android</title>
 <meta name="description" content="Write what you spent the way you'd say it. Penny reads your bank statements, keeps every number on your PC, and tells you what's safe to spend today. Free during the beta.">
 <meta property="og:title" content="Penny – every cent, in focus">
-<meta property="og:description" content="A private budget app for Windows. No account, no bank login, no cloud.">
+<meta property="og:description" content="A private budget app for Windows and Android. It reads your bank alerts and receipts on your device. No account, no bank login, no cloud.">
 <meta property="og:image" content="https://studdit.app/img/og.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://studdit.app/">
@@ -14,8 +14,8 @@
 <meta name="theme-color" content="#10201D">
 <link rel="canonical" href="https://studdit.app/">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Penny","alternateName":"Penny – Budget & Money Tracker","applicationCategory":"FinanceApplication","operatingSystem":"Windows 10, Windows 11",
- "description":"A private budget app for Windows. Type what you spent in plain words, import bank statements, and keep every number encrypted on your own PC.",
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Penny","alternateName":"Penny – Budget & Money Tracker","applicationCategory":"FinanceApplication","operatingSystem":"Windows 10, Windows 11, Android 7+",
+ "description":"A private budget app for Windows and Android. Type what you spent in plain words, add purchases from bank notifications and receipt photos, import statements, and keep every number encrypted on your own device.",
  "url":"https://studdit.app/","downloadUrl":"https://apps.microsoft.com/detail/9NZJGZ0X9VDT","softwareVersion":"1.0.9",
  "inLanguage":["en","es","zh-Hans","hi","ar"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Akrot Software"}}
 </script>
@@ -440,6 +440,48 @@ footer .made{flex-basis:100%;font-size:13px;color:#71837F;margin-top:6px}
 body.masked .num{letter-spacing:.08em}
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}.fc-line{stroke-dashoffset:0}.fc-area,.fc-dip{opacity:1}}
+
+/* =====================================================================
+   AUTO — the phone does the typing (bank alerts, receipts, gestures)
+   ===================================================================== */
+.auto{padding:0 0 var(--sect)}
+.auto .grid3{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.acard{background:#fff;border-radius:24px;padding:22px 22px 26px;box-shadow:0 1px 0 var(--rule),0 18px 40px -30px rgba(20,33,31,.35);display:flex;flex-direction:column}
+.acard .stage{position:relative;height:208px;margin:0 0 22px;border-radius:18px;background:var(--ever);overflow:hidden;padding:18px 16px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.acard .lbl{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--copper);margin-bottom:8px}
+.acard b.h{display:block;font-size:20px;letter-spacing:-.025em;line-height:1.25;margin-bottom:6px}
+.acard p{color:var(--muted);font-size:15.5px;line-height:1.55}
+.note{display:flex;gap:10px;align-items:flex-start;background:rgba(251,246,239,.1);border:1px solid var(--moss);border-radius:14px;padding:10px 12px;color:var(--paper);font-size:13px;line-height:1.4}
+.note .app{flex:none;width:26px;height:26px;border-radius:7px;background:#117ACA;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff}
+.note small{display:block;color:var(--sage);font-size:11.5px}
+.txrow{display:flex;align-items:center;gap:10px;background:var(--fir);border-radius:14px;padding:10px 12px;color:var(--paper);font-size:14px}
+.txrow .ic{width:30px;height:30px;padding:6px;border-radius:50%;background:rgba(201,99,47,.18);color:var(--copper-hi)}
+.txrow .g{flex:1;min-width:0}.txrow .g small{display:block;color:var(--sage);font-size:11.5px}
+.txrow .amt{font-weight:650}.txrow .add{padding:4px 12px;border-radius:999px;background:var(--copper);color:#fff;font-size:12px;font-weight:650}
+.flow{display:grid;place-items:center;color:var(--sage)}.flow svg{width:44px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;transform:rotate(90deg)}
+.slip{align-self:center;width:62%;background:var(--paper);color:var(--ink);border-radius:6px 6px 2px 2px;padding:10px 12px;font-family:var(--mono);font-size:11px;line-height:1.55;box-shadow:0 10px 24px -14px #000}
+.slip div{display:flex;justify-content:space-between}.slip .t{border-top:1px dashed var(--rule);margin-top:4px;padding-top:4px;font-weight:700}
+.slip .scanline{position:absolute;left:19%;right:19%;height:2px;background:var(--copper-hi);box-shadow:0 0 12px var(--copper-hi);animation:scan 2.6s ease-in-out infinite}
+@keyframes scan{0%,100%{top:22px}50%{top:118px}}
+.swipe{position:relative;border-radius:14px;overflow:hidden;background:var(--red)}
+.swipe .under{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;gap:6px;padding:0 16px;color:#fff;font-size:13px;font-weight:650}
+.swipe .txrow{position:relative;border-radius:0;animation:swipe 3.2s ease-in-out infinite}
+@keyframes swipe{0%,30%,100%{transform:translateX(0)}45%,70%{transform:translateX(-34%)}}
+.widget{display:flex;align-items:center;gap:12px;background:var(--paper);color:var(--ink);border-radius:18px;padding:12px 14px}
+.widget .g{flex:1}.widget small{display:block;color:var(--muted);font-size:11.5px}.widget b{font-size:20px;letter-spacing:-.02em}
+.widget .plus{width:34px;height:34px;border-radius:50%;background:var(--copper);color:#fff;display:grid;place-items:center;font-size:22px;line-height:1}
+.auto .local{margin-top:28px;display:flex;gap:10px;align-items:center;color:var(--muted);font-size:15px}.auto .local .ic{color:var(--slice)}
+@media(max-width:960px){.auto .grid3{grid-template-columns:minmax(0,1fr)}.acard .stage{height:190px}}
+
+/* store buttons and the "coming soon" chip */
+.soon{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 20px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--moss);color:var(--sage);font-size:15px;font-weight:600}
+.soon svg{width:18px;height:18px}.soon i{font-style:normal;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--copper-hi)}
+.get .soon{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55);color:#fff}.get .soon i{color:#fff;opacity:.85}
+footer .social{display:flex;gap:10px;margin-top:4px}
+footer .social a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--moss);color:var(--sage);transition:color .2s,box-shadow .2s}
+footer .social a:hover{color:var(--paper);box-shadow:inset 0 0 0 1px var(--sage)}
+footer .social svg{width:18px;height:18px}
+@media(prefers-reduced-motion:reduce){.slip .scanline,.swipe .txrow{animation:none}}
 </style>
 </head>
 <body>
@@ -447,6 +489,15 @@ body.masked .num{letter-spacing:.08em}
   <symbol id="mark" viewBox="0 0 100 100"><path d="M50 50 L88.04 37.64 A40 40 0 1 1 50 10 Z" fill="#C9632F"/><path d="M53.53 45.15 L53.53 5.15 A40 40 0 0 1 91.57 32.79 Z" fill="#2BB89A"/></symbol>
   <symbol id="win" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5.2 10.4 4v7.3H3zm8.4-1.3L21 2.5v8.8h-9.6zM3 12.7h7.4V20L3 18.8zm8.4 0H21v8.8l-9.6-1.4z"/></symbol>
     <symbol id="discord" viewBox="0 0 24 24"><path fill="currentColor" d="M19.3 5.3A16 16 0 0 0 15.4 4l-.5 1a15 15 0 0 0-5.8 0L8.6 4a16 16 0 0 0-3.9 1.3C2.2 9 1.6 12.6 1.9 16.2a16 16 0 0 0 4.8 2.4l1-1.6a10 10 0 0 1-1.6-.8l.4-.3a11.5 11.5 0 0 0 11 0l.4.3-1.6.8 1 1.6a16 16 0 0 0 4.8-2.4c.4-4.2-.6-7.8-2.8-10.9zM8.7 14c-.9 0-1.7-.9-1.7-2s.8-2 1.7-2 1.7.9 1.7 2-.8 2-1.7 2zm6.6 0c-.9 0-1.7-.9-1.7-2s.8-2 1.7-2 1.7.9 1.7 2-.7 2-1.7 2z"/></symbol>
+  <symbol id="android" viewBox="0 0 24 24"><path fill="currentColor" d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22a11.5 11.5 0 0 0-9.84 0L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></symbol>
+  <symbol id="reddit" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12.1a2.2 2.2 0 0 0-3.7-1.6 10.8 10.8 0 0 0-5.8-1.8l1-4.6 3.2.7a1.6 1.6 0 1 0 .2-1l-3.6-.8a.5.5 0 0 0-.6.4l-1.1 5.3a10.9 10.9 0 0 0-5.9 1.8A2.2 2.2 0 1 0 3.3 14a4.3 4.3 0 0 0 0 .7c0 3.4 3.9 6.1 8.7 6.1s8.7-2.7 8.7-6.1a4.3 4.3 0 0 0 0-.7 2.2 2.2 0 0 0 1.3-1.9zM7.5 13.6a1.5 1.5 0 1 1 1.5 1.5 1.5 1.5 0 0 1-1.5-1.5zm8.6 4.1a5.7 5.7 0 0 1-4.1 1.3 5.7 5.7 0 0 1-4.1-1.3.4.4 0 0 1 .6-.6 4.9 4.9 0 0 0 3.5 1.1 4.9 4.9 0 0 0 3.5-1.1.4.4 0 1 1 .6.6zm-.3-2.6a1.5 1.5 0 1 1 1.5-1.5 1.5 1.5 0 0 1-1.5 1.5z"/></symbol>
+  <symbol id="xlogo" viewBox="0 0 24 24"><path fill="currentColor" d="M17.8 3h3.1l-6.8 7.8 8 10.2h-6.3l-4.9-6.4L5.3 21H2.2l7.3-8.3L1.9 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></symbol>
+  <symbol id="insta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" d="M7.5 3.5h9a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></symbol>
+  <symbol id="tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 3a4.6 4.6 0 0 0 3.9 4.1v3.2a7.7 7.7 0 0 1-3.9-1.2v6.5A6.1 6.1 0 1 1 10.5 9.5v3.3a2.9 2.9 0 1 0 2.9 2.8V3z"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><path d="M8 9h8M8 12h8M8 15h5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2H4.5z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 13V5.5a1.5 1.5 0 0 1 3 0V11M11 10.5V4.5a1.5 1.5 0 0 1 3 0v6M14 10.5V6a1.5 1.5 0 0 1 3 0v7.5c0 4-2.5 7-6.5 7-2.5 0-4-1.2-5.5-3.5L3.8 13.6a1.5 1.5 0 0 1 2.4-1.8L8 14"/></symbol>
   <!-- Penny's own line icons (renderer/icons.js) -->
   <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3.5l1.8 4.7 4.7 1.8-4.7 1.8L12 16.5l-1.8-4.7L5.5 10l4.7-1.8z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></symbol>
   <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3.5 4.5h2.2l2 10.2h9.6l1.8-7.4H6.6"/><circle cx="9.5" cy="19" r="1.3"/><circle cx="16.5" cy="19" r="1.3"/></symbol>
@@ -488,7 +539,7 @@ body.masked .num{letter-spacing:.08em}
 <header class="bar" id="bar">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Penny, back to the top"><svg aria-hidden="true"><use href="#mark"/></svg>penny</a>
-    <nav aria-label="Sections"><a href="#statements">Bank statements</a><a href="#privacy">Privacy</a><a href="#health">Health score</a><a href="#screens">The app</a><a href="#faq">FAQ</a></nav>
+    <nav aria-label="Sections"><a href="#auto">Automatic</a><a href="#statements">Statements</a><a href="#privacy">Privacy</a><a href="#health">Health score</a><a href="#faq">FAQ</a></nav>
     <a class="btn copper sm" href="#get">Get Penny</a>
   </div>
 </header>
@@ -498,9 +549,9 @@ body.masked .num{letter-spacing:.08em}
 <section class="hero" aria-labelledby="h1">
   <div class="wrap">
     <div>
-      <a class="news" href="#health"><b>NEW</b>Version 1.0.7: an honest health score, built by Penny Research<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a>
+      <a class="news" href="#auto"><b>NEW</b>Penny on Android: bank alerts and receipts, added for you<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a>
       <h1 id="h1"><span class="l1">Say what you spent.</span> <span class="l2">Penny keeps the books.</span></h1>
-      <p class="sub">A private budget app for Windows. It understands plain sentences, reads your bank statements and keeps every number on your own PC.</p>
+      <p class="sub">A private budget app for Windows and Android. It understands plain sentences, turns bank alerts and receipt photos into transactions, and keeps every number on your own device.</p>
 
       <div class="say">
         <form id="sayForm" autocomplete="off">
@@ -514,12 +565,12 @@ body.masked .num{letter-spacing:.08em}
       </div>
 
       <div class="cta">
-        <a class="btn copper" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><svg aria-hidden="true"><use href="#win"/></svg>Get it from Microsoft</a>
-        <a class="btn ghost" href="https://discord.gg/SXYkvcmX3k"><svg aria-hidden="true"><use href="#discord"/></svg>Join the community</a>
+        <a class="btn copper" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><svg aria-hidden="true"><use href="#win"/></svg>Get it for Windows</a>
+        <span class="soon"><svg aria-hidden="true"><use href="#android"/></svg>Android <i>Coming soon</i></span>
         <p>Free during the beta. No account, no bank login, no ads.</p>
       </div>
       <ul class="trust" aria-label="Why people trust Penny">
-        <li><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>Encrypted on your PC</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>Encrypted on your device</li>
         <li><svg class="ic" aria-hidden="true"><use href="#i-power"/></svg>Works offline</li>
         <li><svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg>5 languages</li>
         <li><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>No account, no ads</li>
@@ -571,6 +622,45 @@ body.masked .num{letter-spacing:.08em}
     <p class="banks">Recognized automatically: <b>Chase, Bank of America, Wells Fargo, Capital One, Citi, American Express, Discover, Apple Card, U.S. Bank</b> and <b>Ally</b>, plus <b>Mint, YNAB</b> and <b>Monarch</b> exports. Any other CSV, OFX or QFX file works too.</p>
   </div>
 </section>
+
+<!-- ===================== automatic (Android) ===================== -->
+<section class="auto" id="auto" aria-labelledby="h2auto">
+  <div class="wrap">
+    <div class="shead rv"><h2 id="h2auto">On your phone, Penny does the typing.</h2>
+    <p class="sub">Your bank already tells you about every purchase, and the shop hands you a receipt. Penny turns both into transactions you confirm with one tap, read right on your phone.</p></div>
+    <div class="grid3">
+      <article class="acard rv">
+        <div class="stage" aria-hidden="true">
+          <div class="note"><span class="app">C</span><span><small>Chase · now</small>You made a $14.99 transaction with AMZN Mktp US*2K4</span></div>
+          <div class="flow"><svg><use href="#i-arrow"/></svg></div>
+          <div class="txrow"><svg class="ic"><use href="#i-bag"/></svg><span class="g">Amazon<small>Shopping · Visa ••4821</small></span><span class="amt">−$14.99</span><span class="add">Add</span></div>
+        </div>
+        <span class="lbl"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>Bank alerts</span>
+        <b class="h">Purchases from your bank's notifications</b>
+        <p>Pick your bank and card apps once. Penny reads their purchase alerts in 5 languages and about 40 currencies, tidies the shop's name, picks the right card's account and waits for your tap. Codes, balances and adverts are never kept.</p>
+      </article>
+      <article class="acard rv d1">
+        <div class="stage" aria-hidden="true">
+          <div class="slip"><span class="scanline"></span><div><span>STARBUCKS</span></div><div><span>Latte</span><span>5.45</span></div><div><span>Croissant</span><span>3.95</span></div><div><span>Tax</span><span>0.82</span></div><div class="t"><span>TOTAL</span><span>$10.22</span></div></div>
+          <div class="txrow"><svg class="ic"><use href="#i-utensils"/></svg><span class="g">Starbucks<small>Dining · Oct 27 · receipt attached</small></span><span class="amt">−$10.22</span></div>
+        </div>
+        <span class="lbl"><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg>Receipts</span>
+        <b class="h">Snap a receipt, get a transaction</b>
+        <p>Penny finds the total (never the subtotal, tax or change), the shop and the date, then attaches the photo. It reads English, Spanish, Chinese and Hindi receipts, and amounts in any currency.</p>
+      </article>
+      <article class="acard rv d2">
+        <div class="stage" aria-hidden="true">
+          <div class="widget"><span class="g"><small>Safe to spend today</small><b>$42.80</b></span><span class="plus">+</span></div>
+          <div class="swipe"><span class="under">Delete</span><div class="txrow"><svg class="ic"><use href="#i-car"/></svg><span class="g">Uber<small>Transport · Today</small></span><span class="amt">−$18.40</span></div></div>
+        </div>
+        <span class="lbl"><svg class="ic" aria-hidden="true"><use href="#i-hand"/></svg>Quick hands</span>
+        <b class="h">Swipe, pull, done</b>
+        <p>Swipe a purchase to delete it or repeat it, swipe a bill to mark it paid, pull down to add. Keep today's safe-to-spend on your home screen with a one-tap add button.</p>
+      </article>
+    </div>
+    <p class="local rv"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Notifications and receipt photos are read on your phone. Nothing is uploaded, and nothing is added until you say so.</p>
+  </div>
+</section>
 </div>
 
 <!-- ===================== privacy ===================== -->
@@ -587,8 +677,8 @@ body.masked .num{letter-spacing:.08em}
       </button>
     </div>
     <div class="facts rv d1">
-      <div><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg><b>No bank login</b><p>Penny reads the files you download yourself. It never connects to your bank.</p></div>
-      <div><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><b>Encrypted on your PC</b><p>AES-256, tied to your Windows account. Add a passcode and a recovery key for a second lock.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg><b>No bank login</b><p>Penny reads the files you download and the alerts your bank already sends you. It never connects to your bank.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><b>Encrypted on your device</b><p>AES-256, sealed by Windows or by your phone's secure hardware. Add a passcode and a recovery key for a second lock.</p></div>
       <div><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><b>Backed up for you</b><p>Verified backups every day and before big changes, so a bad import is one click to undo.</p></div>
     </div>
   </div>
@@ -599,7 +689,7 @@ body.masked .num{letter-spacing:.08em}
 <section class="health" id="health" aria-labelledby="h2h">
   <div class="wrap">
     <div class="shead rv"><h2 id="h2h">A health score that's honest with you.</h2>
-    <p class="sub">The Penny Research team checked every benchmark against the latest household-finance research. Move the sliders: this is the same model the app uses, running in your browser. Nothing you set here leaves the page.</p></div>
+    <p class="sub">Every benchmark is checked against the latest household-finance research. In the app, Penny saves your score each month so you can watch it climb. Move the sliders: this is the same model, running in your browser. Nothing you set here leaves the page.</p></div>
 
     <div class="hgrid">
       <form class="knobs rv d1" id="knobs" onsubmit="return false" aria-label="Your numbers">
@@ -642,7 +732,7 @@ body.masked .num{letter-spacing:.08em}
 <div class="paperband">
 <section class="more" aria-labelledby="h2d">
   <div class="wrap">
-    <div class="shead rv"><h2 id="h2d">And the rest of it.</h2><p class="sub">The everyday tools, all on your PC and all included.</p></div>
+    <div class="shead rv"><h2 id="h2d">And the rest of it.</h2><p class="sub">The everyday tools, on your PC and your phone.</p></div>
     <div class="bento">
       <div class="tile w2 dark rv" id="fcTile"><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg><b>The next 60 days, forecast</b>
         <div class="viz" aria-hidden="true"><svg viewBox="0 0 520 132" preserveAspectRatio="none"><defs><linearGradient id="fcg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2BB89A" stop-opacity=".35"/><stop offset="1" stop-color="#2BB89A" stop-opacity="0"/></linearGradient></defs>
@@ -659,13 +749,13 @@ body.masked .num{letter-spacing:.08em}
         <p>The line is today. Each bar is how far through its budget a category is, so you see the pace before you overspend.</p></div>
       <div class="tile w2 dark rv"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><b>Ask Penny</b>
         <div class="chat" aria-hidden="true"><span class="bubble me">How much did I spend on dining last month?</span><span class="bubble"><span class="num">$291.66</span> across 14 visits. That's <span class="num">$71.66</span> over your budget.</span></div>
-        <p>Plain questions, answered on your PC in a moment.</p></div>
-      <div class="tile rv d1"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><b>Bills on one calendar</b><p>Rent, subscriptions and paydays, with Windows reminders even when Penny is in the tray.</p></div>
+        <p>Plain questions, answered on your device in a moment.</p></div>
+      <div class="tile rv d1"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><b>Bills on one calendar</b><p>Rent, subscriptions and paydays, with a heads-up the day before a subscription renews.</p></div>
       <div class="tile rv d2"><svg class="ic" aria-hidden="true"><use href="#i-coins"/></svg><b>Goals and debt plans</b><p>What to set aside each month, and your debt-free month with avalanche or snowball.</p></div>
-      <div class="tile rv"><svg class="ic" aria-hidden="true"><use href="#i-wand"/></svg><b>Rules that learn</b><p>File a payee once and Penny remembers it next time.</p></div>
-      <div class="tile rv d1"><svg class="ic" aria-hidden="true"><use href="#i-clip"/></svg><b>Receipts attached</b><p>Photos and PDFs kept with their transaction, encrypted.</p></div>
-      <div class="tile rv d2"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg><b>Excel export</b><p>Real dates and amounts, plus totals by category.</p></div>
-      <div class="tile rv d3"><svg class="ic" aria-hidden="true"><use href="#i-power"/></svg><b>A desktop widget</b><p>Today's numbers and a quick-add box, without opening the app.</p></div>
+      <div class="tile rv"><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg><b>Insights that rank</b><p>Findings ordered by the money at stake: overspending before it happens, fees, price rises and habits.</p></div>
+      <div class="tile rv d1"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><b>Reminders that respect you</b><p>An evening nudge only on days with nothing added, a monthly recap, and every one has its own switch.</p></div>
+      <div class="tile rv d2"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg><b>Four looks</b><p>Light, dark, pure white and true black, which is easy on the eyes and on phone batteries.</p></div>
+      <div class="tile rv d3"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg><b>Your data, your way</b><p>Excel export, statement import, rules that learn your payees, and daily verified backups.</p></div>
     </div>
   </div>
 </section>
@@ -690,14 +780,15 @@ body.masked .num{letter-spacing:.08em}
     <div class="shead rv"><h2 id="h2g">Questions, answered.</h2><p class="sub">The things people ask before they install a money app. Short answers, no fine print.</p></div>
     <div class="qa">
       <div>
-        <details class="rv"><summary>Does Penny connect to my bank?</summary><p>No. Penny never asks for a bank password and never logs in anywhere. You download a statement (CSV, OFX or QFX) from your bank's website and drop it in. Major US banks are recognized automatically.</p></details>
-        <details class="rv"><summary>Where is my data, and who can see it?</summary><p>Only on your PC, encrypted with AES-256 and tied to your Windows account. There is no account and no cloud, and Penny has no servers. Add a passcode for a second lock, with a recovery key in case you forget it.</p></details>
-        <details class="rv"><summary>Is it really free?</summary><p>Yes, everything is free during the beta. A Pro plan will add extras later; everyday budgeting stays free, and data you already have is never removed or locked away.</p></details>
+        <details class="rv"><summary>Does Penny connect to my bank?</summary><p>No. Penny never asks for a bank password and never logs in anywhere. On Android it can read the purchase alerts your bank app already shows you; on any device you can import a statement (CSV, OFX or QFX). Major US banks are recognized automatically.</p></details>
+        <details class="rv"><summary>Where is my data, and who can see it?</summary><p>Only on your device, encrypted with AES-256 and sealed by Windows or your phone's secure hardware. There is no account and no cloud, and Penny has no servers. Add a passcode for a second lock, with a recovery key in case you forget it.</p></details>
+        <details class="rv"><summary>Is it really free?</summary><p>Yes, everything is free during the beta. A Pro plan will add extras later, with a free week to try it; everyday budgeting stays free, and data you already have is never removed or locked away.</p></details>
       </div>
       <div>
         <details class="rv"><summary>How is the health score worked out?</summary><p>Four pillars (Spend, Save, Borrow, Plan) scored 0 to 100 with the Penny Research model, built from the latest household-finance research and tested on realistic households.</p></details>
         <details class="rv"><summary>What if I already use Mint, YNAB or Monarch?</summary><p>Export from your old app and import the file. Penny recognizes those exports with all their accounts, keeps transfers as transfers and skips duplicates.</p></details>
-        <details class="rv"><summary>Mac, Linux or phone?</summary><p>Penny is for Windows 10 and 11 today. The money engine is already shared code, which is the groundwork for a phone version. Join the Discord to hear first.</p></details>
+        <details class="rv"><summary>Which devices does Penny run on?</summary><p>Windows 10 and 11 today, and Android is coming to Google Play. iPhone and Mac may follow; join the Discord to hear first.</p></details>
+        <details class="rv"><summary>Is it safe to let Penny read notifications?</summary><p>It's off until you turn it on and pick your bank apps. Penny checks those notifications on your phone for a purchase, keeps only the ones from apps you picked (encrypted), and never sends them anywhere. Codes and balances are never kept.</p></details>
       </div>
     </div>
   </div>
@@ -708,11 +799,12 @@ body.masked .num{letter-spacing:.08em}
   <div class="wrap">
     <div class="rv">
       <h2 id="h2f">Start with the next thing you buy.</h2>
-      <p class="sub">Penny is free during the beta, for Windows 10 and 11.</p>
+      <p class="sub">Penny is free during the beta, for Windows 10 and 11, with Android coming soon.</p>
       <p class="ver"><i></i>Version 1.0.9</p>
     </div>
     <div class="btns rv d1">
-      <a class="btn white" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><svg aria-hidden="true"><use href="#win"/></svg>Get it from Microsoft</a>
+      <a class="btn white" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><svg aria-hidden="true"><use href="#win"/></svg>Get it for Windows</a>
+      <span class="soon"><svg aria-hidden="true"><use href="#android"/></svg>Android <i>Coming soon</i></span>
       <a class="btn outline" href="https://discord.gg/SXYkvcmX3k"><svg aria-hidden="true"><use href="#discord"/></svg>Join the Discord</a>
     </div>
   </div>
@@ -723,14 +815,18 @@ body.masked .num{letter-spacing:.08em}
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Penny, back to the top"><svg aria-hidden="true"><use href="#mark"/></svg>penny</a>
     <nav class="links" aria-label="More">
+      <a href="#auto">Features</a>
+      <a href="#faq">FAQ</a>
       <a href="privacy.html">Privacy policy</a>
       <a href="mailto:pennymoneyapp@gmail.com">Support</a>
-      <a href="https://discord.gg/SXYkvcmX3k">Discord</a>
-      <a href="https://www.reddit.com/r/Pennymoneyapp/">Reddit</a>
-      <a href="https://x.com/pennymoneyapp">X</a>
-      <a href="https://www.instagram.com/pennymoneyapp/">Instagram</a>
-      <a href="https://www.tiktok.com/@pennymoneyapp">TikTok</a>
     </nav>
+    <div class="social" aria-label="Penny elsewhere">
+      <a href="https://discord.gg/SXYkvcmX3k" aria-label="Discord"><svg aria-hidden="true"><use href="#discord"/></svg></a>
+      <a href="https://www.reddit.com/r/Pennymoneyapp/" aria-label="Reddit"><svg aria-hidden="true"><use href="#reddit"/></svg></a>
+      <a href="https://x.com/pennymoneyapp" aria-label="X"><svg aria-hidden="true"><use href="#xlogo"/></svg></a>
+      <a href="https://www.instagram.com/pennymoneyapp/" aria-label="Instagram"><svg aria-hidden="true"><use href="#insta"/></svg></a>
+      <a href="https://www.tiktok.com/@pennymoneyapp" aria-label="TikTok"><svg aria-hidden="true"><use href="#tiktok"/></svg></a>
+    </div>
     <p class="made">© <span id="yr"></span> Akrot Software. This page has no trackers, no cookies and no analytics, just like the app.</p>
   </div>
 </footer>
