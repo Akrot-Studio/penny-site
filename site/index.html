@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Penny – Every cent counted. Nobody watching.</title>
+<title>Penny – Every penny counted. Nobody watching.</title>
 <meta name="description" content="Write what you spent the way you'd say it. Penny reads your bank statements, keeps every number on your PC, and tells you what's safe to spend today. Free during the beta.">
-<meta property="og:title" content="Penny – Every cent counted. Nobody watching.">
+<meta property="og:title" content="Penny – Every penny counted. Nobody watching.">
 <meta property="og:description" content="A private budget app for Windows and Android. It reads your bank alerts and receipts on your device. No account, no bank login, no cloud.">
 <meta property="og:image" content="https://studdit.app/img/og.jpg">
 <meta property="og:type" content="website">
@@ -139,10 +139,14 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 .line small{display:block;font-size:12.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .line .amt{font-weight:600;font-size:16px;text-align:right}
 .line .amt.in{color:#0F7563}
-.line.new{animation:print .9s cubic-bezier(.25,.9,.3,1) both}
-@keyframes print{0%{opacity:0;clip-path:inset(0 0 100% 0)}35%{opacity:1}100%{opacity:1;clip-path:inset(0 0 0 0)}}
-.paper.feed{animation:feed .9s cubic-bezier(.25,.9,.3,1)}
-@keyframes feed{0%{translate:0 -56px}100%{translate:0 0}}
+/* a new line opens up in place (height, then ink); when the receipt is full the oldest line folds away at the same time */
+.line.new,.line.gone{overflow:hidden}
+.line.new{animation:lineIn .6s cubic-bezier(.2,.8,.2,1) both}
+.line.new>*{animation:ink .6s .18s cubic-bezier(.2,.8,.2,1) both}
+.line.gone{animation:lineOut .5s cubic-bezier(.4,0,.2,1) both}
+@keyframes lineIn{from{max-height:0;padding-block:0;border-bottom-color:transparent}to{max-height:72px;padding-block:13px}}
+@keyframes lineOut{from{max-height:72px;opacity:1}to{max-height:0;padding-block:0;opacity:0;border-bottom-width:0}}
+@keyframes ink{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 .totals{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:4px 16px;padding-top:18px;font-size:14px;color:var(--muted)}
 .totals .big,.totals .safe{justify-self:end;text-align:right}
 .totals .big{font-size:30px;font-weight:700;letter-spacing:-.04em;color:var(--ink);line-height:1.1}
@@ -182,6 +186,7 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 .switch .off{display:none}.switch[aria-checked=true] .off{display:block}.switch[aria-checked=true] .on{display:none}
 .switch b{display:block;font-size:19px;letter-spacing:-.02em;line-height:1.3}
 .switch small{display:block;color:var(--sage);font-size:14px}
+.switch>span:last-child{min-width:16.5em}   /* the same width whether numbers show or hide */
 .facts{margin-top:clamp(56px,7vw,88px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--moss)}
 .facts div{padding:30px 32px 0 0}
 .facts div+div{padding-left:32px;border-left:1px solid var(--moss)}
@@ -194,7 +199,7 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 /* =====================================================================
    SCREENS — the real app, in a Windows window
    ===================================================================== */
-.screens{padding:0 0 var(--sect)}
+.screens{padding:var(--sect) 0}
 .screens .head{display:flex;justify-content:space-between;align-items:end;gap:24px}
 .strip-nav{display:flex;gap:10px;flex:none}
 .strip-nav button{width:50px;height:50px;border-radius:50%;border:0;background:var(--fir);cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--moss);color:var(--paper)}
@@ -382,8 +387,17 @@ body.masked .num{letter-spacing:.08em}
 .auto{padding:var(--sect) 0}
 .phones{margin-top:clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px);align-items:start}
 .phone{margin:0}
-.phone .frame{max-width:300px;margin:0 auto;padding:9px;border-radius:46px;background:#0B1513;box-shadow:0 0 0 1px rgba(20,33,31,.15),0 40px 70px -34px rgba(20,33,31,.55),inset 0 0 0 1.5px #2C4540}
-.phone img{width:100%;height:auto;aspect-ratio:390/844;object-fit:cover;object-position:top;border-radius:37px;background:var(--ever)}
+/* an unbranded Android phone in the Pixel style: flat sides, even bezels, a centred punch-hole camera, buttons on the right */
+.phone .frame{position:relative;max-width:290px;margin:0 auto;padding:8px;border-radius:40px;background:linear-gradient(145deg,#2A2E2D,#121615);
+  box-shadow:0 0 0 1px #3A403E,0 44px 70px -34px rgba(20,33,31,.6)}
+.phone .frame::before,.phone .frame::after{content:"";position:absolute;right:-3px;width:3px;border-radius:0 3px 3px 0;background:#2A2E2D}
+.phone .frame::before{top:22%;height:9%}.phone .frame::after{top:35%;height:15%}
+.phone .screen{position:relative;border-radius:32px;overflow:hidden;background:var(--ever)}
+.phone .sbar{height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 22px 0 24px;color:#E8EFEC;font-size:12px;font-weight:600;letter-spacing:.01em}
+.phone .sbar::after{content:"";position:absolute;left:50%;top:9px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:#050807;box-shadow:inset 0 0 0 2px #1B211F}
+.phone .sbar svg{width:44px;height:12px}
+.phone img{display:block;width:100%;height:auto;aspect-ratio:390/844;object-fit:cover;object-position:top}
+.phone .gbar{height:18px;display:grid;place-items:center}.phone .gbar::before{content:"";width:96px;height:4px;border-radius:2px;background:rgba(232,239,236,.6)}
 .phone.mid{transform:translateY(-28px)}
 .phone figcaption{max-width:300px;margin:28px auto 0;color:var(--muted);font-size:15.5px;line-height:1.55}
 .phone figcaption b{display:block;color:var(--ink);font-size:18px;letter-spacing:-.02em;line-height:1.3;margin-bottom:6px}
@@ -477,7 +491,7 @@ footer .social svg{width:18px;height:18px}
   <div class="wrap">
     <div>
       <a class="news" href="#auto"><b>NEW</b>Penny on Android: bank alerts and receipts, added for you<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a>
-      <h1 id="h1"><span class="l1">Every cent counted.</span> <span class="l2">Nobody watching.</span></h1>
+      <h1 id="h1"><span class="l1">Every penny counted.</span> <span class="l2">Nobody watching.</span></h1>
       <p class="sub">Penny writes down your spending from your bank's alerts, your receipts and plain words, then tells you what's safe to spend today. It all stays on your device: no account, no bank login, no cloud.</p>
 
       <div class="say">
@@ -526,11 +540,11 @@ footer .social svg{width:18px;height:18px}
     <div class="shead rv"><h2 id="h2auto">Your spending, written down for you.</h2>
     <p class="sub">Your bank already tells you about every purchase, and the shop hands you a receipt. Penny turns both into transactions you confirm with one tap. Or just type “coffee 4.50”.</p></div>
     <div class="phones">
-      <figure class="phone rv"><div class="frame"><img src="img/p2-capture.webp" alt="Penny on Android: three purchases found in bank notifications, Amazon, Uber Eats and Blue Bottle Coffee, each ready to add" width="780" height="1688" loading="lazy"></div>
+      <figure class="phone rv"><div class="frame"><div class="screen"><div class="sbar" aria-hidden="true"><span>9:30</span><svg viewBox="0 0 44 12"><path fill="currentColor" d="M2 10h2V8H2zm3.5 0h2V6h-2zM9 10h2V4H9zm3.5 0h2V2h-2z"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="M20.5 5.2a6.5 6.5 0 0 1 9 0M22.3 7.2a3.8 3.8 0 0 1 5.4 0"/><circle cx="25" cy="9.6" r="1.1" fill="currentColor"/><rect x="33.5" y="2.5" width="8" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="35" y="4" width="4.6" height="4.5" rx=".6" fill="currentColor"/><rect x="42" y="4.6" width="1.2" height="3.2" rx=".5" fill="currentColor"/></svg></div><img src="img/p2-capture.webp" alt="Penny on Android: three purchases found in bank notifications, Amazon, Uber Eats and Blue Bottle Coffee, each ready to add" width="780" height="1688" loading="lazy"><div class="gbar" aria-hidden="true"></div></div></div>
         <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>Bank alerts</span><b>Every purchase, from your bank's own alerts.</b> Pick your bank apps once. Penny tidies the shop's name, picks the right card and waits for your tap.</figcaption></figure>
-      <figure class="phone mid rv d1"><div class="frame"><img src="img/p3-receipt.webp" alt="Penny on Android: a receipt read into a new transaction, $10.22 at Starbucks, filed under Dining" width="780" height="1688" loading="lazy"></div>
+      <figure class="phone mid rv d1"><div class="frame"><div class="screen"><div class="sbar" aria-hidden="true"><span>9:30</span><svg viewBox="0 0 44 12"><path fill="currentColor" d="M2 10h2V8H2zm3.5 0h2V6h-2zM9 10h2V4H9zm3.5 0h2V2h-2z"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="M20.5 5.2a6.5 6.5 0 0 1 9 0M22.3 7.2a3.8 3.8 0 0 1 5.4 0"/><circle cx="25" cy="9.6" r="1.1" fill="currentColor"/><rect x="33.5" y="2.5" width="8" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="35" y="4" width="4.6" height="4.5" rx=".6" fill="currentColor"/><rect x="42" y="4.6" width="1.2" height="3.2" rx=".5" fill="currentColor"/></svg></div><img src="img/p3-receipt.webp" alt="Penny on Android: a receipt read into a new transaction, $10.22 at Starbucks, filed under Dining" width="780" height="1688" loading="lazy"><div class="gbar" aria-hidden="true"></div></div></div>
         <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-scan"/></svg>Receipts</span><b>Snap a receipt, get a transaction.</b> The total, never the subtotal or tax, plus the shop and the date. The photo stays with it.</figcaption></figure>
-      <figure class="phone rv d2"><div class="frame"><img src="img/p1-overview.webp" alt="Penny on Android: the Overview with what is safe to spend today and net worth over 30 days" width="780" height="1688" loading="lazy"></div>
+      <figure class="phone rv d2"><div class="frame"><div class="screen"><div class="sbar" aria-hidden="true"><span>9:30</span><svg viewBox="0 0 44 12"><path fill="currentColor" d="M2 10h2V8H2zm3.5 0h2V6h-2zM9 10h2V4H9zm3.5 0h2V2h-2z"/><path fill="none" stroke="currentColor" stroke-width="1.4" d="M20.5 5.2a6.5 6.5 0 0 1 9 0M22.3 7.2a3.8 3.8 0 0 1 5.4 0"/><circle cx="25" cy="9.6" r="1.1" fill="currentColor"/><rect x="33.5" y="2.5" width="8" height="7.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="35" y="4" width="4.6" height="4.5" rx=".6" fill="currentColor"/><rect x="42" y="4.6" width="1.2" height="3.2" rx=".5" fill="currentColor"/></svg></div><img src="img/p1-overview.webp" alt="Penny on Android: the Overview with what is safe to spend today and net worth over 30 days" width="780" height="1688" loading="lazy"><div class="gbar" aria-hidden="true"></div></div></div>
         <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg>Today</span><b>One number you can trust.</b> What's safe to spend today, after the bills still to come. On your home screen too.</figcaption></figure>
     </div>
     <ul class="minis rv" aria-label="Also on your phone">
@@ -741,8 +755,10 @@ footer .social svg{width:18px;height:18px}
     <span><b>${esc(r.merchant || r.cat.name)}</b><small>${esc(r.cat.name)} · ${rel(r.date)}</small></span>
     <span class="amt num${r.type === 'income' ? ' in' : ''}">${masked ? '•••' : (r.type === 'income' ? '+' : '−') + USD.format(r.amount || 0)}</span></li>`;
   const drawReceipt = fresh => {
-    const shown = lines.slice(-MAX_LINES);
-    $('#lines').innerHTML = shown.map((r, i) => lineHtml(r, fresh && i === shown.length - 1)).join('');
+    /* while a new line prints on a full receipt, the oldest one is still there for a moment, folding away */
+    const drop = fresh && lines.length > MAX_LINES, shown = lines.slice(-(MAX_LINES + (drop ? 1 : 0)));
+    $('#lines').innerHTML = shown.map((r, i) => lineHtml(r, fresh && i === shown.length - 1).replace('class="line', drop && i === 0 ? 'class="line gone' : 'class="line')).join('');
+    clearTimeout(drawReceipt.t); if (drop) drawReceipt.t = setTimeout(() => drawReceipt(false), 650);
     const spentToday = lines.filter(r => r.type === 'expense' && r.date === TODAY).reduce((s, r) => s + (r.amount || 0), 0);
     const spent = lines.filter(r => r.type === 'expense').reduce((s, r) => s + (r.amount || 0), 0);
     $('#spent').textContent = money(spent);
@@ -752,8 +768,8 @@ footer .social svg{width:18px;height:18px}
   const print = r => {
     lines.push(r); drawReceipt(!reduce);
     if (reduce) return;
-    const p = $('#paper'), s = $('#slot');
-    p.classList.remove('feed'); s.classList.remove('busy'); void p.offsetWidth; p.classList.add('feed'); s.classList.add('busy');
+    const s = $('#slot');
+    s.classList.remove('busy'); void s.offsetWidth; s.classList.add('busy');
   };
   ['groceries 62.18 at Trader Joe\'s', 'uber 18.40 yesterday'].forEach(t => { const r = parse(t); if (r) lines.push(r); });
   drawReceipt(false);
