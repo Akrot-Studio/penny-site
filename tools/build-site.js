@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-/* Builds Penny's website (site/) into dist/site, ready for Cloudflare Pages at https://studdit.app.
+/* Builds Penny's website (site/) into dist/site, ready for Cloudflare Pages at https://penny.akrot.app.
    The page runs Penny's real parser and health model, so a minified copy of renderer/penny-core.js goes in with it.
    Also writes Cloudflare's _headers file (security headers, long caching for fonts), robots.txt and sitemap.xml.
    Usage: node tools/build-site.js          then, from the repository root (wrangler.toml: the newsletter database):
           npx wrangler pages deploy --branch main      (also uploads functions/, the newsletter sign-up) */
 const path = require('path'), fs = require('fs');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'site'), OUT = path.join(ROOT, 'dist', 'site');
-const SITE = 'https://studdit.app';
+const SITE = 'https://penny.akrot.app';
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(SRC, OUT, { recursive: true });
@@ -19,7 +19,7 @@ for (const f of PAGES) {
   /* Cloudflare Pages serves /features.html at /features (308 otherwise), so links and canonicals use the clean address */
   const pages = PAGES.filter(x => x !== 'index.html').map(x => x.replace('.html', '')).join('|');
   fs.writeFileSync(p, t.replace(/<!--header:(\w+)-->/, (_, cur) => part('header').replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace('<!--footer-->', part('footer'))
-    .replace(new RegExp(`(href="(?:https://studdit\\.app/)?)(${pages})\\.html([#"])`, 'g'), '$1$2$3'));
+    .replace(new RegExp(`(href="(?:${SITE.replace(/\./g, '\\.')}/)?)(${pages})\\.html([#"])`, 'g'), '$1$2$3'));
 }
 require('esbuild').buildSync({ entryPoints: [path.join(ROOT, 'renderer', 'penny-core.js')], minify: true, charset: 'utf8', outfile: path.join(OUT, 'penny-core.js'), logLevel: 'warning' });
 

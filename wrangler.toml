@@ -1,4 +1,4 @@
-# Penny's website on Cloudflare Pages (https://studdit.app). Build with `node tools/build-site.js`, then:
+# Penny's website on Cloudflare Pages (https://penny.akrot.app). Build with `node tools/build-site.js`, then:
 #   npx wrangler pages deploy --branch main
 # functions/ holds the newsletter sign-up (/api/subscribe) and /unsubscribe; sign-ups live in the D1 database below.
 name = "penny"
