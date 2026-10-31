@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Penny – Every penny counted. Nobody watching.</title>
-<meta name="description" content="Write what you spent the way you'd say it. Penny reads your bank statements, keeps every number on your PC, and tells you what's safe to spend today. Free during the beta.">
+<title>Penny – Know what's safe to spend. Nobody watching.</title>
+<meta name="description" content="Penny is a private budget app for Windows and Android. It writes down your spending from bank alerts, receipts and plain words, plans every paycheck, and tells you what's safe to spend today. No account, no bank login, no cloud. Free during the beta.">
 <meta property="og:title" content="Penny – Every penny counted. Nobody watching.">
 <meta property="og:description" content="A private budget app for Windows and Android. It reads your bank alerts and receipts on your device. No account, no bank login, no cloud.">
 <meta property="og:image" content="https://studdit.app/img/og.jpg">
@@ -17,7 +17,7 @@
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Penny","alternateName":"Penny – Budget & Money Tracker","applicationCategory":"FinanceApplication","operatingSystem":"Windows 10, Windows 11, Android 7+",
  "description":"A private budget app for Windows and Android. Type what you spent in plain words, add purchases from bank notifications and receipt photos, import statements, and keep every number encrypted on your own device.",
  "url":"https://studdit.app/","downloadUrl":"https://apps.microsoft.com/detail/9NZJGZ0X9VDT","softwareVersion":"1.2.0",
- "inLanguage":["en","es","zh-Hans","hi","ar"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Akrot Software"}}
+ "inLanguage":["en","es","pt","fr","ru","id","zh-Hans","hi","ar"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Akrot Software"}}
 </script>
 <link rel="icon" type="image/svg+xml" href="img/penny-mark.svg">
 <link rel="apple-touch-icon" href="img/icon-180.png">
@@ -84,12 +84,11 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 .btn.copper{background:var(--copper);color:#fff}.btn.copper:hover{background:var(--copper-dk)}
 .btn.ghost{background:transparent;color:var(--paper);box-shadow:inset 0 0 0 1.5px var(--moss)}.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--sage)}
 .btn.sm{height:42px;padding:0 20px;font-size:15px}
-@media(max-width:820px){.bar nav{display:none}.bar .btn{margin-left:auto}}
 
 /* =====================================================================
    HERO — say it, and the receipt prints
    ===================================================================== */
-.hero{position:relative;padding:clamp(40px,6vw,88px) 0 clamp(96px,10vw,140px)}
+.hero{position:relative;overflow-x:clip;padding:clamp(40px,6vw,88px) 0 clamp(96px,10vw,140px)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,400px);gap:clamp(36px,5vw,72px);align-items:start}
 .hero h1{font-size:clamp(40px,4.15vw,62px);line-height:1.04}
 .hero h1 .l1,.hero h1 .l2{display:block;white-space:nowrap}
@@ -187,6 +186,7 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 .switch b{display:block;font-size:19px;letter-spacing:-.02em;line-height:1.3}
 .switch small{display:block;color:var(--sage);font-size:14px}
 .switch>span:last-child{min-width:16.5em}   /* the same width whether numbers show or hide */
+@media(max-width:480px){.switch{width:100%;padding-right:18px}.switch>span:last-child{min-width:0}}
 .facts{margin-top:clamp(56px,7vw,88px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--moss)}
 .facts div{padding:30px 32px 0 0}
 .facts div+div{padding-left:32px;border-left:1px solid var(--moss)}
@@ -241,11 +241,27 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 .get .btn.outline{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}.get .btn.outline:hover{box-shadow:inset 0 0 0 1.5px #fff}
 @media(max-width:820px){.get .wrap{grid-template-columns:minmax(0,1fr)}}
 
-footer{padding:40px 0 calc(48px + env(safe-area-inset-bottom));color:var(--sage);font-size:14px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:14px 30px;align-items:center}
-footer a{text-decoration:none}footer a:hover{color:var(--paper)}
-footer .brand{color:var(--paper);font-size:20px;margin-right:auto}footer .brand svg{width:24px;height:24px}
-@media(max-width:600px){footer .brand{flex-basis:100%;margin-bottom:6px}}
+/* shared header extras and footer (same as site.css) */
+.skip{position:absolute;left:12px;top:-60px;z-index:50;padding:10px 16px;border-radius:10px;background:var(--copper);color:#fff;text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+.bar nav a.m-only{display:none}
+.menu{display:none;margin-left:auto;width:44px;height:44px;border-radius:12px;border:0;background:var(--fir);cursor:pointer;place-items:center;box-shadow:inset 0 0 0 1px var(--moss)}
+.menu .ic{width:22px;height:22px}
+@media(max-width:900px){
+  .bar nav{display:none;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;padding:8px var(--gut) 20px;background:var(--ever);box-shadow:0 1px 0 var(--moss),0 30px 40px -20px rgba(0,0,0,.6)}
+  .bar nav a{padding:14px 0;font-size:18px;color:var(--paper);border-bottom:1px solid var(--moss)}
+  .bar.open nav{display:flex}.bar nav a.m-only{display:block}
+  .menu{display:grid}.bar .btn{display:none}
+}
+footer{padding:64px 0 calc(40px + env(safe-area-inset-bottom));color:var(--sage);font-size:14.5px}
+.fcols{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px}
+.fcols .brand{color:var(--paper);font-size:22px}.fcols .brand svg{width:26px;height:26px}
+.fcols p{margin-top:12px;max-width:22em;line-height:1.55}
+.fcols h4{color:var(--paper);font-size:14px;font-weight:650;margin-bottom:14px}
+.fcols ul{list-style:none;display:grid;gap:10px}
+.fcols a{text-decoration:none}.fcols a:hover{color:var(--paper)}
+.fbase{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;margin-top:48px;padding-top:24px;border-top:1px solid var(--moss);font-size:13px;color:#71837F}
+@media(max-width:820px){.fcols{grid-template-columns:repeat(2,minmax(0,1fr))}.fcols>div:first-child{grid-column:1/-1}}
 
 /* =====================================================================
    1.0.7 — hero news pill, trust row, statement scan, health playground, bento, FAQ, reveal
@@ -368,8 +384,6 @@ footer .brand{color:var(--paper);font-size:20px;margin-right:auto}footer .brand 
 .get .ver a{color:#fff}
 .get .ver i{width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.25)}
 
-footer .links{display:flex;flex-wrap:wrap;gap:10px 26px}
-footer .made{flex-basis:100%;font-size:13px;color:#71837F;margin-top:6px}
 
 /* ---------- reveal on scroll (only when JS runs) ---------- */
 .js .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
@@ -414,10 +428,136 @@ body.masked .num{letter-spacing:.08em}
 .soon{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 20px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--moss);color:var(--sage);font-size:15px;font-weight:600}
 .soon svg{width:18px;height:18px}.soon i{font-style:normal;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--copper-hi)}
 .get .soon{box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55);color:#fff}.get .soon i{color:#fff;opacity:.85}
-footer .social{display:flex;gap:10px;margin-top:4px}
+footer .social{display:flex;gap:10px;margin-top:20px}
 footer .social a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--moss);color:var(--sage);transition:color .2s,box-shadow .2s}
 footer .social a:hover{color:var(--paper);box-shadow:inset 0 0 0 1px var(--sage)}
 footer .social svg{width:18px;height:18px}
+
+/* =====================================================================
+   1.2 — proof strip, how it works, what's new showcase, comparison, Ask Penny in 9 languages
+   ===================================================================== */
+.proof{padding:0 0 clamp(64px,8vw,104px)}
+.proof ul{list-style:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--moss)}
+.proof li{padding:26px 20px 0 0}
+.proof li+li{padding-left:20px;border-left:1px solid var(--moss)}
+.proof b{display:block;font-size:clamp(28px,2.6vw,38px);font-weight:700;letter-spacing:-.045em;line-height:1.1;white-space:nowrap}
+.proof b em{font-style:normal;color:var(--copper-hi)}
+.proof span{display:block;margin-top:8px;color:var(--sage);font-size:14px;line-height:1.45}
+@media(max-width:1000px){.proof ul{grid-template-columns:repeat(3,minmax(0,1fr))}.proof li:nth-child(4){padding-left:0;border-left:0}.proof li:nth-child(n+4){margin-top:26px;border-top:1px solid var(--moss)}}
+@media(max-width:560px){.proof ul{grid-template-columns:repeat(2,minmax(0,1fr))}.proof li{padding:22px 14px 0 0}.proof li+li{padding-left:14px}
+  .proof li:nth-child(odd){padding-left:0;border-left:0}.proof li:nth-child(4){padding-left:14px;border-left:1px solid var(--moss)}.proof li:nth-child(n+3){margin-top:22px;border-top:1px solid var(--moss)}}
+
+.how{padding:var(--sect) 0 0}
+.steps{list-style:none;margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
+.steps li{position:relative;background:#fff;border-radius:22px;padding:28px 26px 26px;box-shadow:0 1px 0 var(--rule),0 18px 40px -30px rgba(20,33,31,.35);display:flex;flex-direction:column}
+.steps .n{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--ever);color:var(--paper);font-weight:700;font-size:15px;margin-bottom:20px}
+.steps li:not(:last-child)::after{content:"";position:absolute;top:45px;right:-14px;width:14px;height:2px;background:var(--rule)}
+.steps b{font-size:20px;letter-spacing:-.025em;line-height:1.25}
+.steps p{margin-top:8px;color:var(--muted);font-size:15.5px;line-height:1.55}
+.steps .chip{margin-top:auto;padding-top:22px}
+.chip>span{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--rule);font-size:14px;color:var(--muted)}
+.chip>span .ic{width:18px;height:18px;color:var(--copper)}
+.chip>span b{margin-left:auto;font-size:15px;color:var(--ink);letter-spacing:-.01em}
+.chip>span i{font-style:normal;padding:4px 10px;border-radius:999px;background:var(--ever);color:var(--paper);font-size:12px;font-weight:600}
+@media(max-width:900px){.steps{grid-template-columns:minmax(0,1fr)}.steps li:not(:last-child)::after{top:auto;bottom:-14px;right:auto;left:43px;width:2px;height:14px}}
+
+/* ---------- what's new: tabs that play by themselves until you take over ---------- */
+.whatsnew{padding:var(--sect) 0;position:relative;overflow:hidden}
+.whatsnew::before{content:"";position:absolute;width:760px;height:760px;left:-280px;top:10%;border-radius:50%;background:radial-gradient(closest-side,rgba(43,184,154,.10),transparent);pointer-events:none}
+.whatsnew .sub{color:var(--sage)}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--copper-hi)}
+.paperband .eyebrow{color:var(--copper)}
+.show{position:relative;margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:minmax(240px,320px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.tabs{display:flex;flex-direction:column;gap:4px}
+.tabs button{position:relative;overflow:hidden;display:grid;grid-template-columns:22px 1fr;gap:4px 14px;align-items:center;text-align:left;padding:16px 18px;border:0;border-radius:16px;background:none;cursor:pointer;color:var(--sage);transition:background-color .25s,color .25s}
+.tabs button:hover{color:var(--paper)}
+.tabs button .ic{width:20px;height:20px}
+.tabs button b{font-size:17px;font-weight:600;letter-spacing:-.02em}
+.tabs button small{grid-column:2;font-size:13.5px;line-height:1.4;display:none}
+.tabs button[aria-selected=true]{background:var(--fir);color:var(--paper);box-shadow:inset 0 0 0 1px var(--moss)}
+.tabs button[aria-selected=true] .ic{color:var(--copper-hi)}
+.tabs button[aria-selected=true] small{display:block;color:var(--sage)}
+.tabs button::after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:2px;border-radius:2px;background:var(--copper-hi);transform:scaleX(var(--prog,0));transform-origin:0 50%;opacity:0}
+.tabs button[aria-selected=true]::after{opacity:1}
+.stage{position:relative;min-height:470px}
+.panel{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,3.5vw,48px);align-items:center}
+.panel[hidden]{display:none}
+.panel.on{animation:panelIn .55s cubic-bezier(.2,.8,.2,1) both}
+@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.panel h3{font-size:clamp(26px,2.5vw,34px);letter-spacing:-.035em;line-height:1.1;text-wrap:balance}
+.panel>div>p{margin-top:14px;color:var(--sage);font-size:16.5px;line-height:1.6}
+.ticks{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.ticks li{display:flex;gap:10px;font-size:15px;line-height:1.45}
+.ticks li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:50%;
+  background:var(--slice) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.3l2.6 2.6L13 6.6' fill='none' stroke='%2310201D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat}
+/* the app card each feature is shown in */
+.card{background:var(--paper);color:var(--ink);border-radius:24px;padding:clamp(20px,2.4vw,28px);box-shadow:0 40px 80px -30px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04)}
+.card .ch{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.card .ch b{font-size:16px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px}
+.card .ch b .ic{width:18px;height:18px;color:var(--copper)}
+.card .ch span{font-size:13px;color:var(--muted)}
+.card .big{font-size:clamp(34px,3.4vw,44px);font-weight:700;letter-spacing:-.05em;line-height:1}
+.card .lbl{font-size:13px;color:var(--muted)}
+.card .row{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--rule);font-size:14.5px}
+.card .row .grow{flex:1;min-width:0}
+.card .row .grow small{display:block;font-size:12.5px;color:var(--muted)}
+.card .row .v{font-weight:600;font-variant-numeric:tabular-nums;text-align:right}
+.card .row .v small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.tag{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:650;letter-spacing:.01em;white-space:nowrap}
+.tag.up{background:#FBE3DF;color:#A8372B}.tag.ok{background:#D9F1EA;color:#0F6E5C}.tag.warn{background:#FCEBD3;color:#8A5410}
+/* payday */
+.split{display:flex;height:16px;border-radius:99px;overflow:hidden;gap:3px;margin:18px 0 8px}
+.split i{display:block;height:100%;border-radius:3px;transition:flex-grow .5s cubic-bezier(.2,.8,.2,1)}
+.pd-rate{display:flex;align-items:center;gap:14px;margin-top:14px;padding:12px 14px;border-radius:14px;background:var(--sand);font-size:14px}
+.pd-rate input{flex:1;accent-color:var(--copper);cursor:pointer}
+.pd-rate b{min-width:3.2em;text-align:right;font-variant-numeric:tabular-nums}
+.perday{margin-top:16px;padding:14px 16px;border-radius:16px;background:var(--ever);color:var(--paper);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.perday b{font-size:24px;letter-spacing:-.04em}.perday span{color:var(--sage);font-size:13.5px}
+/* calendar */
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.cal .h{font-size:11px;color:var(--muted);text-align:center;padding-bottom:2px}
+.cal .d{position:relative;aspect-ratio:1/.92;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px var(--rule);padding:5px 6px;font-size:11.5px;color:var(--muted);overflow:hidden}
+.cal .d.past{opacity:.5}
+.cal .d i{position:absolute;left:0;right:0;bottom:0;background:var(--slice);opacity:.22}
+.cal .d.tight i{background:#E0A43A;opacity:.35}.cal .d.short i{background:var(--red);opacity:.4}
+.cal .d.today{box-shadow:inset 0 0 0 2px var(--ink);color:var(--ink);font-weight:700}
+.cal .d u{position:absolute;right:5px;top:6px;width:6px;height:6px;border-radius:50%;text-decoration:none}
+.cal .d u.in{background:var(--slice)}.cal .d u.out{background:var(--copper)}
+.cal .d.empty{background:none;box-shadow:none}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:14px;font-size:12px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px}
+.alert{margin-top:14px;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:#FBE3DF;color:#7A2A21;font-size:14px;line-height:1.45}
+.alert .ic{width:18px;height:18px;margin-top:1px}
+/* split */
+.who{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-weight:700;font-size:13px;color:#fff;flex:none}
+.mini{border:0;cursor:pointer;padding:7px 12px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--ever);color:var(--paper);transition:background-color .2s}
+.mini:hover{background:#000}
+.mini.done{background:#D9F1EA;color:#0F6E5C;cursor:default}
+@media(max-width:1060px){.show{grid-template-columns:minmax(0,1fr)}.tabs{flex-direction:row;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*var(--gut));padding:0 var(--gut)}.tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:none;grid-template-columns:20px auto;padding:12px 16px}.tabs button small{display:none!important}.stage{min-height:0}}
+@media(max-width:820px){.panel{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- comparison ---------- */
+.vs{margin-top:clamp(56px,7vw,88px)}
+.vs h3{font-size:clamp(22px,2vw,26px);letter-spacing:-.03em;margin-bottom:20px}
+.vs table{width:100%;border-collapse:collapse;font-size:15.5px}
+.vs th,.vs td{padding:16px 18px;text-align:left;border-top:1px solid var(--moss);vertical-align:top}
+.vs thead th{border-top:0;font-size:13px;font-weight:650;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);padding-top:0}
+.vs tbody th{font-weight:550;color:var(--paper);width:30%}
+.vs td{color:var(--sage)}
+.vs td.p{color:var(--paper);font-weight:600;background:rgba(201,99,47,.08)}
+.vs thead th.p{color:var(--copper-hi);background:rgba(201,99,47,.08);border-radius:14px 14px 0 0;padding-top:14px}
+.vs tbody tr:last-child td.p{border-radius:0 0 14px 14px}
+.vs td.p::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:50%;background:var(--slice);vertical-align:2px}
+.vs .note{margin-top:14px;font-size:13px;color:#71837F}
+@media(max-width:640px){.vs th,.vs td{padding:13px 10px;font-size:14px}.vs tbody th{width:34%}.vs td.p::before{display:none}}
+
+/* Ask Penny, in every language it speaks */
+.chat .lang{align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--copper-hi);margin-bottom:2px}
+.chat.swap .bubble{animation:ink .5s cubic-bezier(.2,.8,.2,1) both}.chat.swap .bubble+.bubble{animation-delay:.35s}
+.chat{min-height:150px}
 </style>
 </head>
 <body>
@@ -467,27 +607,23 @@ footer .social svg{width:18px;height:18px}
   <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M4.5 19.5h15"/></symbol>
   <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17"/><path d="M12 3.5c2.6 2.4 3.8 5.2 3.8 8.5s-1.2 6.1-3.8 8.5c-2.6-2.4-3.8-5.2-3.8-8.5S9.4 5.9 12 3.5z"/></symbol>
   <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3.5v8"/><path d="M7 6.6a7.5 7.5 0 1 0 10 0"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.5"/><path d="M2.5 19.5c.6-3.4 3.2-5.5 6.5-5.5s5.9 2.1 6.5 5.5"/><path d="M15.5 5.3a3.5 3.5 0 0 1 0 6.4M18 14.4c1.9.8 3.1 2.6 3.5 5.1"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4 21 19.5H3z"/><path d="M12 10v4.5M12 17.2v.1"/></symbol>
   <symbol id="i-prev" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
   <symbol id="i-next" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 44 14"><path d="M1 7h40M35 1.5 41.5 7 35 12.5"/></symbol>
 </svg>
 
-<header class="bar" id="bar">
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="Penny, back to the top"><svg aria-hidden="true"><use href="#mark"/></svg>penny</a>
-    <nav aria-label="Sections"><a href="#auto">Features</a><a href="#privacy">Privacy</a><a href="#health">Health score</a><a href="#screens">The app</a><a href="#faq">FAQ</a></nav>
-    <a class="btn copper sm" href="#get">Get Penny</a>
-  </div>
-</header>
+<!--header:home-->
 
-<main id="top">
+<main id="main">
 <!-- ===================== hero ===================== -->
 <section class="hero" aria-labelledby="h1">
   <div class="wrap">
     <div>
-      <a class="news" href="#auto"><b>NEW</b>Penny on Android: bank alerts and receipts, added for you<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a>
-      <h1 id="h1"><span class="l1">Every penny counted.</span> <span class="l2">Nobody watching.</span></h1>
-      <p class="sub">Penny writes down your spending from your bank's alerts, your receipts and plain words, then tells you what's safe to spend today. It all stays on your device: no account, no bank login, no cloud.</p>
+      <a class="news" href="#new"><b>NEW 1.2</b>Payday plan, cash-flow calendar, 9 languages<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a>
+      <h1 id="h1"><span class="l1">Know what's safe to spend.</span> <span class="l2">Nobody watching.</span></h1>
+      <p class="sub">Penny writes down your spending from bank alerts, receipts and plain words, plans every paycheck, and gives you one number to live by. It all stays on your device: no account, no bank login, no cloud.</p>
 
       <div class="say">
         <form id="sayForm" autocomplete="off">
@@ -528,8 +664,38 @@ footer .social svg{width:18px;height:18px}
   </div>
 </section>
 
-<!-- ===================== written down for you ===================== -->
+<!-- ===================== proof ===================== -->
+<section class="proof" aria-label="Penny in numbers">
+  <div class="wrap">
+    <ul class="rv">
+      <li><b class="num">0</b><span>servers holding your money data</span></li>
+      <li><b>AES<em>‑</em>256</b><span>encryption, sealed by your device</span></li>
+      <li><b class="num">9</b><span>languages, from English to Arabic</span></li>
+      <li><b>~40</b><span>currencies, converted for you</span></li>
+      <li><b>1 tap</b><span>to add a purchase from a bank alert</span></li>
+      <li><b class="num">$0</b><span>during the beta, with no ads</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== how it works ===================== -->
 <div class="paperband">
+<section class="how" id="how" aria-labelledby="h2how">
+  <div class="wrap">
+    <div class="shead rv"><div><span class="eyebrow">How it works</span><h2 id="h2how">Three steps. Then it runs itself.</h2></div>
+    <p class="sub">Penny does the bookkeeping, so the only thing left for you is the decisions.</p></div>
+    <ol class="steps">
+      <li class="rv"><span class="n">1</span><b>It writes itself down</b><p>Bank alerts, receipt photos, statements or a quick “coffee 4.50”. Penny fills in the payee, the category and the card.</p>
+        <div class="chip"><span><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>Uber Eats <b class="num">$23.40</b><i>Add</i></span></div></li>
+      <li class="rv d1"><span class="n">2</span><b>It makes sense of it</b><p>Subscriptions, transfers, refunds and double charges are sorted out, and rules learn your payees as you go.</p>
+        <div class="chip"><span><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg>Dining · 14 visits <b class="num">$291.66</b></span></div></li>
+      <li class="rv d2"><span class="n">3</span><b>It tells you what to do</b><p>What's safe to spend today, how to split each paycheck, and the day money gets tight, before it happens.</p>
+        <div class="chip"><span><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg>Safe to spend today <b class="num">$42.10</b></span></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===================== written down for you ===================== -->
 <section class="auto" id="auto" aria-labelledby="h2auto">
   <div class="wrap">
     <div class="shead rv"><h2 id="h2auto">Your spending, written down for you.</h2>
@@ -552,23 +718,93 @@ footer .social svg{width:18px;height:18px}
 </section>
 </div>
 
-<!-- ===================== privacy ===================== -->
-<section class="priv" id="privacy" aria-labelledby="h2b">
+<!-- ===================== what's new in 1.2 ===================== -->
+<section class="whatsnew" id="new" aria-labelledby="h2new">
   <div class="wrap">
-    <div class="top rv">
-      <div>
-        <h2 id="h2b">Nobody sees your money. Not even us.</h2>
-        <p class="sub">Penny never asks for your bank password and has no servers to send your data to. Privacy mode hides every number at once. Try it on this page.</p>
+    <div class="shead rv"><div><span class="eyebrow">New in Penny 1.2</span><h2 id="h2new">From tracking money to planning it.</h2></div>
+    <p class="sub">Penny now plans each paycheck, sees the tight days coming, catches creeping subscriptions and keeps shared costs fair. Each demo below is live: try them.</p></div>
+
+    <div class="show rv d1">
+      <div class="tabs" role="tablist" aria-label="New in 1.2">
+        <button role="tab" id="t-pay" aria-controls="p-pay" aria-selected="true"><svg class="ic" aria-hidden="true"><use href="#i-coins"/></svg><b>Payday plan</b><small>Every paycheck, split before you spend it.</small></button>
+        <button role="tab" id="t-cal" aria-controls="p-cal" aria-selected="false" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><b>Cash-flow calendar</b><small>The tight days, weeks ahead.</small></button>
+        <button role="tab" id="t-sub" aria-controls="p-sub" aria-selected="false" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-tv"/></svg><b>Subscription watch</b><small>Price rises and trials, caught.</small></button>
+        <button role="tab" id="t-split" aria-controls="p-split" aria-selected="false" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><b>Split a bill</b><small>Only your share counts.</small></button>
+        <button role="tab" id="t-trip" aria-controls="p-trip" aria-selected="false" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg><b>Trip mode</b><small>Local prices, one total.</small></button>
       </div>
-      <button class="switch" id="privSwitch" role="switch" aria-checked="false" type="button">
-        <span class="track"><span class="knob"><svg class="ic on" aria-hidden="true"><use href="#i-eye"/></svg><svg class="ic off" aria-hidden="true"><use href="#i-eyeoff"/></svg></span></span>
-        <span><b>Privacy mode</b><small id="privState">Numbers are showing</small></span>
-      </button>
-    </div>
-    <div class="facts rv d1">
-      <div><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg><b>No bank login</b><p>Penny reads the files you download and the alerts your bank already sends you. It never connects to your bank.</p></div>
-      <div><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><b>Encrypted on your device</b><p>AES-256, sealed by Windows or by your phone's secure hardware. Add a passcode and a recovery key for a second lock.</p></div>
-      <div><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><b>Backed up for you</b><p>Verified backups every day and before big changes, so a bad import is one click to undo.</p></div>
+
+      <div class="stage">
+        <div class="panel on" role="tabpanel" id="p-pay" aria-labelledby="t-pay">
+          <div><h3>Payday, planned in one tap.</h3>
+            <p>When your pay lands, Penny sets aside the bills due before the next one, shares savings out to your goals, keeps a cushion and tells you what's left for each day.</p>
+            <ul class="ticks"><li>Spots your real paycheck, not a small refund</li><li>Tracks the plan until next payday</li><li>Goal autopilot says when a goal falls behind</li></ul></div>
+          <div class="card" aria-label="Example payday plan">
+            <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-briefcase"/></svg>Salary from Acme Co.</b><span>until next payday, 30 days</span></div>
+            <div class="big num" id="pdPay">$3,200.00</div>
+            <div class="split" id="pdBar" aria-hidden="true"><i style="background:var(--red)"></i><i style="background:var(--slice)"></i><i style="background:#C9BBA6"></i><i style="background:var(--copper)"></i></div>
+            <div id="pdRows"></div>
+            <label class="pd-rate"><span>Save</span><input type="range" id="pdRate" min="0" max="30" value="15" aria-label="Share of this paycheck to save"><b id="pdRateV">15%</b></label>
+            <div class="perday"><span>Everyday money</span><b class="num" id="pdDay"></b></div>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-cal" aria-labelledby="t-cal" hidden>
+          <div><h3>See the tight days before you live them.</h3>
+            <p>Your expected balance on every day ahead, from your bills, paydays and usual spending. Days that run low are marked, so you can move a payment or hold off a purchase.</p>
+            <ul class="ticks"><li>Bills and paydays on the days they land</li><li>Tap any day to see what's behind it</li><li>Only your share of split bills, in your currency</li></ul></div>
+          <div class="card" aria-label="Example cash-flow calendar">
+            <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><span id="calMonth" style="font-size:inherit;color:inherit"></span></b><span>expected balance</span></div>
+            <div class="cal" id="cal"></div>
+            <div class="legend"><span><i style="background:rgba(43,184,154,.4)"></i>Comfortable</span><span><i style="background:rgba(224,164,58,.55)"></i>Tight</span><span><i style="background:rgba(217,87,74,.6)"></i>Short</span><span><i style="background:var(--slice);border-radius:50%"></i>Payday</span><span><i style="background:var(--copper);border-radius:50%"></i>Bill</span></div>
+            <div class="alert" id="calAlert"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><span></span></div>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-sub" aria-labelledby="t-sub" hidden>
+          <div><h3>Subscriptions, with nowhere to hide.</h3>
+            <p>Mark a bill as a subscription to see what it costs a year. Penny flags price rises, reminds you before a free trial turns paid, and counts what you've saved by cancelling.</p>
+            <ul class="ticks"><li>Yearly cost at a glance</li><li>A heads-up before trials end</li><li>Cancel with Undo, not a lecture</li></ul></div>
+          <div class="card" aria-label="Example subscriptions">
+            <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-tv"/></svg>Subscriptions</b><span>4 active</span></div>
+            <div class="lbl">A year of subscriptions</div><div class="big num">$587.52</div>
+            <div style="margin-top:16px">
+              <div class="row"><span class="dot" style="background:#E50914"></span><span class="grow">Netflix<small>$17.99 a month · was $15.49</small></span><span class="tag up">Up $2.50</span><span class="v num">$215.88<small>a year</small></span></div>
+              <div class="row"><span class="dot" style="background:#1DB954"></span><span class="grow">Spotify<small>$11.99 a month</small></span><span class="v num">$143.88<small>a year</small></span></div>
+              <div class="row"><span class="dot" style="background:#E0A43A"></span><span class="grow">FitClub<small>Free trial, then $14.99 a month</small></span><span class="tag warn">Ends in 3 days</span><span class="v num">$179.88<small>a year</small></span></div>
+              <div class="row"><span class="dot" style="background:#5B6664"></span><span class="grow">Cloud storage<small>$3.99 a month</small></span><span class="v num">$47.88<small>a year</small></span></div>
+              <div class="row"><span class="dot" style="background:var(--slice)"></span><span class="grow">Saved since you cancelled Hulu<small>since March</small></span><span class="tag ok">Saved</span><span class="v num">$143.92</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-split" aria-labelledby="t-split" hidden>
+          <div><h3>Split the bill. Keep the friendship.</h3>
+            <p>Pay for dinner, split it, and Penny counts only your share as spending. It remembers who still owes what, drafts a friendly reminder, and files the repayment so it isn't mistaken for income.</p>
+            <ul class="ticks"><li>Even or custom splits</li><li>One list of who owes you</li><li>Repayments never inflate your income</li></ul></div>
+          <div class="card" aria-label="Example split bill">
+            <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg>Dinner at Nopa</b><span>split 3 ways</span></div>
+            <div class="row" style="border-top:0;padding-top:0"><span class="grow"><span class="lbl">You paid</span><div class="big num">$90.00</div></span><span class="v"><span class="lbl">Counts as your spending</span><div class="num" style="font-size:24px;font-weight:700;letter-spacing:-.04em">$30.00</div></span></div>
+            <div class="row"><span class="who" style="background:var(--copper)">You</span><span class="grow">Your share<small>Dining</small></span><span class="v num">$30.00</span></div>
+            <div class="row"><span class="who" style="background:#3E7CB1">SM</span><span class="grow">Sam<small id="samNote">Owes you</small></span><button class="mini" type="button" id="samBtn">Mark repaid</button><span class="v num">$30.00</span></div>
+            <div class="row"><span class="who" style="background:#8E5BB5">AL</span><span class="grow">Alex<small>Paid you back Tuesday</small></span><button class="mini done" type="button" disabled>Repaid</button><span class="v num">$30.00</span></div>
+            <div class="perday"><span>Still owed to you</span><b class="num" id="owed">$30.00</b></div>
+          </div>
+        </div>
+
+        <div class="panel" role="tabpanel" id="p-trip" aria-labelledby="t-trip" hidden>
+          <div><h3>Travel in their currency. Come home to one number.</h3>
+            <p>Turn on trip mode and everything you add is tagged to the trip. Type prices in euros, yen or pesos; Penny converts them and shows what the whole trip cost.</p>
+            <ul class="ticks"><li>Amounts in the local currency</li><li>Your share of shared meals</li><li>A clean total, per day and overall</li></ul></div>
+          <div class="card" aria-label="Example trip">
+            <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg>Lisbon · 5 days</b><span>€1 = $1.08</span></div>
+            <div class="row" style="border-top:0;padding-top:0"><span class="grow"><span class="lbl">Trip total</span><div class="big num">$489.67</div></span><span class="v"><span class="lbl">Per day</span><div class="num" style="font-size:24px;font-weight:700;letter-spacing:-.04em">$97.93</div></span></div>
+            <div class="row"><span class="grow">Hotel in Chiado<small>4 nights</small></span><span class="v num">€420.00<small>$453.60</small></span></div>
+            <div class="row"><span class="grow">Dinner in Alfama<small>Your share of €48.00</small></span><span class="v num">€24.00<small>$25.92</small></span></div>
+            <div class="row"><span class="grow">Pastéis de nata<small>Manteigaria</small></span><span class="v num">€6.40<small>$6.91</small></span></div>
+            <div class="row"><span class="grow">Tram 28<small>Transport</small></span><span class="v num">€3.00<small>$3.24</small></span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -607,6 +843,42 @@ footer .social svg{width:18px;height:18px}
 </section>
 </div>
 
+<!-- ===================== privacy ===================== -->
+<section class="priv" id="privacy" aria-labelledby="h2b">
+  <div class="wrap">
+    <div class="top rv">
+      <div>
+        <span class="eyebrow">Privacy</span>
+        <h2 id="h2b">Nobody sees your money. Not even us.</h2>
+        <p class="sub">Penny never asks for your bank password and has no servers to send your data to. Privacy mode hides every number at once. Try it on this page.</p>
+      </div>
+      <button class="switch" id="privSwitch" role="switch" aria-checked="false" type="button">
+        <span class="track"><span class="knob"><svg class="ic on" aria-hidden="true"><use href="#i-eye"/></svg><svg class="ic off" aria-hidden="true"><use href="#i-eyeoff"/></svg></span></span>
+        <span><b>Privacy mode</b><small id="privState">Numbers are showing</small></span>
+      </button>
+    </div>
+    <div class="facts rv d1">
+      <div><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg><b>No bank login</b><p>Penny reads the files you download and the alerts your bank already sends you. It never connects to your bank.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><b>Encrypted on your device</b><p>AES-256, sealed by Windows or by your phone's secure hardware. Add a passcode and a recovery key for a second lock.</p></div>
+      <div><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><b>Backed up for you</b><p>Verified backups every day and before big changes, so a bad import is one click to undo.</p></div>
+    </div>
+    <div class="vs rv">
+      <h3>How Penny is different</h3>
+      <table>
+        <thead><tr><th scope="col"><span class="sr">Question</span></th><th scope="col" class="p">Penny</th><th scope="col">Most budgeting apps</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Your bank login</th><td class="p">Never asked for</td><td>Shared with a data company to link your bank</td></tr>
+          <tr><th scope="row">Where your data lives</th><td class="p">On your device, encrypted</td><td>On the company's servers</td></tr>
+          <tr><th scope="row">Account to sign up</th><td class="p">None</td><td>Email and password</td></tr>
+          <tr><th scope="row">Without internet</th><td class="p">Everything works</td><td>Mostly stops</td></tr>
+          <tr><th scope="row">Ads and data deals</th><td class="p">None</td><td>Common in free apps</td></tr>
+        </tbody>
+      </table>
+      <p class="note">A general comparison with bank-linked budgeting apps, not any one product.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ===================== the app ===================== -->
 <section class="screens" id="screens" aria-labelledby="h2c">
   <div class="wrap head rv">
@@ -637,13 +909,13 @@ footer .social svg{width:18px;height:18px}
         </div>
         <p>The line is today. Each bar is how far through its budget a category is, so you see the pace before you overspend.</p></div>
       <div class="tile w2 dark rv"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><b>Ask Penny</b>
-        <div class="chat" aria-hidden="true"><span class="bubble me">How much did I spend on dining last month?</span><span class="bubble"><span class="num">$291.66</span> across 14 visits. That's <span class="num">$71.66</span> over your budget.</span></div>
-        <p>Plain questions, answered on your device in a moment.</p></div>
+        <div class="chat" id="askChat" aria-hidden="true"><span class="lang">English</span><span class="bubble me">How much did I spend on dining last month?</span><span class="bubble">$291.66 across 14 visits. That's $71.66 over your budget.</span></div>
+        <p>Plain questions in any of its 9 languages: paydays, trips, who owes you, or this month against last. Answered on your device.</p></div>
       <div class="tile rv d1"><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg><b>Statements, tidied</b><p>Drop in a CSV, OFX or QFX file. Chase, Amex and other big banks are recognized, payees cleaned, duplicates skipped.</p></div>
       <div class="tile rv d2"><svg class="ic" aria-hidden="true"><use href="#i-coins"/></svg><b>Goals and debt plans</b><p>What to set aside each month, and your debt-free month with avalanche or snowball.</p></div>
       <div class="tile rv"><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg><b>Insights that rank</b><p>Findings ordered by the money at stake: overspending before it happens, fees, price rises and habits.</p></div>
       <div class="tile rv d1"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><b>Reminders that respect you</b><p>An evening nudge only on days with nothing added, a monthly recap, and every one has its own switch.</p></div>
-      <div class="tile rv d2"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg><b>Four looks</b><p>Light, dark, pure white and true black, which is easy on the eyes and on phone batteries.</p></div>
+      <div class="tile rv d2"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg><b>Your look</b><p>Four themes, from pure white to true black, and an accent colour that can match your phone or Windows.</p></div>
       <div class="tile rv d3"><svg class="ic" aria-hidden="true"><use href="#i-download"/></svg><b>Yours to keep</b><p>Excel export, rules that learn your payees, and verified backups every day.</p></div>
     </div>
   </div>
@@ -659,6 +931,7 @@ footer .social svg{width:18px;height:18px}
       <div>
         <details class="rv"><summary>Does Penny connect to my bank?</summary><p>No. Penny never asks for a bank password and never logs in anywhere. On Android it can read the purchase alerts your bank app already shows you; on any device you can import a statement (CSV, OFX or QFX). Major US banks are recognized automatically.</p></details>
         <details class="rv"><summary>Where is my data, and who can see it?</summary><p>Only on your device, encrypted with AES-256 and sealed by Windows or your phone's secure hardware. There is no account and no cloud, and Penny has no servers. Add a passcode for a second lock, with a recovery key in case you forget it.</p></details>
+        <details class="rv"><summary>Which languages and currencies does it speak?</summary><p>English, Spanish, Portuguese, French, Russian, Indonesian, Chinese, Hindi and Arabic, with right-to-left layout for Arabic. Bank alerts, quick entry and Ask Penny understand all nine. About 40 currencies, with accounts in different currencies converted to your main one.</p></details>
         <details class="rv"><summary>Is it really free?</summary><p>Yes, everything is free during the beta. A Pro plan will add extras later, with a free week to try it; everyday budgeting stays free, and data you already have is never removed or locked away.</p></details>
       </div>
       <div>
@@ -688,25 +961,7 @@ footer .social svg{width:18px;height:18px}
 </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="Penny, back to the top"><svg aria-hidden="true"><use href="#mark"/></svg>penny</a>
-    <nav class="links" aria-label="More">
-      <a href="#auto">Features</a>
-      <a href="#faq">FAQ</a>
-      <a href="privacy.html">Privacy policy</a>
-      <a href="mailto:pennymoneyapp@gmail.com">Support</a>
-    </nav>
-    <div class="social" aria-label="Penny elsewhere">
-      <a href="https://discord.gg/SXYkvcmX3k" aria-label="Discord"><svg aria-hidden="true"><use href="#discord"/></svg></a>
-      <a href="https://www.reddit.com/r/Pennymoneyapp/" aria-label="Reddit"><svg aria-hidden="true"><use href="#reddit"/></svg></a>
-      <a href="https://x.com/pennymoneyapp" aria-label="X"><svg aria-hidden="true"><use href="#xlogo"/></svg></a>
-      <a href="https://www.instagram.com/pennymoneyapp/" aria-label="Instagram"><svg aria-hidden="true"><use href="#insta"/></svg></a>
-      <a href="https://www.tiktok.com/@pennymoneyapp" aria-label="TikTok"><svg aria-hidden="true"><use href="#tiktok"/></svg></a>
-    </div>
-    <p class="made">© <span id="yr"></span> Akrot Software. No cookies and no trackers here: only anonymous visit counts. The app itself has no analytics at all.</p>
-  </div>
-</footer>
+<!--footer-->
 
 <script src="penny-core.js"></script>
 <script>
@@ -726,7 +981,6 @@ footer .social svg{width:18px;height:18px}
   const shortFmt = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
   const rel = s => { const diff = Math.round((asDate(TODAY) - asDate(s)) / 864e5); return diff === 0 ? 'Today' : diff === 1 ? 'Yesterday' : diff > 1 && diff < 7 ? `${diff} days ago` : shortFmt.format(asDate(s)); };
   $('#today').textContent = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' }).format(new Date());
-  $('#yr').textContent = new Date().getFullYear();
 
   /* Penny's default categories (same ids and icons as the app) */
   const CATS = [['Groceries', 'cart'], ['Dining', 'utensils'], ['Transport', 'car'], ['Housing', 'home'], ['Utilities', 'bulb'], ['Health', 'pill'], ['Shopping', 'bag'],
@@ -807,7 +1061,7 @@ footer .social svg{width:18px;height:18px}
     masked = sw.getAttribute('aria-checked') !== 'true';
     sw.setAttribute('aria-checked', String(masked)); document.body.classList.toggle('masked', masked);
     $('#privState').textContent = masked ? 'Every number on this page is hidden' : 'Numbers are showing';
-    drawReceipt(false); preview(); if (window.__drawHealth) window.__drawHealth();
+    drawReceipt(false); preview(); if (window.__drawHealth) window.__drawHealth(); if (window.__drawNew) window.__drawNew();
   });
 
   /* ============ the app, in a window ============ */
@@ -905,6 +1159,100 @@ footer .social svg{width:18px;height:18px}
     draw();
     window.__drawHealth = draw;
   } else if (knobs) knobs.closest('.hgrid').hidden = true;
+
+  /* ============ what's new: payday plan (the same split as Finance.payPlan: bills, then savings, a cushion, the rest per day) ============ */
+  const PD = { pay: 3200, bills: 1240, days: 30 };
+  const drawPay = () => {
+    const rate = +$('#pdRate').value / 100, cushion = Math.round(PD.pay * .05), save = Math.round(PD.pay * rate),
+      spend = PD.pay - PD.bills - save - cushion, parts = [PD.bills, save, cushion, spend];
+    $('#pdRateV').textContent = Math.round(rate * 100) + '%';
+    $$('#pdBar i').forEach((i, k) => { i.style.flexGrow = Math.max(0, parts[k]); i.style.display = parts[k] > 0 ? '' : 'none'; });
+    const goals = save ? `Emergency fund ${money(save * .6)} · Japan trip ${money(save * .4)}` : 'Nothing set aside this time';
+    $('#pdRows').innerHTML = [['var(--red)', 'Bills before next payday', 'Rent, phone, internet, car insurance', PD.bills], ['var(--slice)', 'To your goals', goals, save],
+      ['#C9BBA6', 'Cushion', 'For the surprises', cushion], ['var(--copper)', 'Everyday money', 'Groceries, transport, fun', spend]]
+      .map(([c, t, s, v]) => `<div class="row"><span class="dot" style="background:${c}"></span><span class="grow">${t}<small>${esc(s)}</small></span><span class="v num">${money(v)}</span></div>`).join('');
+    $('#pdDay').textContent = masked ? '•••' : `${USD.format(spend / PD.days)} a day`;
+    $('#pdPay').textContent = money(PD.pay);
+  };
+  $('#pdRate').addEventListener('input', drawPay);
+
+  /* cash-flow calendar: next month, from a start balance, two paydays, the bills and usual daily spending */
+  const drawCal = () => {
+    const now = new Date(), y = now.getFullYear(), m = now.getMonth() + 1, first = new Date(y, m, 1), days = new Date(y, m + 1, 0).getDate();
+    const IN = { 1: 1600, 15: 1600 }, OUT = { 2: 1400, 9: 64, 12: 210, 20: 85, 27: 120 }, DAILY = 48;
+    let bal = 900, low = { v: Infinity, d: 1 };
+    const cells = [];
+    for (let d = 1; d <= days; d++) {
+      bal += (IN[d] || 0) - (OUT[d] || 0) - DAILY;
+      if (bal < low.v) low = { v: bal, d };
+      cells.push({ d, bal, inc: !!IN[d], out: !!OUT[d] });
+    }
+    const max = Math.max(...cells.map(c => c.bal)), dow = (first.getDay() + 6) % 7;
+    const mName = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(first);
+    $('#calMonth').textContent = mName;
+    $('#cal').innerHTML = ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map(h => `<span class="h">${h}</span>`).join('') + '<span class="d empty"></span>'.repeat(dow) +
+      cells.map(c => `<span class="d${c.bal < 0 ? ' short' : c.bal < 250 ? ' tight' : ''}" title="${esc(shortFmt.format(new Date(y, m, c.d)))}: ${masked ? '•••' : USD.format(c.bal)}">${c.d}<i style="height:${Math.max(8, c.bal / max * 100)}%"></i>${c.inc ? '<u class="in"></u>' : c.out ? '<u class="out"></u>' : ''}</span>`).join('');
+    $('#calAlert span').textContent = `Tightest on ${shortFmt.format(new Date(y, m, low.d))}: about ${money(low.v)} left, the day before payday. Holding off one bigger purchase keeps you clear.`;
+  };
+
+  /* split a bill */
+  let samPaid = false;
+  const drawSplit = () => {
+    $('#owed').textContent = money(samPaid ? 0 : 30);
+    const b = $('#samBtn'); b.textContent = samPaid ? 'Repaid' : 'Mark repaid'; b.classList.toggle('done', samPaid); b.disabled = samPaid;
+    $('#samNote').textContent = samPaid ? 'Paid you back today' : 'Owes you';
+  };
+  $('#samBtn').addEventListener('click', () => { samPaid = true; drawSplit(); });
+
+  /* the tabs: they move on by themselves until you click, hover or focus them; arrow keys move between them */
+  const tabs = $$('.tabs [role=tab]'), TAB_MS = 7000;
+  /* not on phones: the panels differ in height, so the page would jump while you read */
+  let cur = 0, auto = !reduce && matchMedia('(min-width: 1061px)').matches, t0 = 0, rafT = 0, inView = false;
+  const pick = (i, focus) => {
+    cur = (i + tabs.length) % tabs.length;
+    tabs.forEach((t, k) => { const on = k === cur, p = $('#' + t.getAttribute('aria-controls'));
+      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; t.style.setProperty('--prog', 0);
+      p.hidden = !on; p.classList.toggle('on', on); });
+    if (focus) tabs[cur].focus();
+    t0 = performance.now();
+  };
+  const stopAuto = () => { if (!auto) return; auto = false; tabs.forEach(t => t.style.setProperty('--prog', 0)); };
+  const tick = t => {
+    if (auto && inView && !document.hidden) { const k = (t - t0) / TAB_MS; tabs[cur].style.setProperty('--prog', Math.min(1, k)); if (k >= 1) pick(cur + 1); }
+    else t0 = t - (parseFloat(tabs[cur].style.getPropertyValue('--prog')) || 0) * TAB_MS;
+    if (auto) rafT = requestAnimationFrame(tick);
+  };
+  tabs.forEach((t, i) => t.addEventListener('click', () => { stopAuto(); pick(i); }));
+  $('.tabs').addEventListener('keydown', e => {
+    const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (k) { e.preventDefault(); stopAuto(); pick(cur + k, true); }
+    if (e.key === 'Home') { e.preventDefault(); stopAuto(); pick(0, true); } if (e.key === 'End') { e.preventDefault(); stopAuto(); pick(tabs.length - 1, true); }
+  });
+  $('.stage').addEventListener('pointerdown', stopAuto); $('.stage').addEventListener('focusin', stopAuto);
+  if ('IntersectionObserver' in window) new IntersectionObserver(es => { inView = es[0].isIntersecting; }, { threshold: .35 }).observe($('.show'));
+  else inView = true;
+  if (auto) rafT = requestAnimationFrame(tick);
+
+  /* Ask Penny, cycling through the languages it speaks */
+  const ASK = [['English', 'How much did I spend on dining last month?', '$291.66 across 14 visits. That\'s $71.66 over your budget.'],
+    ['Español', '¿Cuánto gasté en restaurantes el mes pasado?', '$291.66 en 14 visitas. Son $71.66 más de tu presupuesto.'],
+    ['Français', 'Combien ai-je dépensé au restaurant le mois dernier ?', '291,66 $ en 14 visites, soit 71,66 $ de plus que votre budget.'],
+    ['العربية', 'كم أنفقت على المطاعم الشهر الماضي؟', '‏$291.66 في 14 زيارة، أي $71.66 فوق ميزانيتك.', 'rtl'],
+    ['Português', 'Quanto gastei em restaurantes no mês passado?', '$291.66 em 14 visitas. São $71.66 acima do seu orçamento.'],
+    ['中文', '上个月我在餐饮上花了多少钱？', '14 次共 $291.66，比预算多 $71.66。'],
+    ['Русский', 'Сколько я потратил на рестораны в прошлом месяце?', '$291.66 за 14 визитов. Это на $71.66 больше бюджета.'],
+    ['हिन्दी', 'पिछले महीने मैंने खाने-पीने पर कितना खर्च किया?', '14 बार में $291.66, आपके बजट से $71.66 ज़्यादा।'],
+    ['Bahasa Indonesia', 'Berapa pengeluaran saya untuk makan di luar bulan lalu?', '$291.66 dari 14 kunjungan, $71.66 di atas anggaran Anda.']];
+  let askI = 0;
+  const drawAsk = swap => {
+    const [l, q, a, dir] = ASK[askI], el = $('#askChat'), hide = s => masked ? s.replace(/\d+[.,]\d{2}/g, '•••') : s;
+    el.setAttribute('dir', dir || 'ltr');
+    el.innerHTML = `<span class="lang">${esc(l)}</span><span class="bubble me">${esc(q)}</span><span class="bubble">${esc(hide(a))}</span>`;
+    if (swap) { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); }
+  };
+  if (!reduce) setInterval(() => { if (document.hidden) return; askI = (askI + 1) % ASK.length; drawAsk(true); }, 4200);
+
+  window.__drawNew = () => { drawPay(); drawCal(); drawSplit(); drawAsk(false); };
+  window.__drawNew();
 
   /* ============ reveal on scroll, bento visuals ============ */
   const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {

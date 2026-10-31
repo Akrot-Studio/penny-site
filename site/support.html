@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Help and FAQ – Penny</title>
+<meta name="description" content="Answers about Penny: getting started, importing statements, bank alerts, privacy, languages, pricing and troubleshooting. Contact support by email or Discord.">
+<link rel="canonical" href="https://studdit.app/support.html">
+<meta property="og:title" content="Penny help and FAQ"><meta property="og:description" content="Short answers about Penny, and how to reach us."><meta property="og:image" content="https://studdit.app/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#10201D">
+<link rel="icon" type="image/svg+xml" href="img/penny-mark.svg"><link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preload" href="fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js');setTimeout(()=>{if(!window.__rvReady)document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'))},3000);</script>
+<style>
+.helpgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(28px,5vw,72px);align-items:start}
+.helpgrid aside{position:sticky;top:100px;display:flex;flex-direction:column;gap:14px}
+.helpgrid aside .tile{padding:22px}
+.helpgrid aside h3{font-size:17px;margin-bottom:2px}
+.helpgrid aside p{font-size:14.5px}
+.helpgrid aside a.tile{color:var(--ink)}
+@media(max-width:900px){.helpgrid{grid-template-columns:minmax(0,1fr)}.helpgrid aside{position:static}}
+</style>
+</head>
+<body>
+<!--header:support-->
+<main id="main">
+<section class="phero">
+  <div class="wrap">
+    <span class="eyebrow">Help and FAQ</span>
+    <h1>How can we help?</h1>
+    <p class="sub">Short answers to what people ask most. Can't find yours? Write to us; a person reads every message.</p>
+    <label class="search"><svg class="ic" aria-hidden="true"><use href="img/icons.svg#i-search"/></svg><span class="sr">Search the questions</span><input id="faqSearch" type="search" placeholder="Search, for example “import” or “currency”" autocomplete="off"></label>
+  </div>
+</section>
+
+<div class="paperband">
+<section class="sect">
+  <div class="wrap helpgrid">
+    <div class="qa">
+      <section aria-labelledby="g1">
+        <h2 id="g1">Getting started</h2>
+        <details><summary>What is Penny?</summary><p>A private budget app for Windows and Android. It writes down your spending from bank alerts, receipts, statements and plain words, plans each paycheck, and tells you what's safe to spend today. Everything stays encrypted on your device.</p></details>
+        <details><summary>Do I need to create an account?</summary><p>No. There's no account, email or password. Install Penny and start.</p></details>
+        <details><summary>How do I add a purchase quickly?</summary><p>Type it the way you'd say it, such as “coffee 4.50” or “lunch 12.80 at Chipotle”. Penny fills in the amount, payee, category and date. On Android, bank alerts and receipt photos add purchases for you, and you can share a bank message to Penny.</p></details>
+        <details><summary>What does “safe to spend today” mean?</summary><p>What you can spend today and stay on track, after the bills that are still to come. It updates as you add purchases.</p></details>
+        <details><summary>Which devices does Penny run on?</summary><p>Windows 10 and 11 today, and Android is coming to Google Play. iPhone and Mac may follow. See <a href="download.html">Download</a>.</p></details>
+      </section>
+
+      <section aria-labelledby="g2">
+        <h2 id="g2">Bank alerts, receipts and imports</h2>
+        <details><summary>Does Penny connect to my bank?</summary><p>No. Penny never asks for a bank password and never logs in anywhere. On Android it can read the purchase alerts your bank app already shows you; on any device you can import a statement (CSV, OFX or QFX).</p></details>
+        <details><summary>Is it safe to let Penny read notifications?</summary><p>It's off until you turn it on and pick your bank apps. Penny checks those notifications on your phone for a purchase, keeps only the ones from apps you picked (encrypted), and never sends them anywhere. Codes and balances are never kept.</p></details>
+        <details><summary>How do I import a bank statement?</summary><p>Download a CSV, OFX or QFX file from your bank's website and open it in Penny. Big banks are recognised automatically; for others, Penny asks once which column is which. Duplicates are skipped, so importing the same file twice is safe.</p></details>
+        <details><summary>I use Mint, YNAB or Monarch. Can I switch?</summary><p>Yes. Export from your old app and import the file. Penny recognises those exports with all their accounts, keeps transfers as transfers and skips duplicates.</p></details>
+        <details><summary>How does receipt scanning work?</summary><p>On Android, take a photo or pick one. Google's on-device scanner reads the text, and Penny fills in the total, shop and date, keeping the photo encrypted with the transaction. Nothing is uploaded.</p></details>
+      </section>
+
+      <section aria-labelledby="g3">
+        <h2 id="g3">Planning</h2>
+        <details><summary>How does the payday plan work?</summary><p>When a paycheck lands, Penny offers a plan: bills due before your next payday, savings shared out to your goals, a small cushion, and what's left for everyday spending per day. Tap “Use this plan” and Overview tracks it until the next payday.</p></details>
+        <details><summary>What's the cash-flow calendar?</summary><p>A month view of your expected balance each day, from your bills, paydays and usual spending. Days that run tight or short are marked so you can plan around them.</p></details>
+        <details><summary>How do I split a bill with friends?</summary><p>When adding a purchase, tap “Split with friends” and enter each friend's part. Only your share counts as spending; Penny tracks who still owes you and files repayments so they don't count as income.</p></details>
+        <details><summary>How is the health score worked out?</summary><p>Four pillars (Spend, Save, Borrow, Plan) scored 0 to 100 with the Penny Research model, built from household-finance research. 80 and above is healthy, 40 to 79 coping, below 40 vulnerable. It's guidance, not financial advice. <a href="./#health">Try it on the home page</a>.</p></details>
+      </section>
+
+      <section aria-labelledby="g4">
+        <h2 id="g4">Privacy and your data</h2>
+        <details><summary>Where is my data, and who can see it?</summary><p>Only on your device, encrypted with AES-256 and sealed by Windows or your phone's secure hardware. There's no account and no cloud, and Penny has no servers. See <a href="security.html">Security</a>.</p></details>
+        <details><summary>What if I forget my passcode?</summary><p>Use the recovery key Penny showed you when you set the passcode. We never see your passcode or recovery key, so we can't recover your data without them. Keep the recovery key somewhere safe.</p></details>
+        <details><summary>How do I back up or export my data?</summary><p>Penny makes verified backups on your device every day and before big changes. You can also export to Excel any time.</p></details>
+        <details><summary>How do I delete everything?</summary><p>Settings › Data &amp; backups › Erase everything, or uninstall Penny. Since we hold none of your data, nothing is left anywhere else.</p></details>
+      </section>
+
+      <section aria-labelledby="g5">
+        <h2 id="g5">Languages, currencies and pricing</h2>
+        <details><summary>Which languages and currencies does Penny support?</summary><p>English, Spanish, Portuguese, French, Russian, Indonesian, Chinese, Hindi and Arabic, with right-to-left layout for Arabic. About 40 currencies, with accounts in different currencies converted to your main one.</p></details>
+        <details><summary>Is it really free?</summary><p>Yes, everything is free during the beta. A Pro plan will add extras later, with a free week to try it; everyday budgeting stays free, and data you already have is never removed or locked away.</p></details>
+        <details><summary>Are there ads?</summary><p>No. Penny has no ads, no analytics and no trackers, and never will sell your data, because it never has it.</p></details>
+      </section>
+
+      <p class="none" hidden>No questions match. Try another word, or <a href="mailto:pennymoneyapp@gmail.com" style="color:var(--copper-dk)">ask us directly</a>.</p>
+    </div>
+
+    <aside>
+      <a class="tile lift rv" href="mailto:pennymoneyapp@gmail.com"><div class="contact"><span class="ci"><svg class="ic" aria-hidden="true"><use href="img/icons.svg#i-mail"/></svg></span><div><h3>Email support</h3><p>pennymoneyapp@gmail.com</p></div></div></a>
+      <a class="tile lift rv d1" href="https://discord.gg/SXYkvcmX3k"><div class="contact"><span class="ci"><svg aria-hidden="true"><use href="img/icons.svg#discord"/></svg></span><div><h3>Discord community</h3><p>Ask, share tips, suggest features</p></div></div></a>
+      <a class="tile lift rv d2" href="https://www.reddit.com/r/Pennymoneyapp/"><div class="contact"><span class="ci"><svg aria-hidden="true"><use href="img/icons.svg#reddit"/></svg></span><div><h3>r/Pennymoneyapp</h3><p>News and discussion</p></div></div></a>
+      <div class="tile rv"><h3>Tip</h3><p>When reporting a problem, include your Penny version (Settings › About) and whether you're on Windows or Android. Never send your recovery key or data file.</p></div>
+    </aside>
+  </div>
+</section>
+</div>
+</main>
+<!--footer-->
+</body>
+</html>

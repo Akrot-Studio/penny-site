@@ -10,6 +10,14 @@ const SITE = 'https://studdit.app';
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(SRC, OUT, { recursive: true });
+/* the shared header and footer (site/partials) go into every page: <!--header:features--> marks Features as the current page */
+const part = n => fs.readFileSync(path.join(SRC, 'partials', n + '.html'), 'utf8').trimEnd();
+fs.rmSync(path.join(OUT, 'partials'), { recursive: true, force: true });
+const PAGES = fs.readdirSync(OUT).filter(f => f.endsWith('.html'));
+for (const f of PAGES) {
+  const p = path.join(OUT, f), t = fs.readFileSync(p, 'utf8');
+  fs.writeFileSync(p, t.replace(/<!--header:(\w+)-->/, (_, cur) => part('header').replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace('<!--footer-->', part('footer')));
+}
 require('esbuild').buildSync({ entryPoints: [path.join(ROOT, 'renderer', 'penny-core.js')], minify: true, charset: 'utf8', outfile: path.join(OUT, 'penny-core.js'), logLevel: 'warning' });
 
 fs.writeFileSync(path.join(OUT, '_headers'), `/*
@@ -26,8 +34,7 @@ fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap
 const today = new Date().toISOString().slice(0, 10);
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>${SITE}/</loc><lastmod>${today}</lastmod></url>
-  <url><loc>${SITE}/privacy.html</loc><lastmod>${today}</lastmod></url>
+${PAGES.filter(f => f !== '404.html').map(f => `  <url><loc>${SITE}/${f === 'index.html' ? '' : f}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
 </urlset>
 `);
 
