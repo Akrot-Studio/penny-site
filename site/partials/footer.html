@@ -1,5 +1,17 @@
 <footer>
   <div class="wrap">
+    <div class="nlband" id="newsletter">
+      <div><h4>The Penny newsletter</h4><p>News and updates, about once a month. Unsubscribe at any time.</p></div>
+      <form class="nl" action="/api/subscribe" method="post">
+        <label class="sr" for="nl-footer">Email address</label>
+        <input id="nl-footer" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com">
+        <input class="trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="source"><input type="hidden" name="lang">
+        <button class="btn copper sm" type="submit">Subscribe</button>
+        <p class="nl-msg" role="status" aria-live="polite"></p>
+        <p class="nl-note">We keep only your email address, in our own database, never shared or sold. <a href="privacy#newsletter">Privacy policy</a></p>
+      </form>
+    </div>
     <div class="fcols">
       <div>
         <a class="brand" href="./" aria-label="Penny home"><svg aria-hidden="true"><use href="img/icons.svg#mark"/></svg>penny</a>

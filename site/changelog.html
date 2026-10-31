@@ -122,8 +122,16 @@
 
 <section class="get" aria-labelledby="h2get" style="--edge:var(--paper)">
   <div class="wrap">
-    <div class="rv"><h2 id="h2get">Get the latest Penny.</h2><p class="sub">Updates are free, and arrive through the Microsoft Store.</p></div>
-    <div class="btns rv d1"><a class="btn white" href="download.html"><svg aria-hidden="true"><use href="img/icons.svg#i-download"/></svg>Download</a><a class="btn outline" href="https://discord.gg/SXYkvcmX3k"><svg aria-hidden="true"><use href="img/icons.svg#discord"/></svg>Suggest a feature</a></div>
+    <div class="rv"><h2 id="h2get">Hear about the next release first.</h2><p class="sub">The Penny newsletter: news and updates, about once a month. Unsubscribe at any time.</p></div>
+    <form class="nl rv d1" action="/api/subscribe" method="post" style="max-width:440px">
+      <label class="sr" for="nl-news">Email address</label>
+      <input id="nl-news" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@example.com">
+      <input class="trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="source"><input type="hidden" name="lang">
+      <button class="btn white" type="submit">Subscribe</button>
+      <p class="nl-msg" role="status" aria-live="polite"></p>
+      <p class="nl-note">We keep only your email address, never shared or sold. <a href="privacy#newsletter">Privacy policy</a></p>
+    </form>
   </div>
 </section>
 </main>

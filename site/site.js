@@ -22,6 +22,20 @@
     window.__rvReady = true;
   }
 
+  /* newsletter: sent in the background with a reply in place; without JavaScript the form posts and gets a page back */
+  $$('form.nl').forEach(f => {
+    f.elements.source.value = location.pathname; f.elements.lang.value = (navigator.language || '').slice(0, 16);
+    const msg = f.querySelector('.nl-msg'), btn = f.querySelector('button');
+    f.addEventListener('submit', async e => {
+      e.preventDefault(); btn.disabled = true; msg.className = 'nl-msg'; msg.textContent = '';
+      let r = null; try { r = await (await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })).json(); } catch {}
+      btn.disabled = false;
+      msg.textContent = r ? r.msg : 'Something went wrong. Please try again in a moment.';
+      msg.classList.add(r && r.ok ? 'ok' : 'bad');
+      if (r && r.ok) f.classList.add('done');
+    });
+  });
+
   /* FAQ search: hides questions that don't match, and the headings left with none */
   const q = $('#faqSearch');
   if (q) {

@@ -209,6 +209,30 @@ a.tile:hover,.tile.lift:hover{transform:translateY(-4px);box-shadow:0 1px 0 var(
 .get .btn.outline{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55)}.get .btn.outline:hover{box-shadow:inset 0 0 0 1.5px #fff}
 @media(max-width:820px){.get .wrap{grid-template-columns:minmax(0,1fr)}}
 
+/* ---------- newsletter (footer band; same rules in the home page's own styles) ---------- */
+.nlband{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px 48px;align-items:start;padding-bottom:48px;margin-bottom:48px;border-bottom:1px solid var(--moss)}
+.nlband h4{color:var(--paper);font-size:20px;font-weight:650;letter-spacing:-.02em;margin-bottom:6px}
+.nlband p{color:var(--sage);font-size:15px}
+.nl{display:flex;flex-wrap:wrap;gap:10px}
+.nl input[type=email]{flex:1 1 220px;min-width:0;height:46px;padding:0 18px;border:0;border-radius:999px;background:var(--fir);box-shadow:inset 0 0 0 1px var(--moss);color:var(--paper);font-size:16px;outline:0}
+.nl input[type=email]:focus{box-shadow:inset 0 0 0 2px var(--copper-hi)}
+.nl input::placeholder{color:#71837F}
+.nl .btn{height:46px}
+.nl .btn[disabled]{opacity:.6;cursor:default}
+.nl .trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.nl-msg{flex-basis:100%;font-size:14.5px;font-weight:600;min-height:0}
+.nl-msg:empty{display:none}
+.nl-msg.ok{color:var(--slice)}.nl-msg.bad{color:#F08A7E}
+.nl-note{flex-basis:100%;font-size:12.5px;color:#71837F}
+.nl-note a{color:var(--sage)}
+.nl.done input[type=email],.nl.done .btn{display:none}
+@media(max-width:820px){.nlband{grid-template-columns:minmax(0,1fr)}}
+.get .nl input[type=email]{background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5);color:#fff}
+.get .nl input::placeholder{color:rgba(255,255,255,.75)}
+.get .nl .btn.white{background:#fff;color:var(--ink)}
+.get .nl-note,.get .nl-note a{color:rgba(255,255,255,.85)}
+.get .nl-msg.ok,.get .nl-msg.bad{color:#fff}
+
 /* ---------- footer ---------- */
 footer{padding:64px 0 calc(40px + env(safe-area-inset-bottom));color:var(--sage);font-size:14.5px}
 .fcols{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px}

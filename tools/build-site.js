@@ -2,8 +2,8 @@
 /* Builds Penny's website (site/) into dist/site, ready for Cloudflare Pages at https://studdit.app.
    The page runs Penny's real parser and health model, so a minified copy of renderer/penny-core.js goes in with it.
    Also writes Cloudflare's _headers file (security headers, long caching for fonts), robots.txt and sitemap.xml.
-   Usage: node tools/build-site.js          then upload dist/site (Cloudflare dashboard) or:
-          npx wrangler pages deploy dist/site --project-name penny */
+   Usage: node tools/build-site.js          then, from the repository root (wrangler.toml: the newsletter database):
+          npx wrangler pages deploy --branch main      (also uploads functions/, the newsletter sign-up) */
 const path = require('path'), fs = require('fs');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'site'), OUT = path.join(ROOT, 'dist', 'site');
 const SITE = 'https://studdit.app';

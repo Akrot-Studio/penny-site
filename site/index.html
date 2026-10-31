@@ -253,6 +253,23 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
   .bar.open nav{display:flex}.bar nav a.m-only{display:block}
   .menu{display:grid}.bar .btn{display:none}
 }
+.nlband{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px 48px;align-items:start;padding-bottom:48px;margin-bottom:48px;border-bottom:1px solid var(--moss)}
+.nlband h4{color:var(--paper);font-size:20px;font-weight:650;letter-spacing:-.02em;margin-bottom:6px}
+.nlband p{color:var(--sage);font-size:15px}
+.nl{display:flex;flex-wrap:wrap;gap:10px}
+.nl input[type=email]{flex:1 1 220px;min-width:0;height:46px;padding:0 18px;border:0;border-radius:999px;background:var(--fir);box-shadow:inset 0 0 0 1px var(--moss);color:var(--paper);font-size:16px;outline:0}
+.nl input[type=email]:focus{box-shadow:inset 0 0 0 2px var(--copper-hi)}
+.nl input::placeholder{color:#71837F}
+.nl .btn{height:46px}
+.nl .btn[disabled]{opacity:.6;cursor:default}
+.nl .trap{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.nl-msg{flex-basis:100%;font-size:14.5px;font-weight:600}
+.nl-msg:empty{display:none}
+.nl-msg.ok{color:var(--slice)}.nl-msg.bad{color:#F08A7E}
+.nl-note{flex-basis:100%;font-size:12.5px;color:#71837F}
+.nl-note a{color:var(--sage)}
+.nl.done input[type=email],.nl.done .btn{display:none}
+@media(max-width:820px){.nlband{grid-template-columns:minmax(0,1fr)}}
 footer{padding:64px 0 calc(40px + env(safe-area-inset-bottom));color:var(--sage);font-size:14.5px}
 .fcols{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px}
 .fcols .brand{color:var(--paper);font-size:22px}.fcols .brand svg{width:26px;height:26px}
