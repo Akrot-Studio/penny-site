@@ -260,3 +260,13 @@ footer{padding:64px 0 calc(40px + env(safe-area-inset-bottom));color:var(--sage)
 a.soon{text-decoration:none}a.soon:hover i{text-decoration:underline}
 .phero.short{padding:clamp(40px,5vw,64px) 0 clamp(32px,4vw,48px)}
 .phero.short h1{font-size:clamp(36px,4.6vw,60px)}
+
+/* email chooser */
+.mailpick{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px;background:rgba(10,20,18,.45)}
+.mp-card{position:relative;width:min(360px,100%);padding:22px 20px 16px;border-radius:16px;background:var(--paper,#FBF6EF);color:var(--ink,#14211F);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.mp-card>b{display:block;font-size:17px;margin-right:28px;word-break:break-all}
+.mp-opts{display:grid;gap:8px;margin:16px 0 10px}
+.mp-opts a{display:flex;align-items:center;justify-content:center;height:46px;border-radius:999px;background:var(--ink,#14211F);color:#fff;text-decoration:none;font-weight:600}
+.mp-opts a:first-child{background:var(--copper,#C9632F)}
+.mp-copy{width:100%;height:42px;border:0;border-radius:999px;background:transparent;box-shadow:inset 0 0 0 1.5px currentColor;color:inherit;font:inherit;font-weight:600;cursor:pointer;opacity:.8}
+.mp-x{position:absolute;top:10px;right:12px;width:32px;height:32px;border:0;background:none;color:inherit;font-size:24px;line-height:1;cursor:pointer;opacity:.6}

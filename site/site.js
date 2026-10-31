@@ -50,3 +50,33 @@
     });
   }
 })();
+
+/* Email links: a mailto: link does nothing on many computers (no email app set up), so pressing any email address
+   offers Gmail, Outlook, your email app, or copying the address. Each address gets a subject that says what it's
+   about, so the message is easy to spot in the inbox. */
+(() => {
+  const SUBJ = { 'support@akrot.app': 'Penny support', 'billing@akrot.app': 'Penny billing question', 'press@akrot.app': 'Press inquiry', 'business@akrot.app': 'Partnership inquiry', 'hello@akrot.app': 'Hello from penny.akrot.app' };
+  let box = null;
+  const close = () => { if (box) { box.remove(); box = null; document.removeEventListener('keydown', onKey); } };
+  const onKey = e => { if (e.key === 'Escape') close(); };
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href^="mailto:"]'); if (!a) return;
+    e.preventDefault(); close();
+    const u = new URL(a.getAttribute('href')), to = decodeURIComponent(u.pathname), q = encodeURIComponent;
+    const subject = u.searchParams.get('subject') || SUBJ[to.toLowerCase()] || '', body = u.searchParams.get('body') || '';
+    const links = [
+      ['Gmail', `https://mail.google.com/mail/?view=cm&fs=1&to=${q(to)}&su=${q(subject)}&body=${q(body)}`],
+      ['Outlook', `https://outlook.live.com/mail/0/deeplink/compose?to=${q(to)}&subject=${q(subject)}&body=${q(body)}`],
+      ['Email app', `mailto:${to}?subject=${q(subject)}${body ? '&body=' + q(body) : ''}`]
+    ];
+    box = document.createElement('div'); box.className = 'mailpick'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Send an email');
+    box.innerHTML = `<div class="mp-card"><b>Write to <span dir="ltr"></span></b><div class="mp-opts"></div><button type="button" class="mp-copy">Copy address</button><button type="button" class="mp-x" aria-label="Close">×</button></div>`;
+    box.querySelector('span').textContent = to;
+    const opts = box.querySelector('.mp-opts');
+    for (const [label, href] of links) { const l = document.createElement('a'); l.textContent = label; l.href = href; if (!href.startsWith('mailto:')) { l.target = '_blank'; l.rel = 'noopener'; } l.onclick = () => setTimeout(close, 50); opts.appendChild(l); }
+    box.querySelector('.mp-copy').onclick = async ev => { try { await navigator.clipboard.writeText(to); ev.target.textContent = 'Copied'; } catch { ev.target.textContent = to; } setTimeout(close, 900); };
+    box.querySelector('.mp-x').onclick = close;
+    box.addEventListener('click', ev => { if (ev.target === box) close(); });
+    document.body.appendChild(box); document.addEventListener('keydown', onKey); opts.querySelector('a').focus();
+  });
+})();
