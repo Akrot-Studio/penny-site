@@ -16,7 +16,10 @@ fs.rmSync(path.join(OUT, 'partials'), { recursive: true, force: true });
 const PAGES = fs.readdirSync(OUT).filter(f => f.endsWith('.html'));
 for (const f of PAGES) {
   const p = path.join(OUT, f), t = fs.readFileSync(p, 'utf8');
-  fs.writeFileSync(p, t.replace(/<!--header:(\w+)-->/, (_, cur) => part('header').replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace('<!--footer-->', part('footer')));
+  /* Cloudflare Pages serves /features.html at /features (308 otherwise), so links and canonicals use the clean address */
+  const pages = PAGES.filter(x => x !== 'index.html').map(x => x.replace('.html', '')).join('|');
+  fs.writeFileSync(p, t.replace(/<!--header:(\w+)-->/, (_, cur) => part('header').replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace('<!--footer-->', part('footer'))
+    .replace(new RegExp(`(href="(?:https://studdit\\.app/)?)(${pages})\\.html([#"])`, 'g'), '$1$2$3'));
 }
 require('esbuild').buildSync({ entryPoints: [path.join(ROOT, 'renderer', 'penny-core.js')], minify: true, charset: 'utf8', outfile: path.join(OUT, 'penny-core.js'), logLevel: 'warning' });
 
@@ -34,7 +37,7 @@ fs.writeFileSync(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap
 const today = new Date().toISOString().slice(0, 10);
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${PAGES.filter(f => f !== '404.html').map(f => `  <url><loc>${SITE}/${f === 'index.html' ? '' : f}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
+${PAGES.filter(f => f !== '404.html').map(f => `  <url><loc>${SITE}/${f === 'index.html' ? '' : f.replace('.html', '')}</loc><lastmod>${today}</lastmod></url>`).join('\n')}
 </urlset>
 `);
 
