@@ -8,7 +8,7 @@ const form = t => `<p class="sub">Click below and your address is removed from P
 export async function onRequestGet({ request }) {
   const t = new URL(request.url).searchParams.get('t');
   return t ? page('Unsubscribe from the newsletter?', form(t))
-    : page('Unsubscribe', '<p class="sub">Use the unsubscribe link at the bottom of any newsletter, or write to <a href="mailto:akrotstudio@gmail.com" style="color:var(--copper-hi)">akrotstudio@gmail.com</a> and we\'ll remove you.</p>');
+    : page('Unsubscribe', '<p class="sub">Use the unsubscribe link at the bottom of any newsletter, or write to <a href="mailto:hello@akrot.app" style="color:var(--copper-hi)">hello@akrot.app</a> and we\'ll remove you.</p>');
 }
 
 export async function onRequestPost({ request, env }) {
