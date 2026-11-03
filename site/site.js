@@ -22,17 +22,21 @@
     window.__rvReady = true;
   }
 
-  /* newsletter: sent in the background with a reply in place; without JavaScript the form posts and gets a page back */
+  /* newsletter: sent in the background with a reply in place; without JavaScript the form posts and gets a page back.
+     Someone who already subscribed sees "You're on the list" on their next visit instead of the form (remembered in this
+     browser only, with local storage: no cookie, nothing sent anywhere). */
+  let subbed = false; try { subbed = !!localStorage.getItem('penny-nl'); } catch {}
   $$('form.nl').forEach(f => {
     f.elements.source.value = location.pathname; f.elements.lang.value = (navigator.language || '').slice(0, 16);
     const msg = f.querySelector('.nl-msg'), btn = f.querySelector('button');
+    if (subbed) { f.classList.add('done'); msg.className = 'nl-msg ok'; msg.textContent = 'You’re on the list. Thanks for following Penny.'; }
     f.addEventListener('submit', async e => {
       e.preventDefault(); btn.disabled = true; msg.className = 'nl-msg'; msg.textContent = '';
       let r = null; try { r = await (await fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })).json(); } catch {}
       btn.disabled = false;
       msg.textContent = r ? r.msg : 'Something went wrong. Please try again in a moment.';
       msg.classList.add(r && r.ok ? 'ok' : 'bad');
-      if (r && r.ok) f.classList.add('done');
+      if (r && r.ok) { f.classList.add('done'); try { localStorage.setItem('penny-nl', '1'); } catch {} }
     });
   });
 
