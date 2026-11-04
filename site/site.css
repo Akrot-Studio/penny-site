@@ -129,6 +129,9 @@ a.tile:hover,.tile.lift:hover{transform:translateY(-4px);box-shadow:0 1px 0 var(
 .prose h2:first-child{margin-top:0}
 .prose p+p,.prose ul+p,.prose p+ul{margin-top:14px}
 .prose ul{padding-left:22px}.prose li{margin:6px 0}
+.prose h3{font-size:19px;letter-spacing:-.02em;margin:26px 0 6px}
+.prose h2+h3{margin-top:12px}
+.prose .faint{color:var(--muted);font-size:14px;margin-top:28px}
 .prose a{color:var(--copper-dk)}
 .prose .muted{color:var(--muted)}
 

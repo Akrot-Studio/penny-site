@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Test Penny for Android – Penny</title>
+<meta name="description" content="Help bring Penny to Google Play. Join the Android test: early access to the private budget app, before anyone else.">
+<link rel="canonical" href="https://penny.akrot.app/android-test.html">
+<meta property="og:title" content="Test Penny for Android"><meta property="og:description" content="Early access to the private budget app for Android. No bank login, no account."><meta property="og:image" content="https://penny.akrot.app/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#10201D">
+<link rel="icon" type="image/svg+xml" href="img/penny-mark.svg"><link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preload" href="fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<script>document.documentElement.classList.add('js');setTimeout(()=>{if(!window.__rvReady)document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'))},3000);</script>
+<style>
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 clamp(24px,4vw,56px)}
+.steps article{counter-increment:s;padding:28px 0;border-top:1px solid var(--rule)}
+.steps article::before{content:"0" counter(s);display:block;font-size:15px;font-weight:700;letter-spacing:.06em;color:var(--copper);margin-bottom:10px}
+.steps h3{font-size:clamp(20px,1.8vw,24px);letter-spacing:-.03em;margin-bottom:8px}
+.steps p{color:var(--muted);font-size:17px;line-height:1.6}
+@media(max-width:820px){.steps{grid-template-columns:minmax(0,1fr)}}
+.joinbox{max-width:640px}
+.joinbox .nl{margin-top:18px}
+</style>
+</head>
+<body>
+<!--header:download-->
+<main id="main">
+<section class="phero">
+  <div class="wrap">
+    <span class="eyebrow">Android test</span>
+    <h1>Help bring Penny to Google Play.</h1>
+    <p class="sub">Before a new app can go public, Google asks for a small group of people to try it for two weeks. Join them and use Penny on your phone before anyone else: know what's safe to spend today, with spending added from your bank alerts and receipts, and no bank login.</p>
+  </div>
+</section>
+
+<section class="sect" style="padding-top:0">
+  <div class="wrap">
+    <div class="steps">
+      <article class="rv"><h3>Leave your email</h3><p>Use the email of the Google account on your phone, the one you use for the Play Store. That's how Google lets you in.</p></article>
+      <article class="rv d1"><h3>Get the invite</h3><p>When the test opens, we email you a link. Tap it, accept the invite, and install Penny from the Play Store like any other app.</p></article>
+      <article class="rv"><h3>Keep it for 14 days</h3><p>Use it as much or as little as you like, just keep it installed for two weeks. Tell us what you think, if you want to, on Discord or by email.</p></article>
+    </div>
+  </div>
+</section>
+
+<div class="paperband">
+<section class="sect" id="join">
+  <div class="wrap">
+    <div class="joinbox rv">
+      <h2>Join the test</h2>
+      <p class="sub">Android 7 or later. Free, no account in the app, and your money data never leaves your phone.</p>
+      <form class="nl" action="/api/subscribe" method="post">
+        <label class="sr" for="nl-test">Google account email</label>
+        <input id="nl-test" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="you@gmail.com">
+        <input class="trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="source"><input type="hidden" name="lang">
+        <button class="btn copper sm" type="submit">Join the test</button>
+        <p class="nl-msg" role="status" aria-live="polite"></p>
+        <p class="nl-note">We'll email you the invite, and you'll get the Penny newsletter: news and updates, about once a month, unsubscribe at any time. We keep only your email address, never shared or sold. <a href="privacy#newsletter">Privacy policy</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sect" style="padding-top:0">
+  <div class="wrap narrow">
+    <div class="prose rv">
+      <h2>Questions</h2>
+      <h3>Is it safe to test?</h3>
+      <p>Yes. It's the same Penny that's on the Microsoft Store: your data is encrypted on your phone, and Penny has no servers and no analytics. Reading bank alerts is optional and off until you turn it on.</p>
+      <h3>Will I lose my data when the test ends?</h3>
+      <p>No. When Penny goes public, the app simply updates. Everything you entered stays.</p>
+      <h3>Do I have to give feedback?</h3>
+      <p>No, but we'd love it. The <a href="https://discord.gg/SXYkvcmX3k">Discord</a> is the quickest way, or write to <a href="mailto:support@akrot.app?subject=Android%20test">support@akrot.app</a>.</p>
+      <h3>On Windows?</h3>
+      <p>Penny for Windows is already on the Microsoft Store. <a href="download.html">Get it here</a>.</p>
+    </div>
+  </div>
+</section>
+</div>
+</main>
+<!--footer-->
+</body>
+</html>
