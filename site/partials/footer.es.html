@@ -1,0 +1,34 @@
+<footer>
+  <div class="wrap">
+    <div class="nlband" id="newsletter">
+      <div><h4>El boletín de Penny</h4><p>Noticias y novedades, más o menos una vez al mes. Puedes darte de baja cuando quieras.</p></div>
+      <form class="nl" action="/api/subscribe" method="post">
+        <label class="sr" for="nl-footer">Correo electrónico</label>
+        <input id="nl-footer" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="tu@correo.com">
+        <input class="trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="source"><input type="hidden" name="lang">
+        <button class="btn copper sm" type="submit">Suscribirme</button>
+        <p class="nl-msg" role="status" aria-live="polite"></p>
+        <p class="nl-note">Solo guardamos tu correo, en nuestra propia base de datos. Nunca se comparte ni se vende. <a href="privacy#newsletter">Política de privacidad</a></p>
+      </form>
+    </div>
+    <div class="fcols">
+      <div>
+        <a class="brand" href="./" aria-label="Inicio de Penny"><svg aria-hidden="true"><use href="img/icons.svg#mark"/></svg>penny</a>
+        <p>La app de presupuesto privada para Windows y Android. Cada céntimo contado. Nadie mirando.</p>
+        <div class="social" aria-label="Penny en redes">
+          <a href="https://discord.gg/SXYkvcmX3k" aria-label="Discord"><svg aria-hidden="true"><use href="img/icons.svg#discord"/></svg></a>
+          <a href="https://www.reddit.com/r/Pennymoneyapp/" aria-label="Reddit"><svg aria-hidden="true"><use href="img/icons.svg#reddit"/></svg></a>
+          <a href="https://x.com/pennymoneyapp" aria-label="X"><svg aria-hidden="true"><use href="img/icons.svg#xlogo"/></svg></a>
+          <a href="https://www.instagram.com/pennymoneyapp/" aria-label="Instagram"><svg aria-hidden="true"><use href="img/icons.svg#insta"/></svg></a>
+          <a href="https://www.tiktok.com/@pennymoneyapp" aria-label="TikTok"><svg aria-hidden="true"><use href="img/icons.svg#tiktok"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Producto</h4><ul><li><a href="features.html">Funciones</a></li><li><a href="changelog.html">Novedades</a></li><li><a href="download.html">Descargar</a></li><li><a href="android-test.html">Prueba Penny en Android</a></li><li><a href="./#health">Puntuación de salud</a></li></ul></div>
+      <div><h4>Confianza</h4><ul><li><a href="security.html">Seguridad</a></li><li><a href="privacy.html">Política de privacidad</a></li><li><a href="security.html#compare">En qué se diferencia Penny</a></li><li><a href="app-de-presupuesto-sin-banco.html">Sin acceso al banco</a></li><li><a href="alternativa-a-mint.html">Alternativa a Mint</a></li><li><a href="alternativa-a-ynab.html">Alternativa a YNAB</a></li></ul></div>
+      <div><h4>Empresa</h4><ul><li><a href="about.html">Acerca de</a></li><li><a href="support.html">Ayuda y preguntas</a></li><li><a href="mailto:hello@akrot.app">Contacto</a></li><li><a href="mailto:press@akrot.app">Prensa</a></li><li><a href="https://discord.gg/SXYkvcmX3k">Comunidad</a></li></ul></div>
+    </div>
+    <div class="fbase"><span>© <span class="yr">2026</span> <a href="https://akrot.app">Akrot Software</a></span><span>Sin cookies ni rastreadores, solo un recuento anónimo de visitas. La app no tiene ninguna analítica.</span></div>
+  </div>
+</footer>
+<script src="site.js" defer></script>

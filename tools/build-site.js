@@ -10,15 +10,16 @@ const SITE = 'https://penny.akrot.app';
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(SRC, OUT, { recursive: true });
-/* the shared header and footer (site/partials) go into every page: <!--header:features--> marks Features as the current page */
-const part = n => fs.readFileSync(path.join(SRC, 'partials', n + '.html'), 'utf8').trimEnd();
+/* the shared header and footer (site/partials) go into every page: <!--header:features--> marks Features as the current page.
+   A page in another language asks for its own copies: <!--header:compare:es--> and <!--footer:es--> use header.es.html and footer.es.html */
+const part = (n, lang) => { const f = path.join(SRC, 'partials', n + (lang ? '.' + lang : '') + '.html'); return fs.readFileSync(fs.existsSync(f) ? f : path.join(SRC, 'partials', n + '.html'), 'utf8').trimEnd(); };
 fs.rmSync(path.join(OUT, 'partials'), { recursive: true, force: true });
 const PAGES = fs.readdirSync(OUT).filter(f => f.endsWith('.html'));
 for (const f of PAGES) {
   const p = path.join(OUT, f), t = fs.readFileSync(p, 'utf8');
   /* Cloudflare Pages serves /features.html at /features (308 otherwise), so links and canonicals use the clean address */
   const pages = PAGES.filter(x => x !== 'index.html').map(x => x.replace('.html', '')).join('|');
-  fs.writeFileSync(p, t.replace(/<!--header:(\w+)-->/, (_, cur) => part('header').replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace('<!--footer-->', part('footer'))
+  fs.writeFileSync(p, t.replace(/<!--header:(\w+)(?::(\w+))?-->/, (_, cur, lang) => part('header', lang).replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace(/<!--footer(?::(\w+))?-->/, (_, lang) => part('footer', lang))
     .replace(new RegExp(`(href="(?:${SITE.replace(/\./g, '\\.')}/)?)(${pages})\\.html([#"])`, 'g'), '$1$2$3'));
 }
 require('esbuild').buildSync({ entryPoints: [path.join(ROOT, 'renderer', 'penny-core.js')], minify: true, charset: 'utf8', outfile: path.join(OUT, 'penny-core.js'), logLevel: 'warning' });
