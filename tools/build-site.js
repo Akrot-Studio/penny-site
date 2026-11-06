@@ -20,6 +20,7 @@ for (const f of PAGES) {
   /* Cloudflare Pages serves /features.html at /features (308 otherwise), so links and canonicals use the clean address */
   const pages = PAGES.filter(x => x !== 'index.html').map(x => x.replace('.html', '')).join('|');
   fs.writeFileSync(p, t.replace(/<!--header:(\w+)(?::(\w+))?-->/, (_, cur, lang) => part('header', lang).replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace(/<!--footer(?::(\w+))?-->/, (_, lang) => part('footer', lang))
+    .replace('</head>', '<link rel="stylesheet" href="theme.css?v=1">\n</head>')   /* the 2026 redesign layer, last so it wins */
     .replace(new RegExp(`(href="(?:${SITE.replace(/\./g, '\\.')}/)?)(${pages})\\.html([#"])`, 'g'), '$1$2$3'));
 }
 require('esbuild').buildSync({ entryPoints: [path.join(ROOT, 'renderer', 'penny-core.js')], minify: true, charset: 'utf8', outfile: path.join(OUT, 'penny-core.js'), logLevel: 'warning' });

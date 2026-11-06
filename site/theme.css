@@ -1,0 +1,69 @@
+/* Penny website, 2026 redesign layer. Loaded last on every page (tools/build-site.js adds the link), on top of site.css or the home page's own styles.
+   Same Penny palette as the app; new structure: a floating top bar, paper sheets that float on the evergreen ground, a lit hero ground, quieter motion. */
+
+/* ---------- floating top bar ---------- */
+.bar{position:sticky;top:0;z-index:30;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none!important;padding-top:12px;transition:padding .3s}
+.bar .wrap{height:auto}
+.bar .pill{display:flex;align-items:center;gap:28px;width:100%;height:64px;padding:0 10px 0 22px;border-radius:999px;
+  background:rgba(16,32,29,.72);backdrop-filter:saturate(1.3) blur(18px);-webkit-backdrop-filter:saturate(1.3) blur(18px);
+  box-shadow:inset 0 0 0 1px rgba(169,184,180,.14),0 18px 40px -24px rgba(0,0,0,.6);transition:background-color .3s,box-shadow .3s}
+.bar.scrolled .pill{background:rgba(16,32,29,.9);box-shadow:inset 0 0 0 1px rgba(169,184,180,.2),0 18px 40px -20px rgba(0,0,0,.7)}
+.bar .brand{font-size:22px}.bar .brand svg{width:28px;height:28px}
+.bar nav{gap:4px}
+.bar nav a{padding:8px 14px;border-radius:999px;transition:color .2s,background-color .2s}
+.bar nav a:hover{background:rgba(169,184,180,.08)}
+.bar nav a[aria-current=page]{box-shadow:none;background:rgba(238,154,92,.12);color:var(--paper)}
+.bar .btn.sm{height:44px}
+.menu{background:transparent;box-shadow:none}
+@media(max-width:900px){
+  .bar .pill{gap:12px;padding:0 8px 0 18px;height:58px}
+  .bar nav{top:calc(100% + 8px);left:var(--gut);right:var(--gut);border-radius:24px;padding:8px 20px 14px;background:rgba(16,32,29,.97);box-shadow:inset 0 0 0 1px var(--moss),0 30px 60px -20px rgba(0,0,0,.7)}
+  .bar nav a{border-radius:0;padding:14px 0}.bar nav a:last-child{border-bottom:0}
+  .bar nav a:hover,.bar nav a[aria-current=page]{background:none}
+}
+
+/* ---------- buttons: a little light on top, a step on hover, a press on click ---------- */
+.btn.copper{background:linear-gradient(180deg,#D6703B,var(--copper));box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 10px 24px -12px rgba(201,99,47,.8)}
+.btn.copper:hover{background:linear-gradient(180deg,#DB7843,var(--copper-dk));transform:translateY(-1px)}
+.btn.ghost:hover,.soon:hover{transform:translateY(-1px)}
+.btn:active,.soon:active{transform:translateY(0) scale(.97)}
+.soon{transition:transform .15s,box-shadow .2s}
+.msbadge:hover{transform:translateY(-1px)}
+
+/* ---------- paper sheets floating on the evergreen ground ---------- */
+.paperband{margin:0 clamp(8px,1.4vw,20px);border-radius:clamp(28px,3.4vw,48px);box-shadow:0 40px 80px -50px rgba(0,0,0,.8)}
+.paperband+.paperband{margin-top:clamp(8px,1.4vw,20px)}
+.get{margin:clamp(24px,3vw,40px) clamp(8px,1.4vw,20px) 0;border-radius:clamp(28px,3.4vw,48px);overflow:hidden;isolation:isolate}
+.get::before{content:"";position:absolute;inset:auto -10% -60% 40%;height:140%;z-index:-1;pointer-events:none;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,255,255,.22),transparent 70%);-webkit-mask:none;mask:none}
+.get{position:relative}
+
+/* ---------- section heads: a small copper rule above the eyebrow ---------- */
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;background:currentColor}
+h2{letter-spacing:-.045em}
+
+/* ---------- cards answer the pointer ---------- */
+.tile,.steps li,.minis li,.knobs,.card{transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+a.tile:hover,.tile.lift:hover,.steps li:hover,.minis li:hover{transform:translateY(-2px)}
+.tile.dark,.facts>div{position:relative}
+.tile.dark{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,0)) ,var(--fir);box-shadow:inset 0 0 0 1px var(--moss),inset 0 1px 0 rgba(255,255,255,.05)}
+
+/* ---------- inner page hero: the same lit ground as the home page ---------- */
+.phero{isolation:isolate}
+.phero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(rgba(169,184,180,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(169,184,180,.07) 1px,transparent 1px);background-size:56px 56px;
+  -webkit-mask:radial-gradient(70% 80% at 70% 20%,#000,transparent 75%);mask:radial-gradient(70% 80% at 70% 20%,#000,transparent 75%)}
+.phero h1{font-size:clamp(40px,5.6vw,80px);letter-spacing:-.05em;line-height:1}
+
+/* ---------- footer ---------- */
+footer{position:relative}
+footer::before{content:"";position:absolute;left:50%;top:0;width:min(900px,90%);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(238,154,92,.5),transparent)}
+
+/* ---------- content shows at once: no fade-in on scroll ---------- */
+.js .rv{opacity:1!important;transform:none!important;transition:none!important}
+
+@media(prefers-reduced-motion:reduce){.hero::before{animation:none}.btn:hover,.soon:hover,.tile:hover,.steps li:hover{transform:none}}
+
+/* the Android chip stays on one line */
+.soon{white-space:nowrap}
+@media(max-width:560px){.soon{width:100%;justify-content:space-between;font-size:14px;padding:0 18px}.news{font-size:14px}}
