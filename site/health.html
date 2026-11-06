@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Money health score – Penny</title>
+<meta name="description" content="How's your money really doing? Move five sliders and get a 0 to 100 health score from the Penny Research model, with your next step. It runs in your browser; nothing leaves the page.">
+<link rel="canonical" href="https://penny.akrot.app/health">
+<meta property="og:title" content="Money health score – Penny"><meta property="og:description" content="Move a slider. We won't peek. A 0 to 100 money health score that runs in your browser."><meta property="og:image" content="https://penny.akrot.app/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#10201D">
+<link rel="icon" type="image/svg+xml" href="img/penny-mark.svg"><link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preload" href="fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+<style>
+.health{padding:var(--sect) 0}
+.hgrid{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,3vw,36px);align-items:stretch}
+.knobs{background:#fff;border-radius:24px;padding:clamp(22px,3vw,34px);box-shadow:0 1px 0 var(--rule),0 24px 50px -30px rgba(20,33,31,.35);display:flex;flex-direction:column;gap:22px}
+.knob-row label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px;color:var(--muted)}
+.knob-row label b{color:var(--ink);font-size:17px;font-weight:600;letter-spacing:-.02em}
+.knob-row input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin-top:6px;cursor:pointer;--p:50%}
+.knob-row input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--copper) var(--p),var(--sand) var(--p))}
+.knob-row input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--copper) var(--p),var(--sand) var(--p))}
+.knob-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 1.5px var(--copper),0 4px 10px rgba(20,33,31,.25);transition:transform .15s}
+.knob-row input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 1.5px var(--copper),0 4px 10px rgba(20,33,31,.25)}
+.knob-row input[type=range]:active::-webkit-slider-thumb{transform:scale(1.12)}
+.knob-row input[type=range]:focus-visible{outline:none}.knob-row input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--copper-hi),0 4px 10px rgba(20,33,31,.25)}
+.knob-row .kl{font-size:15px;color:var(--muted)}
+.seg{display:flex;gap:4px;padding:4px;margin-top:8px;border-radius:16px;background:var(--sand)}
+.seg button{flex:1;height:40px;border:0;border-radius:10px;background:none;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;transition:background-color .2s,color .2s,box-shadow .2s}
+.seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(20,33,31,.15)}
+.tick{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink);cursor:pointer}
+.tick input{width:22px;height:22px;accent-color:var(--copper);cursor:pointer}
+.result{position:relative;overflow:hidden;border-radius:24px;padding:clamp(24px,3vw,36px);background:var(--ever);color:var(--paper);display:flex;flex-direction:column;gap:24px;box-shadow:0 30px 60px -28px rgba(16,32,29,.7)}
+.result::before{content:"";position:absolute;width:420px;height:420px;right:-160px;top:-180px;border-radius:50%;background:radial-gradient(closest-side,var(--tone,rgba(43,184,154,.28)),transparent);transition:background .6s;pointer-events:none}
+.rtop{position:relative;display:flex;align-items:center;gap:clamp(18px,3vw,30px)}
+.ring{position:relative;width:148px;height:148px;flex:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:12;stroke-linecap:round}
+.ring .bg{stroke:var(--moss)}
+.ring .fg{stroke:var(--ring,var(--slice));transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1),stroke .4s}
+.ring .val{position:absolute;inset:0;display:grid;place-items:center;align-content:center;text-align:center}
+.ring .val b{font-size:46px;font-weight:700;letter-spacing:-.05em;line-height:1}
+.ring .val small{font-size:12px;color:var(--sage);margin-top:4px}
+.tier{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.02em;background:rgba(255,255,255,.07)}
+.tier i{width:8px;height:8px;border-radius:50%;background:var(--ring,var(--slice))}
+.rtop h3{font-size:clamp(22px,2.2vw,28px);letter-spacing:-.03em;line-height:1.15;margin-top:12px;text-wrap:balance}
+.pills4{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 22px}
+.pills4 div{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:baseline;font-size:15px;color:var(--sage)}
+.pills4 b{color:var(--paper);font-size:15px}
+.pills4 .pb{grid-column:1/-1;height:6px;border-radius:99px;background:var(--moss);overflow:hidden}
+.pills4 .pb i{display:block;height:100%;width:0;border-radius:inherit;background:var(--copper-hi);transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.step{position:relative;padding:16px 18px;border-radius:16px;background:var(--fir);box-shadow:inset 0 0 0 1px var(--moss)}
+.step small{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--copper-hi);font-weight:700;margin-bottom:4px}
+.step p{font-size:16px;line-height:1.5}
+.hfoot{position:relative;font-size:13px;color:var(--sage);margin-top:auto}
+.hfoot a{color:var(--paper)}
+.facts3{position:relative;display:flex;flex-wrap:wrap;gap:8px}
+.facts3 span{padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.06);font-size:13px;color:var(--sage)}
+.facts3 b{color:var(--paper);font-weight:600}
+@media(max-width:900px){.hgrid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:480px){.rtop{flex-direction:column;align-items:flex-start}.ring{width:128px;height:128px}.ring .val b{font-size:40px}.pills4{grid-template-columns:minmax(0,1fr)}}
+.health{padding:clamp(56px,7vw,96px) 0}
+.health .hgrid{margin-top:0}
+.howcalc{margin-top:clamp(40px,5vw,56px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.howcalc div{background:#fff;border-radius:20px;padding:22px;box-shadow:0 1px 0 var(--rule)}
+.howcalc b{display:block;font-size:17px;letter-spacing:-.02em;margin-bottom:6px}
+.howcalc p{color:var(--muted);font-size:15px;line-height:1.5}
+@media(max-width:900px){.howcalc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.howcalc{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<!--header:health-->
+<main id="main">
+<section class="phero">
+  <div class="wrap">
+    <p class="crumbs"><a href="./">Home</a> › Health score</p>
+    <span class="eyebrow">Money health score</span>
+    <h1>How's your money really doing?</h1>
+    <p class="sub">Move a slider. We won't peek. This is Penny's own health model, running in your browser: nothing you set here leaves the page. In the app, Penny saves your score each month so you can watch it climb.</p>
+  </div>
+</section>
+
+<div class="paperband">
+<section class="health" aria-label="Try the health score">
+  <div class="wrap">
+    <div class="hgrid">
+      <form class="knobs" id="knobs" onsubmit="return false" aria-label="Your numbers">
+        <div class="knob-row"><label for="k_inc">Take-home pay a month <b class="num" id="v_inc"></b></label><input type="range" id="k_inc" min="1000" max="12000" step="100" value="4000"></div>
+        <div class="knob-row"><label for="k_spend">Spending a month <b class="num" id="v_spend"></b></label><input type="range" id="k_spend" min="500" max="12000" step="100" value="3500"></div>
+        <div class="knob-row"><label for="k_cash">Cash you can reach <b class="num" id="v_cash"></b></label><input type="range" id="k_cash" min="0" max="40000" step="250" value="3000"></div>
+        <div class="knob-row"><label for="k_debt">Card and loan debt <b class="num" id="v_debt"></b></label><input type="range" id="k_debt" min="0" max="30000" step="250" value="2500"></div>
+        <div class="knob-row"><div class="kl" id="payLbl">How steady is your pay?</div>
+          <div class="seg" role="group" aria-labelledby="payLbl"><button type="button" data-pay="steady" aria-pressed="true">Steady</button><button type="button" data-pay="varies" aria-pressed="false">Varies</button><button type="button" data-pay="irregular" aria-pressed="false">Irregular</button></div></div>
+        <label class="tick"><input type="checkbox" id="k_bud" checked>I plan my spending with budgets</label>
+      </form>
+
+      <div class="result" aria-live="polite">
+        <div class="rtop">
+          <div class="ring"><svg viewBox="0 0 148 148" aria-hidden="true"><circle class="bg" cx="74" cy="74" r="62"/><circle class="fg" id="ringFg" cx="74" cy="74" r="62" stroke-dasharray="389.6" stroke-dashoffset="389.6"/></svg>
+            <div class="val"><b class="num" id="score">–</b><small>out of 100</small></div></div>
+          <div><span class="tier" id="tier"><i></i><span></span></span><h3 id="verdict"></h3></div>
+        </div>
+        <div class="pills4" id="pillars"></div>
+        <div class="facts3" id="hfacts"></div>
+        <div class="step"><small>Your next step</small><p id="nextStep"></p></div>
+        <p class="hfoot">Penny Research model, edition 2026.10. 80 and above is healthy, 40 to 79 is coping, below 40 is vulnerable. Guidance, not financial advice.</p>
+      </div>
+    </div>
+    <div class="howcalc">
+      <div><b>Spend</b><p>Do you spend less than you earn, and how much of it goes to needs?</p></div>
+      <div><b>Save</b><p>Your savings rate, and how many months of essentials your cash covers.</p></div>
+      <div><b>Borrow</b><p>Card and loan debt against your income, and what the interest costs you.</p></div>
+      <div><b>Plan</b><p>Budgets, dated goals and steady habits that keep the rest on track.</p></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="get" aria-labelledby="h2get" style="--edge:var(--paper)">
+  <div class="wrap">
+    <div><h2 id="h2get">See your real score, every month.</h2><p class="sub">Penny works it out from your own spending, on your device. Free during the beta.</p></div>
+    <div class="btns"><a class="btn white" href="download.html"><svg aria-hidden="true"><use href="img/icons.svg#i-download"/></svg>Get Penny</a><a class="btn outline" href="features.html">See every feature</a></div>
+  </div>
+</section>
+</main>
+<!--footer-->
+<script src="penny-core.js"></script>
+<script>
+'use strict';
+(() => {
+  const C = window.PennyCore, $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, masked = false;
+  const pad = n => String(n).padStart(2, '0'), d0 = new Date(), TODAY = `${d0.getFullYear()}-${pad(d0.getMonth() + 1)}-${pad(d0.getDate())}`;
+  const H = (() => {
+    const L = C && C.Ledger;
+    if (!L || !L.pillars) return null;
+    const pd2 = n => String(n).padStart(2, '0');
+    const SWING = { steady: [0, 0, 0, 0, 0, 0], varies: [.15, -.12, .08, -.15, .12, -.08], irregular: [.45, -.35, .25, -.4, .5, -.45] };
+    /* six months of history for one household, built from the sliders, scored exactly like the Financial Health Report */
+    return o => {
+      const now = new Date(), needs = o.spend * .55, wants = o.spend - needs, tx = []; let n = 0, flow = 0;
+      for (let k = 6; k >= 1; k--) {
+        const d = new Date(now.getFullYear(), now.getMonth() - k, 1), ym = `${d.getFullYear()}-${pd2(d.getMonth() + 1)}`, inc = Math.max(0, o.income * (1 + SWING[o.pay][6 - k]));
+        tx.push({ id: 't' + n++, date: ym + '-01', amount: inc, type: 'income', accountId: 'chk', category: 'c_salary' },
+          { id: 't' + n++, date: ym + '-03', amount: needs * .6, type: 'expense', accountId: 'chk', category: 'c_housing' },
+          { id: 't' + n++, date: ym + '-12', amount: needs * .4, type: 'expense', accountId: 'chk', category: 'c_groceries' },
+          { id: 't' + n++, date: ym + '-18', amount: wants, type: 'expense', accountId: 'chk', category: 'c_dining' });
+        flow += inc - o.spend;
+      }
+      const b = o.budgets, doc = { schema: 3, settings: { currency: 'USD', cycleStart: 1 }, transactions: tx, goals: [], bills: [], reminders: [], snapshots: [],
+        categories: [{ id: 'c_salary', name: 'Salary', type: 'income' }, { id: 'c_housing', name: 'Housing', type: 'expense', bucket: 'needs', budget: b ? needs * .6 : 0 },
+          { id: 'c_groceries', name: 'Groceries', type: 'expense', bucket: 'needs', budget: b ? needs * .4 : 0 }, { id: 'c_dining', name: 'Dining', type: 'expense', bucket: 'wants', budget: b ? wants : 0 }],
+        accounts: [{ id: 'chk', name: 'Checking', type: 'checking', opening: o.cash - flow, currency: 'USD' }]
+          .concat(o.debt > 0 ? [{ id: 'cc', name: 'Card', type: 'credit', opening: -o.debt, apr: 22, minPay: Math.max(25, o.debt * .03), currency: 'USD' }] : []) };
+      const led = L.createLedger({ data: () => doc, version: () => 0, today: () => TODAY });
+      const R = led.reportData({ region: { us: true, usd: true, code: 'US', cur: 'USD' } });
+      return { R, P: L.pillars(R) };
+    };
+  })();
+  const knobs = $('#knobs');
+  if (knobs && H) {
+    const K = { income: '#k_inc', spend: '#k_spend', cash: '#k_cash', debt: '#k_debt' }, state = { pay: 'steady' };
+    const whole = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    const m0 = n => masked ? '•••' : whole.format(n);
+    const PILL = [['spend', 'Spend'], ['save', 'Save'], ['borrow', 'Borrow'], ['plan', 'Plan']];
+    const TIERS = [[80, 'Financially healthy', '#2BB89A', 'rgba(43,184,154,.30)'], [40, 'Coping', '#EE9A5C', 'rgba(238,154,92,.28)'], [0, 'Vulnerable', '#E5736A', 'rgba(229,115,106,.30)']];
+    let raf = 0, shown = 0;
+    const animateTo = target => {
+      cancelAnimationFrame(raf); const from = shown, t0 = performance.now(), D = reduce ? 0 : 600;
+      const step = t => { const k = D ? Math.min(1, (t - t0) / D) : 1, e = 1 - Math.pow(1 - k, 3); shown = Math.round(from + (target - from) * e);
+        $('#score').textContent = masked ? '••' : shown; if (k < 1) raf = requestAnimationFrame(step); };
+      raf = requestAnimationFrame(step);
+    };
+    const nextStep = (R, P) => {
+      const pl = R.pl, res = R.res, gap = pl.expenses - pl.income;
+      if (gap > 0) return `You spend more than you earn. Trimming ${m0(gap)} a month is the first move; everything else builds on it.`;
+      if (res.starterGap > 0) return `Build a starter cushion: ${m0(res.starterGap)} more reaches six weeks of take-home pay, enough for most surprises.`;
+      if (R.debts.length) return `Pay down the card at 22%: every ${m0(1000)} cleared saves about ${m0(220)} a year in interest.`;
+      if (pl.savingsRate < .15) return `Lift your savings rate to 15%: about ${m0(pl.income * .15 - (pl.income - pl.expenses))} more a month.`;
+      if (res.months < res.target) return `Grow your cushion to ${res.target} months of essentials: ${m0(res.gap)} to go.`;
+      if (P.plan != null && P.plan < 70) return 'Plan ahead: give your money a job with budgets and a dated goal.';
+      return 'You are in great shape. Keep saving, and compare investing against any debt you take on.';
+    };
+    const draw = () => {
+      const o = { income: +$(K.income).value, spend: +$(K.spend).value, cash: +$(K.cash).value, debt: +$(K.debt).value, pay: state.pay, budgets: $('#k_bud').checked };
+      Object.entries(K).forEach(([k, sel]) => { const el = $(sel); el.style.setProperty('--p', ((el.value - el.min) / (el.max - el.min) * 100) + '%'); });
+      $('#v_inc').textContent = m0(o.income); $('#v_spend').textContent = m0(o.spend); $('#v_cash').textContent = m0(o.cash); $('#v_debt').textContent = m0(o.debt);
+      const { R, P } = H(o), total = P.total == null ? 0 : P.total, tier = TIERS.find(([min]) => total >= min);
+      const res = $('.result'); res.style.setProperty('--ring', tier[2]); res.style.setProperty('--tone', tier[3]);
+      $('#ringFg').style.strokeDashoffset = String(389.6 * (1 - total / 100));
+      animateTo(total);
+      $('#tier span').textContent = tier[1];
+      const areas = PILL.filter(([k]) => P[k] != null), best = areas.slice().sort((a, b) => P[b[0]] - P[a[0]])[0], worst = areas.slice().sort((a, b) => P[a[0]] - P[b[0]])[0];
+      $('#verdict').textContent = worst && P[worst[0]] >= 70 ? 'Strong on all four pillars.' : `Strongest at ${best[1]}. Work on ${worst[1]} next.`;
+      $('#pillars').innerHTML = PILL.map(([k, n]) => `<div><span>${n}</span><b class="num">${masked ? '••' : P[k] ?? '–'}</b><span class="pb"><i style="width:${P[k] || 0}%"></i></span></div>`).join('');
+      const pl = R.pl;
+      $('#hfacts').innerHTML = `<span>Saving <b class="num">${masked ? '••' : Math.round((pl.savingsRate || 0) * 100) + '%'}</b> of pay</span><span>Cushion <b class="num">${masked ? '••' : (R.res.months || 0).toFixed(1)}</b> of ${R.res.target} months</span><span>Pay is <b>${R.vol ? { stable: 'steady', variable: 'varied', volatile: 'irregular' }[R.vol.level] : 'new'}</b></span>`;
+      $('#nextStep').textContent = nextStep(R, P);
+    };
+    knobs.addEventListener('input', draw);
+    $$('.seg button').forEach(b => b.addEventListener('click', () => { state.pay = b.dataset.pay; $$('.seg button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw(); }));
+    draw();
+  } else if (knobs) knobs.closest('.hgrid').hidden = true;
+})();
+</script>
+</body>
+</html>

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Penny – Know what's safe to spend. Nobody watching.</title>
+<title>Penny – Spend freely. Nobody's watching.</title>
 <meta name="description" content="Penny is a private budget app for Windows and Android. It plans every paycheck and shows what's safe to spend today. No account, no bank login, no cloud.">
-<meta property="og:title" content="Penny – Every penny counted. Nobody watching.">
+<meta property="og:title" content="Penny – Spend freely. Nobody's watching.">
 <meta property="og:description" content="A private budget app for Windows and Android. It reads your bank alerts and receipts on your device. No account, no bank login, no cloud.">
 <meta property="og:image" content="https://penny.akrot.app/img/og.jpg">
 <meta property="og:type" content="website">
@@ -235,37 +235,7 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 @media(max-width:900px){.priv .top{grid-template-columns:minmax(0,1fr);align-items:start}.switch{justify-self:start}
   .facts{grid-template-columns:minmax(0,1fr)}.facts div{padding:26px 0}.facts div+div{padding-left:0;border-left:0;border-top:1px solid var(--moss)}}
 
-/* =====================================================================
-   SCREENS — the real app, in a Windows window
-   ===================================================================== */
-.screens{padding:var(--sect) 0}
-.screens .head{display:flex;justify-content:space-between;align-items:end;gap:24px}
-.strip-nav{display:flex;gap:10px;flex:none}
-.strip-nav button{width:50px;height:50px;border-radius:50%;border:0;background:var(--fir);cursor:pointer;display:grid;place-items:center;box-shadow:inset 0 0 0 1px var(--moss);color:var(--paper)}
-.strip-nav button:hover:not(:disabled){box-shadow:inset 0 0 0 1px var(--sage)}
-.strip-nav button:disabled{opacity:.35;cursor:default}
-.strip{margin-top:clamp(40px,5vw,64px);display:flex;gap:clamp(20px,3vw,36px);overflow-x:auto;scroll-snap-type:x mandatory;--edge:max(var(--gut),calc((100vw - var(--wrap))/2));scroll-padding-inline:var(--edge);
-  padding:8px var(--edge) 12px;scrollbar-width:none}
-.strip::-webkit-scrollbar{display:none}
-.shot{flex:0 0 min(84vw,880px);scroll-snap-align:start;margin:0}
-.win{border-radius:10px;overflow:hidden;background:#1F1F1F;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 70px -20px rgba(0,0,0,.7)}
-.win .tb{height:32px;display:flex;align-items:center;gap:8px;padding:0 0 0 12px;background:#202020;color:#C8C8C8;font-size:12px;font-family:"Segoe UI",system-ui,sans-serif}
-.win .tb svg{width:14px;height:14px}
-.win .tb .ctl{margin-left:auto;display:flex}
-.win .tb .ctl span{width:44px;height:32px;display:grid;place-items:center}
-.win .tb .ctl svg{width:10px;height:10px;stroke:#C8C8C8;stroke-width:1.1;fill:none}
-.win img{width:100%;height:auto;aspect-ratio:16/9;background:var(--paper)}
-.shot figcaption{margin-top:18px;color:var(--sage);font-size:16px;max-width:38em}
-.shot figcaption b{color:var(--paper);font-weight:600}
-.dots{display:flex;gap:8px;justify-content:center;margin-top:24px}
-.dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--moss);cursor:pointer;transition:background-color .2s,width .2s}
-.dots button[aria-current=true]{background:var(--copper-hi);width:24px;border-radius:4px}
-@media(max-width:640px){.strip-nav{display:none}.win .tb{height:24px;font-size:10px}.win .tb .ctl span{width:30px;height:24px}}
 
-/* =====================================================================
-   EVERYTHING ELSE (paper)
-   ===================================================================== */
-.more{padding:var(--sect) 0 calc(var(--sect) * .6)}
 
 /* =====================================================================
    GET IT
@@ -333,99 +303,8 @@ footer{padding:64px 0 calc(40px + env(safe-area-inset-bottom));color:var(--sage)
 
 
 
-/* ---------- health playground (paper) ---------- */
-.health{padding:var(--sect) 0}
-.hgrid{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(20px,3vw,36px);align-items:stretch}
-.knobs{background:#fff;border-radius:24px;padding:clamp(22px,3vw,34px);box-shadow:0 1px 0 var(--rule),0 24px 50px -30px rgba(20,33,31,.35);display:flex;flex-direction:column;gap:22px}
-.knob-row label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:15px;color:var(--muted)}
-.knob-row label b{color:var(--ink);font-size:17px;font-weight:600;letter-spacing:-.02em}
-.knob-row input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin-top:6px;cursor:pointer;--p:50%}
-.knob-row input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--copper) var(--p),var(--sand) var(--p))}
-.knob-row input[type=range]::-moz-range-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--copper) var(--p),var(--sand) var(--p))}
-.knob-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 1.5px var(--copper),0 4px 10px rgba(20,33,31,.25);transition:transform .15s}
-.knob-row input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:0;box-shadow:0 0 0 1.5px var(--copper),0 4px 10px rgba(20,33,31,.25)}
-.knob-row input[type=range]:active::-webkit-slider-thumb{transform:scale(1.12)}
-.knob-row input[type=range]:focus-visible{outline:none}.knob-row input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--copper-hi),0 4px 10px rgba(20,33,31,.25)}
-.knob-row .kl{font-size:15px;color:var(--muted)}
-.seg{display:flex;gap:4px;padding:4px;margin-top:8px;border-radius:16px;background:var(--sand)}
-.seg button{flex:1;height:40px;border:0;border-radius:10px;background:none;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;transition:background-color .2s,color .2s,box-shadow .2s}
-.seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(20,33,31,.15)}
-.tick{display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink);cursor:pointer}
-.tick input{width:22px;height:22px;accent-color:var(--copper);cursor:pointer}
-.result{position:relative;overflow:hidden;border-radius:24px;padding:clamp(24px,3vw,36px);background:var(--ever);color:var(--paper);display:flex;flex-direction:column;gap:24px;box-shadow:0 30px 60px -28px rgba(16,32,29,.7)}
-.result::before{content:"";position:absolute;width:420px;height:420px;right:-160px;top:-180px;border-radius:50%;background:radial-gradient(closest-side,var(--tone,rgba(43,184,154,.28)),transparent);transition:background .6s;pointer-events:none}
-.rtop{position:relative;display:flex;align-items:center;gap:clamp(18px,3vw,30px)}
-.ring{position:relative;width:148px;height:148px;flex:none}
-.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
-.ring circle{fill:none;stroke-width:12;stroke-linecap:round}
-.ring .bg{stroke:var(--moss)}
-.ring .fg{stroke:var(--ring,var(--slice));transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1),stroke .4s}
-.ring .val{position:absolute;inset:0;display:grid;place-items:center;align-content:center;text-align:center}
-.ring .val b{font-size:46px;font-weight:700;letter-spacing:-.05em;line-height:1}
-.ring .val small{font-size:12px;color:var(--sage);margin-top:4px}
-.tier{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:.02em;background:rgba(255,255,255,.07)}
-.tier i{width:8px;height:8px;border-radius:50%;background:var(--ring,var(--slice))}
-.rtop h3{font-size:clamp(22px,2.2vw,28px);letter-spacing:-.03em;line-height:1.15;margin-top:12px;text-wrap:balance}
-.pills4{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 22px}
-.pills4 div{display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:baseline;font-size:15px;color:var(--sage)}
-.pills4 b{color:var(--paper);font-size:15px}
-.pills4 .pb{grid-column:1/-1;height:6px;border-radius:99px;background:var(--moss);overflow:hidden}
-.pills4 .pb i{display:block;height:100%;width:0;border-radius:inherit;background:var(--copper-hi);transition:width .8s cubic-bezier(.2,.8,.2,1)}
-.step{position:relative;padding:16px 18px;border-radius:16px;background:var(--fir);box-shadow:inset 0 0 0 1px var(--moss)}
-.step small{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--copper-hi);font-weight:700;margin-bottom:4px}
-.step p{font-size:16px;line-height:1.5}
-.hfoot{position:relative;font-size:13px;color:var(--sage);margin-top:auto}
-.hfoot a{color:var(--paper)}
-.facts3{position:relative;display:flex;flex-wrap:wrap;gap:8px}
-.facts3 span{padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.06);font-size:13px;color:var(--sage)}
-.facts3 b{color:var(--paper);font-weight:600}
-@media(max-width:900px){.hgrid{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:480px){.rtop{flex-direction:column;align-items:flex-start}.ring{width:128px;height:128px}.ring .val b{font-size:40px}.pills4{grid-template-columns:minmax(0,1fr)}}
 
-/* ---------- bento (replaces the flat list) ---------- */
-.bento{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.tile{position:relative;overflow:hidden;background:#fff;border-radius:22px;padding:24px 24px 26px;box-shadow:0 1px 0 var(--rule),0 18px 40px -30px rgba(20,33,31,.35);
-  transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
-.tile:hover{transform:translateY(-4px);box-shadow:0 1px 0 var(--rule),0 28px 50px -28px rgba(20,33,31,.45)}
-.tile .ic{width:22px;height:22px;color:var(--copper);margin-bottom:12px}
-.tile b{display:block;font-size:17px;letter-spacing:-.02em;margin-bottom:4px}
-.tile p{color:var(--muted);font-size:15px;line-height:1.5}
-.tile.w2{grid-column:span 2}
-.tile.dark{background:var(--ever);color:var(--paper)}.tile.dark p{color:var(--sage)}.tile.dark .ic{color:var(--copper-hi)}
-.tile .viz{margin:6px -6px 18px;height:132px}
-.tile .viz svg{width:100%;height:100%;overflow:visible}
-.fc-line{fill:none;stroke:var(--slice);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:900;stroke-dashoffset:900}
-.fc-area{fill:url(#fcg);opacity:0;transition:opacity 1s .6s}
-.fc-dip{fill:var(--copper-hi);opacity:0;transition:opacity .4s 1.3s}
-.in .fc-line{animation:draw 1.6s cubic-bezier(.4,0,.2,1) .2s forwards}.in .fc-area,.in .fc-dip{opacity:1}
-@keyframes draw{to{stroke-dashoffset:0}}
-.pace{display:flex;flex-direction:column;gap:12px;margin:4px 0 18px}
-.pace div{display:grid;grid-template-columns:96px 1fr auto;gap:12px;align-items:center;font-size:15px}
-.pace span:last-child{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
-.pace .tr{position:relative;height:10px;border-radius:99px;background:var(--sand)}
-.pace .tr i{position:absolute;inset:0 auto 0 0;border-radius:inherit;background:var(--slice);width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
-.pace .tr i.warn{background:#E0A43A}.pace .tr i.over{background:var(--red)}
-.pace .tr::after{content:"";position:absolute;top:-4px;bottom:-4px;left:var(--today,70%);width:2px;border-radius:4px;background:var(--ink);opacity:.5}
-.bubble{display:inline-block;margin:2px 0 16px;padding:12px 16px;border-radius:16px 16px 16px 4px;background:var(--fir);font-size:15px;line-height:1.4;max-width:100%}
-.bubble.me{background:var(--copper);color:#fff;border-radius:16px 16px 4px 16px;margin-left:auto;display:block;width:fit-content}
-.chat{display:flex;flex-direction:column;gap:8px;margin-bottom:6px}
-@media(max-width:1000px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){.bento{grid-template-columns:minmax(0,1fr)}.tile.w2{grid-column:auto}}
 
-/* ---------- FAQ (evergreen) ---------- */
-.faq{padding:var(--sect) 0}
-.faq .sub{color:var(--sage)}
-.qa{margin-top:clamp(36px,4.5vw,56px);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(28px,4vw,56px)}
-.qa details{border-top:1px solid var(--moss)}
-.qa summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;cursor:pointer;font-size:17px;font-weight:600;letter-spacing:-.02em}
-.qa summary::-webkit-details-marker{display:none}
-.qa summary::after{content:"";flex:none;width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--moss);
-  background:linear-gradient(var(--paper),var(--paper)) center/12px 1.5px no-repeat,linear-gradient(var(--paper),var(--paper)) center/1.5px 12px no-repeat;transition:transform .3s,box-shadow .2s}
-.qa details[open] summary::after{transform:rotate(45deg);box-shadow:inset 0 0 0 1.5px var(--copper-hi)}
-.qa summary:hover::after{box-shadow:inset 0 0 0 1.5px var(--sage)}
-.qa p{padding:0 44px 24px 0;color:var(--sage);font-size:16px;line-height:1.6}
-.qa p a{color:var(--paper)}
-@media(max-width:820px){.qa{grid-template-columns:minmax(0,1fr)}}
 
 /* ---------- get it: a torn receipt edge into the copper band ---------- */
 .get{position:relative}
@@ -502,57 +381,9 @@ footer .social a{width:38px;height:38px;border-radius:50%;display:grid;place-ite
 footer .social a:hover{color:var(--paper);box-shadow:inset 0 0 0 1px var(--sage)}
 footer .social svg{width:18px;height:18px}
 
-/* =====================================================================
-   1.2 — proof strip, how it works, what's new showcase, comparison, Ask Penny in 13 languages
-   ===================================================================== */
-.proof{padding:0 0 clamp(64px,8vw,104px)}
-.proof ul{list-style:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--moss)}
-.proof li{padding:26px 20px 0 0}
-.proof li+li{padding-left:20px;border-left:1px solid var(--moss)}
-.proof b{display:block;font-size:clamp(28px,2.6vw,38px);font-weight:700;letter-spacing:-.045em;line-height:1.1;white-space:nowrap}
-.proof b em{font-style:normal;color:var(--copper-hi)}
-.proof span{display:block;margin-top:8px;color:var(--sage);font-size:15px;line-height:1.45}
-@media(max-width:1000px){.proof ul{grid-template-columns:repeat(3,minmax(0,1fr))}.proof li:nth-child(4){padding-left:0;border-left:0}.proof li:nth-child(n+4){margin-top:26px;border-top:1px solid var(--moss)}}
-@media(max-width:560px){.proof ul{grid-template-columns:repeat(2,minmax(0,1fr))}.proof li{padding:22px 14px 0 0}.proof li+li{padding-left:14px}
-  .proof li:nth-child(odd){padding-left:0;border-left:0}.proof li:nth-child(4){padding-left:14px;border-left:1px solid var(--moss)}.proof li:nth-child(n+3){margin-top:22px;border-top:1px solid var(--moss)}}
 
-.how{padding:var(--sect) 0 0}
-.steps{list-style:none;margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
-.steps li{position:relative;background:#fff;border-radius:22px;padding:28px 26px 26px;box-shadow:0 1px 0 var(--rule),0 18px 40px -30px rgba(20,33,31,.35);display:flex;flex-direction:column}
-.steps .n{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--ever);color:var(--paper);font-weight:700;font-size:15px;margin-bottom:20px}
-.steps li:not(:last-child)::after{content:"";position:absolute;top:45px;right:-14px;width:14px;height:2px;background:var(--rule)}
-.steps b{font-size:20px;letter-spacing:-.025em;line-height:1.25}
-.steps p{margin-top:8px;color:var(--muted);font-size:15px;line-height:1.55}
-.steps .chip{margin-top:auto;padding-top:22px}
-.chip>span{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--rule);font-size:15px;color:var(--muted)}
-.chip>span .ic{width:18px;height:18px;color:var(--copper)}
-.chip>span b{margin-left:auto;font-size:15px;color:var(--ink);letter-spacing:-.01em}
-.chip>span i{font-style:normal;padding:4px 10px;border-radius:999px;background:var(--ever);color:var(--paper);font-size:12px;font-weight:600}
-@media(max-width:900px){.steps{grid-template-columns:minmax(0,1fr)}.steps li:not(:last-child)::after{top:auto;bottom:-14px;right:auto;left:43px;width:2px;height:14px}}
-
-/* ---------- what's new: tabs that play by themselves until you take over ---------- */
-.whatsnew{padding:var(--sect) 0;position:relative;overflow:hidden}
-.whatsnew::before{content:"";position:absolute;width:760px;height:760px;left:-280px;top:10%;border-radius:50%;background:radial-gradient(closest-side,rgba(43,184,154,.10),transparent);pointer-events:none}
-.whatsnew .sub{color:var(--sage)}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--copper-hi)}
 .paperband .eyebrow{color:var(--copper)}
-.show{position:relative;margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:minmax(240px,320px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
-.tabs{display:flex;flex-direction:column;gap:4px}
-.tabs button{position:relative;overflow:hidden;display:grid;grid-template-columns:22px 1fr;gap:4px 14px;align-items:center;text-align:left;padding:16px 18px;border:0;border-radius:16px;background:none;cursor:pointer;color:var(--sage);transition:background-color .25s,color .25s}
-.tabs button:hover{color:var(--paper)}
-.tabs button .ic{width:20px;height:20px}
-.tabs button b{font-size:17px;font-weight:600;letter-spacing:-.02em}
-.tabs button small{grid-column:2;font-size:13px;line-height:1.4;display:none}
-.tabs button[aria-selected=true]{background:var(--fir);color:var(--paper);box-shadow:inset 0 0 0 1px var(--moss)}
-.tabs button[aria-selected=true] .ic{color:var(--copper-hi)}
-.tabs button[aria-selected=true] small{display:block;color:var(--sage)}
-.tabs button::after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:2px;border-radius:4px;background:var(--copper-hi);transform:scaleX(var(--prog,0));transform-origin:0 50%;opacity:0}
-.tabs button[aria-selected=true]::after{opacity:1}
-.stage{position:relative;min-height:470px}
-.panel{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,3.5vw,48px);align-items:center}
-.panel[hidden]{display:none}
-.panel.on{animation:panelIn .55s cubic-bezier(.2,.8,.2,1) both}
-@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .panel h3{font-size:clamp(26px,2.5vw,34px);letter-spacing:-.035em;line-height:1.1;text-wrap:balance}
 .panel>div>p{margin-top:14px;color:var(--sage);font-size:17px;line-height:1.6}
 .ticks{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:10px}
@@ -599,34 +430,99 @@ footer .social svg{width:18px;height:18px}
 .legend i{width:10px;height:10px;border-radius:4px}
 .alert{margin-top:14px;display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:#FBE3DF;color:#7A2A21;font-size:15px;line-height:1.45}
 .alert .ic{width:18px;height:18px;margin-top:1px}
-/* split */
-.who{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-weight:700;font-size:13px;color:#fff;flex:none}
-.mini{border:0;cursor:pointer;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:600;background:var(--ever);color:var(--paper);transition:background-color .2s}
-.mini:hover{background:#000}
-.mini.done{background:#D9F1EA;color:#0F6E5C;cursor:default}
 @media(max-width:1060px){.show{grid-template-columns:minmax(0,1fr)}.tabs{flex-direction:row;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1*var(--gut));padding:0 var(--gut)}.tabs::-webkit-scrollbar{display:none}
   .tabs button{flex:none;grid-template-columns:20px auto;padding:12px 16px}.tabs button small{display:none!important}.stage{min-height:0}}
 @media(max-width:820px){.panel{grid-template-columns:minmax(0,1fr)}}
 
-/* ---------- comparison ---------- */
-.vs{margin-top:clamp(56px,7vw,88px)}
-.vs h3{font-size:clamp(22px,2vw,26px);letter-spacing:-.03em;margin-bottom:20px}
-.vs table{width:100%;border-collapse:collapse;font-size:15px}
-.vs th,.vs td{padding:16px 18px;text-align:left;border-top:1px solid var(--moss);vertical-align:top}
-.vs thead th{border-top:0;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--sage);padding-top:0}
-.vs tbody th{font-weight:600;color:var(--paper);width:30%}
-.vs td{color:var(--sage)}
-.vs td.p{color:var(--paper);font-weight:600;background:rgba(201,99,47,.08)}
-.vs thead th.p{color:var(--copper-hi);background:rgba(201,99,47,.08);border-radius:16px 16px 0 0;padding-top:14px}
-.vs tbody tr:last-child td.p{border-radius:0 0 16px 16px}
-.vs td.p::before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:50%;background:var(--slice);vertical-align:2px}
-.vs .note{margin-top:14px;font-size:13px;color:#71837F}
-@media(max-width:640px){.vs th,.vs td{padding:13px 10px;font-size:15px}.vs tbody th{width:34%}.vs td.p::before{display:none}}
 
-/* Ask Penny, in every language it speaks */
-.chat .lang{align-self:flex-start;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--copper-hi);margin-bottom:2px}
-.chat.swap .bubble{animation:ink .5s cubic-bezier(.2,.8,.2,1) both}.chat.swap .bubble+.bubble{animation-delay:.35s}
-.chat{min-height:150px}
+
+/* =====================================================================
+   A DAY WITH PENNY — the sky follows the hour, a clock shows where you are
+   ===================================================================== */
+body{background:transparent}
+html{background:var(--ever)}
+.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--ever)}
+.sky i{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
+.sky .dawn{background:radial-gradient(80% 60% at 72% 0,rgba(127,209,176,.24),transparent 70%),radial-gradient(55% 45% at 10% 100%,rgba(238,154,92,.14),transparent 70%)}
+.sky .day{background:radial-gradient(90% 70% at 50% 0,rgba(43,184,154,.30),transparent 72%),radial-gradient(60% 50% at 92% 60%,rgba(246,192,143,.14),transparent 70%)}
+.sky .sunset{background:radial-gradient(100% 65% at 50% 105%,rgba(201,99,47,.55),transparent 70%),radial-gradient(70% 50% at 85% 25%,rgba(238,154,92,.20),transparent 70%)}
+.sky .dusk{background:radial-gradient(80% 55% at 15% 105%,rgba(181,83,42,.34),transparent 70%),radial-gradient(60% 40% at 85% 0,rgba(43,184,154,.10),transparent 70%)}
+.sky .night,.sky .midnight{background-color:#0B1715;
+  background-image:radial-gradient(1.3px 1.3px at 22px 34px,rgba(251,246,239,.75),transparent 99%),radial-gradient(1px 1px at 120px 80px,rgba(251,246,239,.5),transparent 99%),
+    radial-gradient(1.6px 1.6px at 170px 160px,rgba(251,246,239,.7),transparent 99%),radial-gradient(1px 1px at 60px 190px,rgba(251,246,239,.45),transparent 99%),
+    radial-gradient(1.2px 1.2px at 210px 30px,rgba(238,154,92,.6),transparent 99%);background-size:240px 240px}
+.sky .midnight{background-image:radial-gradient(80% 50% at 50% 100%,rgba(127,209,176,.16),transparent 70%),radial-gradient(1.3px 1.3px at 22px 34px,rgba(251,246,239,.6),transparent 99%),radial-gradient(1px 1px at 120px 80px,rgba(251,246,239,.4),transparent 99%),radial-gradient(1.6px 1.6px at 170px 160px,rgba(251,246,239,.55),transparent 99%);background-size:100% 100%,240px 240px,240px 240px,240px 240px}
+html:not([data-sky]) .sky .dawn,html[data-sky=dawn] .sky .dawn,html[data-sky=day] .sky .day,html[data-sky=sunset] .sky .sunset,html[data-sky=dusk] .sky .dusk,html[data-sky=night] .sky .night,html[data-sky=midnight] .sky .midnight{opacity:1}
+.hero::before{display:none}
+
+/* the hour on each part of the day */
+.hr b{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:700;letter-spacing:0}
+.eyebrow.hr{gap:10px}
+.eyebrow.hr b{padding:3px 8px;border-radius:8px;background:rgba(238,154,92,.14);color:var(--copper-hi)}
+.paperband .eyebrow.hr b{background:rgba(201,99,47,.10);color:var(--copper-dk)}
+.try{display:flex;align-items:center;gap:12px;margin-top:clamp(36px,4.5vw,56px);color:var(--sage);font-size:16px}
+.try .hr b{display:inline-block;padding:3px 8px;border-radius:8px;background:rgba(238,154,92,.14);color:var(--copper-hi);font-size:13px}
+.try+.appwin{margin-top:16px}
+
+/* 18:00 and 20:00: a sentence beside the live card */
+.hourly{padding:var(--sect) 0}
+.duo{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:center}
+.duo h2{max-width:13ch}
+.duo .sub{color:var(--sage)}
+.duo.flip>:first-child{order:2}
+.duo .card{width:100%;max-width:560px;justify-self:end}
+.duo.flip .card{justify-self:start}
+@media(max-width:900px){.duo{grid-template-columns:minmax(0,1fr)}.duo.flip>:first-child{order:0}.duo .card,.duo.flip .card{justify-self:stretch;max-width:none}}
+.ticks{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:10px}
+.ticks li{display:flex;gap:10px;font-size:16px;line-height:1.45}
+.ticks li::before{content:"";flex:none;width:18px;height:18px;margin-top:2px;border-radius:50%;
+  background:var(--slice) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.3l2.6 2.6L13 6.6' fill='none' stroke='%2310201D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat}
+.also{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:28px}
+.also a{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:var(--copper-hi);font-weight:600;text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 calc(100% - 10px)/0 1.5px no-repeat;transition:background-size .3s}
+.also a:hover{background-size:calc(100% - 22px) 1.5px}
+.also .ic{width:16px;height:16px}
+.priv .also{margin-top:36px}
+.facts .hr b{display:inline-block;margin-right:10px;padding:1px 7px;border-radius:7px;background:rgba(238,154,92,.14);color:var(--copper-hi);font-size:13px;vertical-align:3px}
+
+/* 22:00: privacy mode blurs the numbers, like reading over your own shoulder */
+.num{transition:filter .6s ease}
+body.blurred .num{filter:blur(9px)}
+body.blurred .appwin .num,body.blurred .card .num{filter:blur(7px)}
+
+/* 00:00 */
+.get .eyebrow.hr{color:#fff}.get .eyebrow.hr b{background:rgba(255,255,255,.18);color:#fff}
+.get .btns{align-items:stretch}.get .msbadge{justify-content:center}.get .soon{justify-content:center}
+.shareline{margin-top:20px;font-size:16px;color:rgba(255,255,255,.9)}
+.linkbtn{border:0;background:none;padding:0;color:#fff;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;min-height:44px}
+.linkbtn:hover{text-decoration-thickness:3px}
+
+/* the clock: bottom left; on phones a bar with the Download button */
+.dock{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;display:flex;align-items:center;gap:8px;padding:5px;border-radius:999px;
+  background:rgba(16,32,29,.88);backdrop-filter:saturate(1.3) blur(16px);-webkit-backdrop-filter:saturate(1.3) blur(16px);
+  box-shadow:inset 0 0 0 1px rgba(169,184,180,.18),0 18px 40px -20px rgba(0,0,0,.7);
+  transform:translateY(calc(100% + 24px));opacity:0;visibility:hidden;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s,visibility 0s .45s}
+.dock.on{transform:none;opacity:1;visibility:visible;transition:transform .45s cubic-bezier(.2,.8,.2,1),opacity .3s}
+.dock .btn{display:none}
+.clock{position:relative}
+.clock summary{list-style:none;display:flex;align-items:center;gap:10px;height:44px;padding:0 18px 0 10px;border-radius:999px;cursor:pointer;font-size:15px;color:var(--sage);white-space:nowrap;transition:background-color .2s}
+.clock summary::-webkit-details-marker{display:none}
+.clock summary:hover{background:rgba(169,184,180,.08)}
+.clock summary b{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--paper);font-size:15px}
+.dial{position:relative;width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--copper-hi)}
+.dial i{position:absolute;left:50%;top:4px;width:2px;height:8px;margin-left:-1px;border-radius:2px;background:var(--copper-hi);transform-origin:50% 8px;transform:rotate(var(--deg,210deg));transition:transform .6s cubic-bezier(.3,1.3,.5,1)}
+.clock nav{position:absolute;bottom:calc(100% + 12px);left:-5px;min-width:250px;padding:8px;border-radius:22px;background:rgba(16,32,29,.97);box-shadow:inset 0 0 0 1px var(--moss),0 30px 60px -20px rgba(0,0,0,.75);display:grid;gap:2px}
+.clock nav a{display:flex;align-items:center;gap:14px;min-height:44px;padding:0 14px;border-radius:14px;text-decoration:none;color:var(--sage);font-size:15px;transition:background-color .2s,color .2s}
+.clock nav a b{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--paper);font-size:14px}
+.clock nav a:hover,.clock nav a[aria-current=true]{background:rgba(169,184,180,.08);color:var(--paper)}
+.clock nav a[aria-current=true] b{color:var(--copper-hi)}
+@media(max-width:900px){
+  .dock{left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));justify-content:space-between}
+  .dock .btn{display:inline-flex;height:44px}
+  .clock nav{min-width:min(280px,calc(100vw - 24px))}
+  footer{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){.sky i,.dial i,.num{transition:none}}
+
 </style>
 </head>
 <body>
@@ -685,25 +581,29 @@ footer .social svg{width:18px;height:18px}
 
 <!--header:home-->
 
+<!-- A day with Penny: the page plays one day, 07:00 to 00:00. The sky behind it follows the hour (Penny's palette is the sky). -->
+<div class="sky" aria-hidden="true"><i class="dawn"></i><i class="day"></i><i class="sunset"></i><i class="dusk"></i><i class="night"></i><i class="midnight"></i></div>
+
 <main id="main">
-<!-- ===================== hero ===================== -->
-<section class="hero" aria-labelledby="h1">
+<!-- ===================== 07:00 wake up ===================== -->
+<section class="hero hour" id="morning" data-hour="07:00" data-label="Wake up" data-sky="dawn" aria-labelledby="h1">
   <div class="wrap">
     <div class="h-top">
       <div>
         <a class="news" href="changelog.html"><b>NEW</b>Penny 1.1: Windows Hello and fingerprint unlock<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a>
-        <h1 id="h1"><span class="l1">Know what's <em>safe to spend.</em></span> <span class="l2">Nobody watching.</span></h1>
+        <h1 id="h1"><span class="l1">Spend <em>freely.</em></span> <span class="l2">Nobody's watching.</span></h1>
       </div>
       <div class="h-side">
-        <p class="sub">Penny writes down your spending from bank alerts, receipts and plain words, plans every paycheck, and gives you one number to live by. It all stays on your device: no account, no bank login, no cloud.</p>
+        <p class="sub">Know exactly what's safe to spend today. No bank login, nothing leaves your device.</p>
         <div class="cta">
           <a class="msbadge" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><img src="https://get.microsoft.com/images/en-us%20dark.svg" width="192" height="58" alt="Get it from Microsoft"></a>
-          <a class="soon" href="#newsletter"><svg aria-hidden="true"><use href="#android"/></svg>Android is coming soon <i>Get told first</i></a>
+          <a class="soon" href="android-test.html"><svg aria-hidden="true"><use href="#android"/></svg>Android <i>Join the test</i></a>
         </div>
-        <p class="fine">Free during the beta. Made by <a href="https://akrot.app">Akrot Studio</a>.</p>
+        <p class="fine">Free during the beta. No card, no catch, no account. Made by <a href="https://akrot.app">Akrot Studio</a>.</p>
       </div>
     </div>
 
+    <p class="try hour" id="coffee" data-hour="08:30" data-label="Coffee" data-sky="dawn"><span class="hr"><b>08:30</b></span>Bought a coffee? Just say so. Type it in the window and watch today's number drop.</p>
     <div class="appwin" role="region" aria-label="Try Penny: type a purchase and watch it land">
       <div class="aw-bar"><svg aria-hidden="true"><use href="#mark"/></svg>Penny<span class="aw-saved"><i id="slot" class="slot" aria-hidden="true"></i>Saved on this device</span><span class="ctl" aria-hidden="true"><span><svg viewBox="0 0 10 10"><path d="M0 5h10"/></svg></span><span><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9"/></svg></span><span><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0 0 10"/></svg></span></span></div>
       <div class="aw-body">
@@ -749,42 +649,12 @@ footer .social svg{width:18px;height:18px}
   </div>
 </section>
 
-<!-- ===================== proof ===================== -->
-<section class="proof" aria-label="Penny in numbers">
-  <div class="wrap">
-    <ul class="rv">
-      <li><b class="num">0</b><span>servers holding your money data</span></li>
-      <li><b>AES<em>‑</em>256</b><span>encryption, sealed by your device</span></li>
-      <li><b class="num">13</b><span>languages, from English to Arabic</span></li>
-      <li><b>~40</b><span>currencies, converted for you</span></li>
-      <li><b>1 tap</b><span>to add a purchase from a bank alert</span></li>
-      <li><b class="num">$0</b><span>during the beta, with no ads</span></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ===================== how it works ===================== -->
+<!-- ===================== 12:30 lunch: written down for you ===================== -->
 <div class="paperband">
-<section class="how" id="how" aria-labelledby="h2how">
+<section class="auto hour" id="lunch" data-hour="12:30" data-label="Lunch" data-sky="day" aria-labelledby="h2auto">
   <div class="wrap">
-    <div class="shead rv"><div><span class="eyebrow">How it works</span><h2 id="h2how">Three steps. Then it runs itself.</h2></div>
-    <p class="sub">Penny does the bookkeeping, so the only thing left for you is the decisions.</p></div>
-    <ol class="steps">
-      <li class="rv"><span class="n">1</span><b>It writes itself down</b><p>Bank alerts, receipt photos, statements or a quick “coffee 4.50”. Penny fills in the payee, the category and the card.</p>
-        <div class="chip"><span><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>Uber Eats <b class="num">$23.40</b><i>Add</i></span></div></li>
-      <li class="rv d1"><span class="n">2</span><b>It makes sense of it</b><p>Subscriptions, transfers, refunds and double charges are sorted out, and rules learn your payees as you go.</p>
-        <div class="chip"><span><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg>Dining · 14 visits <b class="num">$291.66</b></span></div></li>
-      <li class="rv d2"><span class="n">3</span><b>It tells you what to do</b><p>What's safe to spend today, how to split each paycheck, and the day money gets tight, before it happens.</p>
-        <div class="chip"><span><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg>Safe to spend today <b class="num">$42.10</b></span></div></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ===================== written down for you ===================== -->
-<section class="auto" id="auto" aria-labelledby="h2auto">
-  <div class="wrap">
-    <div class="shead rv"><h2 id="h2auto">Your spending, written down for you.</h2>
-    <p class="sub">Your bank already tells you about every purchase, and the shop hands you a receipt. Penny turns both into transactions you confirm with one tap. Or just type “coffee 4.50”.</p></div>
+    <div class="shead"><div><span class="eyebrow hr"><b>12:30</b>Lunch</span><h2 id="h2auto">Your bank already told you. Penny listened.</h2></div>
+    <p class="sub">Bank alerts and receipt photos become transactions you confirm with one tap. They're read on your phone and never uploaded.</p></div>
     <div class="phones">
       <figure class="phone rv"><div class="device"><div class="pixel"><i class="key pwr"></i><i class="key vol"></i><div class="glass"><div class="scr"><div class="sb"><span>9:30</span><svg viewBox="0 0 52 14" aria-hidden="true"><path d="M1 13 13 1v12z"/><path d="M17.5 5.6a9.6 9.6 0 0 1 13 0L24 13z"/><rect x="35.6" y="2.6" width="13" height="8.8" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="37.4" y="4.4" width="7.6" height="5.2" rx="1"/><rect x="49.4" y="5.4" width="1.6" height="3.2" rx=".8"/></svg></div><i class="cam"></i><img src="img/p2-capture.webp?v=3" alt="Penny on Android: three purchases found in bank notifications, Amazon, Uber Eats and Blue Bottle Coffee, each ready to add" width="1030" height="2138" loading="lazy"><div class="nav"><i></i></div></div></div></div></div>
         <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>Bank alerts</span><b>Every purchase, from your bank's own alerts.</b> Pick your bank apps once. Penny tidies the shop's name, picks the right card and waits for your tap.</figcaption></figure>
@@ -793,36 +663,19 @@ footer .social svg{width:18px;height:18px}
       <figure class="phone rv d2"><div class="device"><div class="pixel"><i class="key pwr"></i><i class="key vol"></i><div class="glass"><div class="scr"><div class="sb"><span>9:30</span><svg viewBox="0 0 52 14" aria-hidden="true"><path d="M1 13 13 1v12z"/><path d="M17.5 5.6a9.6 9.6 0 0 1 13 0L24 13z"/><rect x="35.6" y="2.6" width="13" height="8.8" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.3"/><rect x="37.4" y="4.4" width="7.6" height="5.2" rx="1"/><rect x="49.4" y="5.4" width="1.6" height="3.2" rx=".8"/></svg></div><i class="cam"></i><img src="img/p1-overview.webp?v=3" alt="Penny on Android: the Overview with what is safe to spend today and net worth over 30 days" width="1030" height="2138" loading="lazy"><div class="nav"><i></i></div></div></div></div></div>
         <figcaption><span class="k"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg>Today</span><b>One number you can trust.</b> What's safe to spend today, after the bills still to come. On your home screen too.</figcaption></figure>
     </div>
-    <ul class="minis rv" aria-label="Also on your phone">
-      <li><svg class="ic" aria-hidden="true"><use href="#i-hand"/></svg>Swipe to delete, repeat or mark paid</li>
-      <li><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg>A nudge only on days you forget</li>
-      <li><svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg>13 languages, about 40 currencies</li>
-      <li><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Read on your phone, never uploaded</li>
-    </ul>
   </div>
 </section>
 </div>
 
-<!-- ===================== what's new in 1.2 ===================== -->
-<section class="whatsnew" id="new" aria-labelledby="h2new">
-  <div class="wrap">
-    <div class="shead rv"><div><span class="eyebrow">Plan ahead</span><h2 id="h2new">From tracking money to planning it.</h2></div>
-    <p class="sub">Penny now plans each paycheck, sees the tight days coming, catches creeping subscriptions and keeps shared costs fair. Each demo below is live: try them.</p></div>
-
-    <div class="show rv d1">
-      <div class="tabs" role="tablist" aria-label="Planning features">
-        <button role="tab" id="t-pay" aria-controls="p-pay" aria-selected="true"><svg class="ic" aria-hidden="true"><use href="#i-coins"/></svg><b>Payday plan</b><small>Every paycheck, split before you spend it.</small></button>
-        <button role="tab" id="t-cal" aria-controls="p-cal" aria-selected="false" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><b>Cash-flow calendar</b><small>The tight days, weeks ahead.</small></button>
-        <button role="tab" id="t-sub" aria-controls="p-sub" aria-selected="false" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-tv"/></svg><b>Subscription watch</b><small>Price rises and trials, caught.</small></button>
-        <button role="tab" id="t-split" aria-controls="p-split" aria-selected="false" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><b>Split a bill</b><small>Only your share counts.</small></button>
-        <button role="tab" id="t-trip" aria-controls="p-trip" aria-selected="false" tabindex="-1"><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg><b>Trip mode</b><small>Local prices, one total.</small></button>
-      </div>
-
-      <div class="stage">
-        <div class="panel on" role="tabpanel" id="p-pay" aria-labelledby="t-pay">
-          <div><h3>Payday, planned in one tap.</h3>
-            <p>When your pay lands, Penny sets aside the bills due before the next one, shares savings out to your goals, keeps a cushion and tells you what's left for each day.</p>
-            <ul class="ticks"><li>Spots your real paycheck, not a small refund</li><li>Tracks the plan until next payday</li><li>Goal autopilot says when a goal falls behind</li></ul></div>
+<!-- ===================== 18:00 payday ===================== -->
+<section class="hourly hour" id="payday" data-hour="18:00" data-label="Payday" data-sky="sunset" aria-labelledby="h2pay">
+  <div class="wrap duo">
+    <div>
+      <span class="eyebrow hr"><b>18:00</b>Payday</span>
+      <h2 id="h2pay">Payday? Already planned.</h2>
+      <p class="sub">When your pay lands, Penny sets aside the bills due before the next one, shares savings out to your goals, keeps a cushion and tells you what's left for each day.</p>
+      <ul class="ticks"><li>Spots your real paycheck, not a small refund</li><li>Tracks the plan until next payday</li><li>Goal autopilot says when a goal falls behind</li></ul>
+    </div>
           <div class="card" aria-label="Example payday plan">
             <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-briefcase"/></svg>Salary from Acme Co.</b><span>until next payday, 30 days</span></div>
             <div class="big num" id="pdPay">$3,200.00</div>
@@ -831,217 +684,80 @@ footer .social svg{width:18px;height:18px}
             <label class="pd-rate"><span>Save</span><input type="range" id="pdRate" min="0" max="30" value="15" aria-label="Share of this paycheck to save"><b id="pdRateV">15%</b></label>
             <div class="perday"><span>Everyday money</span><b class="num" id="pdDay"></b></div>
           </div>
-        </div>
+  </div>
+</section>
 
-        <div class="panel" role="tabpanel" id="p-cal" aria-labelledby="t-cal" hidden>
-          <div><h3>See the tight days before you live them.</h3>
-            <p>Your expected balance on every day ahead, from your bills, paydays and usual spending. Days that run low are marked, so you can move a payment or hold off a purchase.</p>
-            <ul class="ticks"><li>Bills and paydays on the days they land</li><li>Tap any day to see what's behind it</li><li>Only your share of split bills, in your currency</li></ul></div>
+<!-- ===================== 20:00 evening: the tight days ===================== -->
+<section class="hourly hour" id="evening" data-hour="20:00" data-label="Evening" data-sky="dusk" aria-labelledby="h2cal">
+  <div class="wrap duo flip">
+    <div>
+      <span class="eyebrow hr"><b>20:00</b>Evening</span>
+      <h2 id="h2cal">See the tight days coming.</h2>
+      <p class="sub">Your expected balance on every day ahead, from your bills, paydays and usual spending. Penny marks the days that run low weeks before you get there.</p>
+      <ul class="ticks"><li>Bills and paydays on the days they land</li><li>Subscriptions, trials and price rises caught</li><li>Only your share of split bills, in your currency</li></ul>
+      <p class="also"><a href="features.html">See every feature<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a><a href="health.html">Try the money health score<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a></p>
+    </div>
           <div class="card" aria-label="Example cash-flow calendar">
             <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg><span id="calMonth" style="font-size:inherit;color:inherit"></span></b><span>expected balance</span></div>
             <div class="cal" id="cal"></div>
             <div class="legend"><span><i style="background:rgba(43,184,154,.4)"></i>Comfortable</span><span><i style="background:rgba(224,164,58,.55)"></i>Tight</span><span><i style="background:rgba(217,87,74,.6)"></i>Short</span><span><i style="background:var(--slice);border-radius:50%"></i>Payday</span><span><i style="background:var(--copper);border-radius:50%"></i>Bill</span></div>
             <div class="alert" id="calAlert"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><span></span></div>
           </div>
-        </div>
-
-        <div class="panel" role="tabpanel" id="p-sub" aria-labelledby="t-sub" hidden>
-          <div><h3>Subscriptions, with nowhere to hide.</h3>
-            <p>Mark a bill as a subscription to see what it costs a year. Penny flags price rises, reminds you before a free trial turns paid, and counts what you've saved by cancelling.</p>
-            <ul class="ticks"><li>Yearly cost at a glance</li><li>A heads-up before trials end</li><li>Cancel with Undo, not a lecture</li></ul></div>
-          <div class="card" aria-label="Example subscriptions">
-            <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-tv"/></svg>Subscriptions</b><span>4 active</span></div>
-            <div class="lbl">A year of subscriptions</div><div class="big num">$587.52</div>
-            <div style="margin-top:16px">
-              <div class="row"><span class="dot" style="background:#E50914"></span><span class="grow">Netflix<small>$17.99 a month · was $15.49</small></span><span class="tag up">Up $2.50</span><span class="v num">$215.88<small>a year</small></span></div>
-              <div class="row"><span class="dot" style="background:#1DB954"></span><span class="grow">Spotify<small>$11.99 a month</small></span><span class="v num">$143.88<small>a year</small></span></div>
-              <div class="row"><span class="dot" style="background:#E0A43A"></span><span class="grow">FitClub<small>Free trial, then $14.99 a month</small></span><span class="tag warn">Ends in 3 days</span><span class="v num">$179.88<small>a year</small></span></div>
-              <div class="row"><span class="dot" style="background:#5B6664"></span><span class="grow">Cloud storage<small>$3.99 a month</small></span><span class="v num">$47.88<small>a year</small></span></div>
-              <div class="row"><span class="dot" style="background:var(--slice)"></span><span class="grow">Saved since you cancelled Hulu<small>since March</small></span><span class="tag ok">Saved</span><span class="v num">$143.92</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="panel" role="tabpanel" id="p-split" aria-labelledby="t-split" hidden>
-          <div><h3>Split the bill. Keep the friendship.</h3>
-            <p>Pay for dinner, split it, and Penny counts only your share as spending. It remembers who still owes what, drafts a friendly reminder, and files the repayment so it isn't mistaken for income.</p>
-            <ul class="ticks"><li>Even or custom splits</li><li>One list of who owes you</li><li>Repayments never inflate your income</li></ul></div>
-          <div class="card" aria-label="Example split bill">
-            <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg>Dinner at Nopa</b><span>split 3 ways</span></div>
-            <div class="row" style="border-top:0;padding-top:0"><span class="grow"><span class="lbl">You paid</span><div class="big num">$90.00</div></span><span class="v"><span class="lbl">Counts as your spending</span><div class="num" style="font-size:24px;font-weight:700;letter-spacing:-.04em">$30.00</div></span></div>
-            <div class="row"><span class="who" style="background:var(--copper)">You</span><span class="grow">Your share<small>Dining</small></span><span class="v num">$30.00</span></div>
-            <div class="row"><span class="who" style="background:#3E7CB1">SM</span><span class="grow">Sam<small id="samNote">Owes you</small></span><button class="mini" type="button" id="samBtn">Mark repaid</button><span class="v num">$30.00</span></div>
-            <div class="row"><span class="who" style="background:#8E5BB5">AL</span><span class="grow">Alex<small>Paid you back Tuesday</small></span><button class="mini done" type="button" disabled>Repaid</button><span class="v num">$30.00</span></div>
-            <div class="perday"><span>Still owed to you</span><b class="num" id="owed">$30.00</b></div>
-          </div>
-        </div>
-
-        <div class="panel" role="tabpanel" id="p-trip" aria-labelledby="t-trip" hidden>
-          <div><h3>Travel in their currency. Come home to one number.</h3>
-            <p>Turn on trip mode and everything you add is tagged to the trip. Type prices in euros, yen or pesos; Penny converts them and shows what the whole trip cost.</p>
-            <ul class="ticks"><li>Amounts in the local currency</li><li>Your share of shared meals</li><li>A clean total, per day and overall</li></ul></div>
-          <div class="card" aria-label="Example trip">
-            <div class="ch"><b><svg class="ic" aria-hidden="true"><use href="#i-plane"/></svg>Lisbon · 5 days</b><span>€1 = $1.08</span></div>
-            <div class="row" style="border-top:0;padding-top:0"><span class="grow"><span class="lbl">Trip total</span><div class="big num">$489.67</div></span><span class="v"><span class="lbl">Per day</span><div class="num" style="font-size:24px;font-weight:700;letter-spacing:-.04em">$97.93</div></span></div>
-            <div class="row"><span class="grow">Hotel in Chiado<small>4 nights</small></span><span class="v num">€420.00<small>$453.60</small></span></div>
-            <div class="row"><span class="grow">Dinner in Alfama<small>Your share of €48.00</small></span><span class="v num">€24.00<small>$25.92</small></span></div>
-            <div class="row"><span class="grow">Pastéis de nata<small>Manteigaria</small></span><span class="v num">€6.40<small>$6.91</small></span></div>
-            <div class="row"><span class="grow">Tram 28<small>Transport</small></span><span class="v num">€3.00<small>$3.24</small></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- ===================== health score playground ===================== -->
-<div class="paperband">
-<section class="health" id="health" aria-labelledby="h2h">
+<!-- ===================== 22:00 lights off: privacy ===================== -->
+<section class="priv hour" id="privacy" data-hour="22:00" data-label="Lights off" data-sky="night" aria-labelledby="h2b">
   <div class="wrap">
-    <div class="shead rv"><h2 id="h2h">A health score that's honest with you.</h2>
-    <p class="sub">Every benchmark is checked against the latest household-finance research. In the app, Penny saves your score each month so you can watch it climb. Move the sliders: this is the same model, running in your browser. Nothing you set here leaves the page.</p></div>
-
-    <div class="hgrid">
-      <form class="knobs rv d1" id="knobs" onsubmit="return false" aria-label="Your numbers">
-        <div class="knob-row"><label for="k_inc">Take-home pay a month <b class="num" id="v_inc"></b></label><input type="range" id="k_inc" min="1000" max="12000" step="100" value="4000"></div>
-        <div class="knob-row"><label for="k_spend">Spending a month <b class="num" id="v_spend"></b></label><input type="range" id="k_spend" min="500" max="12000" step="100" value="3500"></div>
-        <div class="knob-row"><label for="k_cash">Cash you can reach <b class="num" id="v_cash"></b></label><input type="range" id="k_cash" min="0" max="40000" step="250" value="3000"></div>
-        <div class="knob-row"><label for="k_debt">Card and loan debt <b class="num" id="v_debt"></b></label><input type="range" id="k_debt" min="0" max="30000" step="250" value="2500"></div>
-        <div class="knob-row"><div class="kl" id="payLbl">How steady is your pay?</div>
-          <div class="seg" role="group" aria-labelledby="payLbl"><button type="button" data-pay="steady" aria-pressed="true">Steady</button><button type="button" data-pay="varies" aria-pressed="false">Varies</button><button type="button" data-pay="irregular" aria-pressed="false">Irregular</button></div></div>
-        <label class="tick"><input type="checkbox" id="k_bud" checked>I plan my spending with budgets</label>
-      </form>
-
-      <div class="result rv d2" aria-live="polite">
-        <div class="rtop">
-          <div class="ring"><svg viewBox="0 0 148 148" aria-hidden="true"><circle class="bg" cx="74" cy="74" r="62"/><circle class="fg" id="ringFg" cx="74" cy="74" r="62" stroke-dasharray="389.6" stroke-dashoffset="389.6"/></svg>
-            <div class="val"><b class="num" id="score">–</b><small>out of 100</small></div></div>
-          <div><span class="tier" id="tier"><i></i><span></span></span><h3 id="verdict"></h3></div>
-        </div>
-        <div class="pills4" id="pillars"></div>
-        <div class="facts3" id="hfacts"></div>
-        <div class="step"><small>Your next step</small><p id="nextStep"></p></div>
-        <p class="hfoot">Penny Research model, edition 2026.10. 80 and above is healthy, 40 to 79 is coping, below 40 is vulnerable. Guidance, not financial advice.</p>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<!-- ===================== privacy ===================== -->
-<section class="priv" id="privacy" aria-labelledby="h2b">
-  <div class="wrap">
-    <div class="top rv">
+    <div class="top">
       <div>
-        <span class="eyebrow">Privacy</span>
-        <h2 id="h2b">Nobody sees your money. Not even us.</h2>
-        <p class="sub">Penny never asks for your bank password and has no servers to send your data to. Privacy mode hides every number at once. Try it on this page.</p>
+        <span class="eyebrow hr"><b>22:00</b>Lights off</span>
+        <h2 id="h2b">Nobody watching. Not even us.</h2>
+        <p class="sub">No bank login, no account, no cloud. It all stays on your device. The lights just went off and every number on this page blurred. Switch it back if you like.</p>
       </div>
       <button class="switch" id="privSwitch" role="switch" aria-checked="false" type="button">
         <span class="track"><span class="knob"><svg class="ic on" aria-hidden="true"><use href="#i-eye"/></svg><svg class="ic off" aria-hidden="true"><use href="#i-eyeoff"/></svg></span></span>
-        <span><b>Privacy mode</b><small id="privState">Numbers are showing</small></span>
+        <span><b>Privacy mode</b><small id="privState">Numbers showing</small></span>
       </button>
     </div>
-    <div class="facts rv d1">
+    <div class="facts">
       <div><svg class="ic" aria-hidden="true"><use href="#i-bank"/></svg><b>No bank login</b><p>Penny reads the files you download and the alerts your bank already sends you. It never connects to your bank.</p></div>
-      <div><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><b>Encrypted on your device</b><p>AES-256, sealed by Windows or by your phone's secure hardware. Add a passcode and a recovery key for a second lock, and unlock with Windows Hello or your fingerprint.</p></div>
+      <div id="locked" class="hour" data-hour="23:00" data-label="Locked" data-sky="night"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg><b><span class="hr"><b>23:00</b></span>Locked tight</b><p>AES-256 encryption, sealed by Windows or your phone's secure hardware. Unlock with Windows Hello or your fingerprint.</p></div>
       <div><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><b>Backed up for you</b><p>Verified backups every day and before big changes, so a bad import is one click to undo.</p></div>
     </div>
-    <div class="vs rv">
-      <h3>How Penny is different</h3>
-      <table>
-        <thead><tr><th scope="col"><span class="sr">Question</span></th><th scope="col" class="p">Penny</th><th scope="col">Most budgeting apps</th></tr></thead>
-        <tbody>
-          <tr><th scope="row">Your bank login</th><td class="p">Never asked for</td><td>Shared with a data company to link your bank</td></tr>
-          <tr><th scope="row">Where your data lives</th><td class="p">On your device, encrypted</td><td>On the company's servers</td></tr>
-          <tr><th scope="row">Account to sign up</th><td class="p">None</td><td>Email and password</td></tr>
-          <tr><th scope="row">Without internet</th><td class="p">Everything works</td><td>Mostly stops</td></tr>
-          <tr><th scope="row">Ads and data deals</th><td class="p">None</td><td>Common in free apps</td></tr>
-        </tbody>
-      </table>
-      <p class="note">A general comparison with bank-linked budgeting apps, not any one product.</p>
-    </div>
+    <p class="also"><a href="security.html">How Penny compares with bank-linked apps<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a></p>
   </div>
 </section>
 
-<!-- ===================== the app ===================== -->
-<section class="screens" id="screens" aria-labelledby="h2c">
-  <div class="wrap head rv">
-    <h2 id="h2c">Calm on the surface. Thorough underneath.</h2>
-    <div class="strip-nav"><button type="button" id="prevShot" aria-label="Previous screen"><svg class="ic"><use href="#i-prev"/></svg></button><button type="button" id="nextShot" aria-label="Next screen"><svg class="ic"><use href="#i-next"/></svg></button></div>
-  </div>
-  <div class="strip" id="strip" tabindex="0" aria-label="Screens from Penny, scroll sideways"></div>
-  <div class="dots" id="dots" aria-label="Choose a screen"></div>
-</section>
-
-<!-- ===================== everything else ===================== -->
-<div class="paperband">
-<section class="more" aria-labelledby="h2d">
+<!-- ===================== 00:00 tomorrow ===================== -->
+<section class="get hour" id="get" data-hour="00:00" data-label="Tomorrow" data-sky="midnight" aria-labelledby="h2f">
   <div class="wrap">
-    <div class="shead rv"><h2 id="h2d">Everything else, done properly.</h2><p class="sub">The tools a budget needs, on your PC and your phone, without the clutter. <a class="more-link" href="features.html">See every feature<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a></p></div>
-    <div class="bento">
-      <div class="tile w2 dark rv" id="fcTile"><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg><b>The next 60 days, forecast</b>
-        <div class="viz" aria-hidden="true"><svg viewBox="0 0 520 132" preserveAspectRatio="none"><defs><linearGradient id="fcg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2BB89A" stop-opacity=".35"/><stop offset="1" stop-color="#2BB89A" stop-opacity="0"/></linearGradient></defs>
-          <path class="fc-area" d="M4 52 C60 54 90 58 120 60 S150 104 170 106 S196 30 214 30 C260 32 300 40 340 44 S372 78 388 80 S410 26 430 24 C470 26 500 30 516 32 L516 132 L4 132Z"/>
-          <path class="fc-line" d="M4 52 C60 54 90 58 120 60 S150 104 170 106 S196 30 214 30 C260 32 300 40 340 44 S372 78 388 80 S410 26 430 24 C470 26 500 30 516 32"/>
-          <circle class="fc-dip" cx="170" cy="106" r="7"/></svg></div>
-        <p>Your balance ahead of time, with the low point marked before it happens.</p></div>
-      <div class="tile w2 rv d1" id="paceTile"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg><b>Budgets that warn early</b>
-        <div class="pace" aria-hidden="true">
-          <div><span>Groceries</span><span class="tr"><i data-w="58"></i></span><span>$261</span></div>
-          <div><span>Dining</span><span class="tr"><i class="warn" data-w="86"></i></span><span>$189</span></div>
-          <div><span>Shopping</span><span class="tr"><i class="over" data-w="100"></i></span><span>$214</span></div>
-        </div>
-        <p>The line is today. Each bar is how far through its budget a category is, so you see the pace before you overspend.</p></div>
-      <div class="tile w2 dark rv"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><b>Ask Penny</b>
-        <div class="chat" id="askChat" aria-hidden="true"><span class="lang">English</span><span class="bubble me">How much did I spend on dining last month?</span><span class="bubble">$291.66 across 14 visits. That's $71.66 over your budget.</span></div>
-        <p>Plain questions in any of its 13 languages: paydays, trips, who owes you, or this month against last. Answered on your device.</p></div>
-    </div>
-  </div>
-</section>
-
-</div>
-
-<!-- ===================== FAQ ===================== -->
-<section class="faq" id="faq" aria-labelledby="h2g">
-  <div class="wrap">
-    <div class="shead rv"><h2 id="h2g">Questions, answered.</h2><p class="sub">The things people ask before they install a money app. Short answers, no fine print.</p></div>
-    <div class="qa">
-      <div>
-        <details class="rv"><summary>Does Penny connect to my bank?</summary><p>No. Penny never asks for a bank password and never logs in anywhere. On Android it can read the purchase alerts your bank app already shows you; on any device you can import a statement (CSV, OFX or QFX). Major US banks are recognized automatically.</p></details>
-        <details class="rv"><summary>Where is my data, and who can see it?</summary><p>Only on your device, encrypted with AES-256 and sealed by Windows or your phone's secure hardware. There is no account and no cloud, and Penny has no servers. Add a passcode for a second lock, with a recovery key in case you forget it.</p></details>
-        <details class="rv"><summary>Which languages and currencies does it speak?</summary><p>English, Spanish, Portuguese, French, German, Italian, Hungarian, Turkish, Russian, Indonesian, Chinese, Hindi and Arabic, with right-to-left layout for Arabic. Bank alerts, quick entry and Ask Penny understand all 13. About 40 currencies, with accounts in different currencies converted to your main one.</p></details>
-        <details class="rv"><summary>Is it really free?</summary><p>Yes, everything is free during the beta. A Pro plan will add extras later, with a free week to try it; everyday budgeting stays free, and data you already have is never removed or locked away.</p></details>
-      </div>
-      <div>
-        <details class="rv"><summary>How is the health score worked out?</summary><p>Four pillars (Spend, Save, Borrow, Plan) scored 0 to 100 with the Penny Research model, built from the latest household-finance research and tested on realistic households.</p></details>
-        <details class="rv"><summary>What if I already use Mint, YNAB or Monarch?</summary><p>Export from your old app and import the file. Penny recognizes those exports with all their accounts, keeps transfers as transfers and skips duplicates.</p></details>
-        <details class="rv"><summary>Which devices does Penny run on?</summary><p>Windows 10 and 11 today, and Android is coming to Google Play. iPhone and Mac may follow; <a href="#newsletter">get the newsletter</a> to hear first.</p></details>
-        <details class="rv"><summary>Is it safe to let Penny read notifications?</summary><p>It's off until you turn it on and pick your bank apps. Penny checks those notifications on your phone for a purchase, keeps only the ones from apps you picked (encrypted), and never sends them anywhere. Codes and balances are never kept.</p></details>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== get it ===================== -->
-<section class="get" id="get" aria-labelledby="h2f">
-  <div class="wrap">
-    <div class="rv">
-      <h2 id="h2f">Start with the next thing you buy.</h2>
-      <p class="sub">Penny is free during the beta, for Windows 10 and 11, with Android coming soon.</p>
+    <div>
+      <span class="eyebrow hr"><b>00:00</b>Tomorrow</span>
+      <h2 id="h2f">Tomorrow, it starts again. Calmly.</h2>
+      <p class="sub">Free during the beta. No card, no catch, no account. Windows today, Android soon.</p>
       <p class="ver"><i></i>Version 1.1.0</p>
+      <p class="shareline">Know someone who's always broke by the 25th? <button type="button" class="linkbtn" id="share">Send them Penny</button></p>
     </div>
-    <div class="btns rv d1">
+    <div class="btns">
       <a class="msbadge" href="https://apps.microsoft.com/detail/9NZJGZ0X9VDT"><img src="https://get.microsoft.com/images/en-us%20light.svg" width="192" height="58" alt="Get it from Microsoft"></a>
-      <a class="soon" href="#newsletter"><svg aria-hidden="true"><use href="#android"/></svg>Android is coming soon <i>Get told first</i></a>
+      <a class="soon" href="android-test.html"><svg aria-hidden="true"><use href="#android"/></svg>Android <i>Join the test</i></a>
       <a class="btn outline" href="https://discord.gg/SXYkvcmX3k"><svg aria-hidden="true"><use href="#discord"/></svg>Join the community</a>
     </div>
   </div>
 </section>
 </main>
 
-<!--footer-->
+<!-- the clock: where you are in the day, a jump menu, and on phones the Download button -->
+<div class="dock" id="dock">
+  <details class="clock" id="clock">
+    <summary><span class="dial" aria-hidden="true"><i></i></span><b id="clockT">07:00</b><span id="clockL">Wake up</span><span class="sr">: jump to another part of the day</span></summary>
+    <nav aria-label="Jump to" id="jump"></nav>
+  </details>
+  <a class="btn copper sm" href="download.html">Get Penny</a>
+</div>
 
+<!--footer-->
 <script src="penny-core.js"></script>
 <script>
 'use strict';
@@ -1095,7 +811,7 @@ footer .social svg{width:18px;height:18px}
     const meter = $('.aw-meter i'); if (meter) meter.style.width = Math.min(100, spentToday / DAY_BUDGET * 100) + '%';
   };
   const print = r => {
-    lines.push(r); drawReceipt(!reduce);
+    lines.push(r); $('#safe').dataset.live = 1; drawReceipt(!reduce);
     if (reduce) return;
     const s = $('#slot');
     s.classList.remove('busy'); void s.offsetWidth; s.classList.add('busy');
@@ -1135,110 +851,28 @@ footer .social svg{width:18px;height:18px}
     step(0);
   } else { const r = parse('coffee 4.50 at Starbucks'); if (r) { lines.push(r); drawReceipt(false); } }
 
-  /* ============ privacy mode for the whole page ============ */
+
+  /* ============ 07:00: the copper number counts up from $0 and settles ============ */
+  if (!reduce) {
+    const el = $('#safe'), target = parseFloat(el.textContent.replace(/[^0-9.]/g, '')) || 0, t0 = performance.now(), D = 900;
+    const step = t => { const k = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - k, 3); if (!el.dataset.live) el.textContent = USD.format(target * e); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
+
+  /* ============ 22:00: privacy mode blurs every number on the page ============ */
   const sw = $('#privSwitch');
-  sw.addEventListener('click', () => {
-    masked = sw.getAttribute('aria-checked') !== 'true';
-    sw.setAttribute('aria-checked', String(masked)); document.body.classList.toggle('masked', masked);
-    $('#privState').textContent = masked ? 'Every number on this page is hidden' : 'Numbers are showing';
-    drawReceipt(false); preview(); if (window.__drawHealth) window.__drawHealth(); if (window.__drawNew) window.__drawNew();
-  });
-
-  /* ============ the app, in a window ============ */
-  const SHOTS = [['01-overview', 'Overview', 'What\'s safe to spend today after upcoming bills, your net worth, budgets and goals.'],
-    ['02-insights', 'Insights', 'What needs attention first, ranked by the money at stake, with what changed and why.'],
-    ['03-transactions', 'Transactions', 'One list, day by day, with search that understands “coffee >5”.'],
-    ['05-budgets', 'Budgets', 'The ones closest to their limit at the top, so you act before you overspend.'],
-    ['08-health-report', 'Health report', 'Your numbers against research benchmarks, a short plan, and your score month by month.']]
-  const strip = $('#strip');
-  strip.innerHTML = SHOTS.map(([f, t, d], i) => `<figure class="shot" id="s${i}"><div class="win"><div class="tb"><svg aria-hidden="true"><use href="#mark"/></svg>Penny<span class="ctl" aria-hidden="true"><span><svg viewBox="0 0 10 10"><path d="M0 5h10"/></svg></span><span><svg viewBox="0 0 10 10"><rect x=".5" y=".5" width="9" height="9"/></svg></span><span><svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0 0 10"/></svg></span></span></div>
-    <img src="img/${f}.webp" alt="Penny: ${esc(t)}. ${esc(d)}" loading="${i < 2 ? 'eager' : 'lazy'}" width="1600" height="900"></div><figcaption><b>${esc(t)}.</b> ${esc(d)}</figcaption></figure>`).join('');
-  const dots = $('#dots');
-  dots.innerHTML = SHOTS.map(([, t], i) => `<button type="button" aria-label="${esc(t)}" data-i="${i}"></button>`).join('');
-  const shots = $$('.shot');
-  const go = i => { const s = shots[Math.max(0, Math.min(shots.length - 1, i))]; strip.scrollTo({ left: s.offsetLeft - strip.offsetLeft - parseFloat(getComputedStyle(strip).paddingLeft), behavior: reduce ? 'auto' : 'smooth' }); };
-  const current = () => { const x = strip.scrollLeft; let best = 0, d = Infinity; shots.forEach((s, i) => { const dd = Math.abs(s.offsetLeft - strip.offsetLeft - parseFloat(getComputedStyle(strip).paddingLeft) - x); if (dd < d) { d = dd; best = i; } }); return best; };
-  const sync = () => { const c = current(); $$('#dots button').forEach((b, i) => b.setAttribute('aria-current', String(i === c)));
-    $('#prevShot').disabled = c === 0; $('#nextShot').disabled = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 4; };
-  $('#prevShot').addEventListener('click', () => go(current() - 1));
-  $('#nextShot').addEventListener('click', () => go(current() + 1));
-  dots.addEventListener('click', e => { const b = e.target.closest('button'); if (b) go(+b.dataset.i); });
-  strip.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
-  strip.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); } });
-  addEventListener('resize', sync); sync();
-
-  /* ============ health score playground: the app's own Penny Research model ============ */
-  const H = (() => {
-    const L = C && C.Ledger;
-    if (!L || !L.pillars) return null;
-    const pd2 = n => String(n).padStart(2, '0');
-    const SWING = { steady: [0, 0, 0, 0, 0, 0], varies: [.15, -.12, .08, -.15, .12, -.08], irregular: [.45, -.35, .25, -.4, .5, -.45] };
-    /* six months of history for one household, built from the sliders, scored exactly like the Financial Health Report */
-    return o => {
-      const now = new Date(), needs = o.spend * .55, wants = o.spend - needs, tx = []; let n = 0, flow = 0;
-      for (let k = 6; k >= 1; k--) {
-        const d = new Date(now.getFullYear(), now.getMonth() - k, 1), ym = `${d.getFullYear()}-${pd2(d.getMonth() + 1)}`, inc = Math.max(0, o.income * (1 + SWING[o.pay][6 - k]));
-        tx.push({ id: 't' + n++, date: ym + '-01', amount: inc, type: 'income', accountId: 'chk', category: 'c_salary' },
-          { id: 't' + n++, date: ym + '-03', amount: needs * .6, type: 'expense', accountId: 'chk', category: 'c_housing' },
-          { id: 't' + n++, date: ym + '-12', amount: needs * .4, type: 'expense', accountId: 'chk', category: 'c_groceries' },
-          { id: 't' + n++, date: ym + '-18', amount: wants, type: 'expense', accountId: 'chk', category: 'c_dining' });
-        flow += inc - o.spend;
-      }
-      const b = o.budgets, doc = { schema: 3, settings: { currency: 'USD', cycleStart: 1 }, transactions: tx, goals: [], bills: [], reminders: [], snapshots: [],
-        categories: [{ id: 'c_salary', name: 'Salary', type: 'income' }, { id: 'c_housing', name: 'Housing', type: 'expense', bucket: 'needs', budget: b ? needs * .6 : 0 },
-          { id: 'c_groceries', name: 'Groceries', type: 'expense', bucket: 'needs', budget: b ? needs * .4 : 0 }, { id: 'c_dining', name: 'Dining', type: 'expense', bucket: 'wants', budget: b ? wants : 0 }],
-        accounts: [{ id: 'chk', name: 'Checking', type: 'checking', opening: o.cash - flow, currency: 'USD' }]
-          .concat(o.debt > 0 ? [{ id: 'cc', name: 'Card', type: 'credit', opening: -o.debt, apr: 22, minPay: Math.max(25, o.debt * .03), currency: 'USD' }] : []) };
-      const led = L.createLedger({ data: () => doc, version: () => 0, today: () => TODAY });
-      const R = led.reportData({ region: { us: true, usd: true, code: 'US', cur: 'USD' } });
-      return { R, P: L.pillars(R) };
-    };
-  })();
-  const knobs = $('#knobs');
-  if (knobs && H) {
-    const K = { income: '#k_inc', spend: '#k_spend', cash: '#k_cash', debt: '#k_debt' }, state = { pay: 'steady' };
-    const whole = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-    const m0 = n => masked ? '•••' : whole.format(n);
-    const PILL = [['spend', 'Spend'], ['save', 'Save'], ['borrow', 'Borrow'], ['plan', 'Plan']];
-    const TIERS = [[80, 'Financially healthy', '#2BB89A', 'rgba(43,184,154,.30)'], [40, 'Coping', '#EE9A5C', 'rgba(238,154,92,.28)'], [0, 'Vulnerable', '#E5736A', 'rgba(229,115,106,.30)']];
-    let raf = 0, shown = 0;
-    const animateTo = target => {
-      cancelAnimationFrame(raf); const from = shown, t0 = performance.now(), D = reduce ? 0 : 600;
-      const step = t => { const k = D ? Math.min(1, (t - t0) / D) : 1, e = 1 - Math.pow(1 - k, 3); shown = Math.round(from + (target - from) * e);
-        $('#score').textContent = masked ? '••' : shown; if (k < 1) raf = requestAnimationFrame(step); };
-      raf = requestAnimationFrame(step);
-    };
-    const nextStep = (R, P) => {
-      const pl = R.pl, res = R.res, gap = pl.expenses - pl.income;
-      if (gap > 0) return `You spend more than you earn. Trimming ${m0(gap)} a month is the first move; everything else builds on it.`;
-      if (res.starterGap > 0) return `Build a starter cushion: ${m0(res.starterGap)} more reaches six weeks of take-home pay, enough for most surprises.`;
-      if (R.debts.length) return `Pay down the card at 22%: every ${m0(1000)} cleared saves about ${m0(220)} a year in interest.`;
-      if (pl.savingsRate < .15) return `Lift your savings rate to 15%: about ${m0(pl.income * .15 - (pl.income - pl.expenses))} more a month.`;
-      if (res.months < res.target) return `Grow your cushion to ${res.target} months of essentials: ${m0(res.gap)} to go.`;
-      if (P.plan != null && P.plan < 70) return 'Plan ahead: give your money a job with budgets and a dated goal.';
-      return 'You are in great shape. Keep saving, and compare investing against any debt you take on.';
-    };
-    const draw = () => {
-      const o = { income: +$(K.income).value, spend: +$(K.spend).value, cash: +$(K.cash).value, debt: +$(K.debt).value, pay: state.pay, budgets: $('#k_bud').checked };
-      Object.entries(K).forEach(([k, sel]) => { const el = $(sel); el.style.setProperty('--p', ((el.value - el.min) / (el.max - el.min) * 100) + '%'); });
-      $('#v_inc').textContent = m0(o.income); $('#v_spend').textContent = m0(o.spend); $('#v_cash').textContent = m0(o.cash); $('#v_debt').textContent = m0(o.debt);
-      const { R, P } = H(o), total = P.total == null ? 0 : P.total, tier = TIERS.find(([min]) => total >= min);
-      const res = $('.result'); res.style.setProperty('--ring', tier[2]); res.style.setProperty('--tone', tier[3]);
-      $('#ringFg').style.strokeDashoffset = String(389.6 * (1 - total / 100));
-      animateTo(total);
-      $('#tier span').textContent = tier[1];
-      const areas = PILL.filter(([k]) => P[k] != null), best = areas.slice().sort((a, b) => P[b[0]] - P[a[0]])[0], worst = areas.slice().sort((a, b) => P[a[0]] - P[b[0]])[0];
-      $('#verdict').textContent = worst && P[worst[0]] >= 70 ? 'Strong on all four pillars.' : `Strongest at ${best[1]}. Work on ${worst[1]} next.`;
-      $('#pillars').innerHTML = PILL.map(([k, n]) => `<div><span>${n}</span><b class="num">${masked ? '••' : P[k] ?? '–'}</b><span class="pb"><i style="width:${P[k] || 0}%"></i></span></div>`).join('');
-      const pl = R.pl;
-      $('#hfacts').innerHTML = `<span>Saving <b class="num">${masked ? '••' : Math.round((pl.savingsRate || 0) * 100) + '%'}</b> of pay</span><span>Cushion <b class="num">${masked ? '••' : (R.res.months || 0).toFixed(1)}</b> of ${R.res.target} months</span><span>Pay is <b>${R.vol ? { stable: 'steady', variable: 'varied', volatile: 'irregular' }[R.vol.level] : 'new'}</b></span>`;
-      $('#nextStep').textContent = nextStep(R, P);
-    };
-    knobs.addEventListener('input', draw);
-    $$('.seg button').forEach(b => b.addEventListener('click', () => { state.pay = b.dataset.pay; $$('.seg button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw(); }));
-    draw();
-    window.__drawHealth = draw;
-  } else if (knobs) knobs.closest('.hgrid').hidden = true;
+  let touched = false;
+  const setPrivacy = on => {
+    sw.setAttribute('aria-checked', String(on)); document.body.classList.toggle('blurred', on);
+    $('#privState').textContent = on ? 'Shh. Nothing to see here.' : 'Numbers showing';
+  };
+  sw.addEventListener('click', () => { touched = true; setPrivacy(sw.getAttribute('aria-checked') !== 'true'); });
+  /* the lights go off by themselves at 22:00 and come back on in the morning, until you take the switch yourself */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(es => es.forEach(e => { if (!touched && e.isIntersecting) setPrivacy(e.target.id === 'privacy'); }), { threshold: .45 })
+      .observe($('#privacy'));
+    new IntersectionObserver(es => es.forEach(e => { if (!touched && e.isIntersecting) setPrivacy(false); }), { threshold: .3 }).observe($('#morning'));
+  }
 
   /* ============ what's new: payday plan (the same split as Finance.payPlan: bills, then savings, a cushion, the rest per day) ============ */
   const PD = { pay: 3200, bills: 1240, days: 30 };
@@ -1272,67 +906,47 @@ footer .social svg{width:18px;height:18px}
     $('#calMonth').textContent = mName;
     $('#cal').innerHTML = ['M', 'T', 'W', 'T', 'F', 'S', 'S'].map(h => `<span class="h">${h}</span>`).join('') + '<span class="d empty"></span>'.repeat(dow) +
       cells.map(c => `<span class="d${c.bal < 0 ? ' short' : c.bal < 250 ? ' tight' : ''}" title="${esc(shortFmt.format(new Date(y, m, c.d)))}: ${masked ? '•••' : USD.format(c.bal)}">${c.d}<i style="height:${Math.max(8, c.bal / max * 100)}%"></i>${c.inc ? '<u class="in"></u>' : c.out ? '<u class="out"></u>' : ''}</span>`).join('');
-    $('#calAlert span').textContent = `Tightest on ${shortFmt.format(new Date(y, m, low.d))}: about ${money(low.v)} left, the day before payday. Holding off one bigger purchase keeps you clear.`;
+    $('#calAlert span').innerHTML = `Tightest on ${shortFmt.format(new Date(y, m, low.d))}: about <span class="num">${money(low.v)}</span> left, the day before payday. Holding off one bigger purchase keeps you clear.`;
   };
 
-  /* split a bill */
-  let samPaid = false;
-  const drawSplit = () => {
-    $('#owed').textContent = money(samPaid ? 0 : 30);
-    const b = $('#samBtn'); b.textContent = samPaid ? 'Repaid' : 'Mark repaid'; b.classList.toggle('done', samPaid); b.disabled = samPaid;
-    $('#samNote').textContent = samPaid ? 'Paid you back today' : 'Owes you';
-  };
-  $('#samBtn').addEventListener('click', () => { samPaid = true; drawSplit(); });
+  drawPay(); drawCal();
 
-  /* the tabs: they move on by themselves until you click, hover or focus them; arrow keys move between them */
-  const tabs = $$('.tabs [role=tab]'), TAB_MS = 7000;
-  /* not on phones: the panels differ in height, so the page would jump while you read */
-  let cur = 0, auto = !reduce && matchMedia('(min-width: 1061px)').matches, t0 = 0, rafT = 0, inView = false;
-  const pick = (i, focus) => {
-    cur = (i + tabs.length) % tabs.length;
-    tabs.forEach((t, k) => { const on = k === cur, p = $('#' + t.getAttribute('aria-controls'));
-      t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; t.style.setProperty('--prog', 0);
-      p.hidden = !on; p.classList.toggle('on', on); });
-    if (focus) tabs[cur].focus();
-    t0 = performance.now();
+  /* ============ the clock: the hour you're in sets the sky; the menu jumps to any hour ============ */
+  const hours = $$('.hour'), dock = $('#dock'), clock = $('#clock'), root = document.documentElement;
+  $('#jump').innerHTML = hours.map(h => `<a href="#${h.id}" data-for="${h.id}"><b>${h.dataset.hour}</b>${esc(h.dataset.label)}</a>`).join('');
+  const setHour = h => {
+    $('#clockT').textContent = h.dataset.hour; $('#clockL').textContent = h.dataset.label;
+    root.dataset.sky = h.dataset.sky;
+    const [hh, mm] = h.dataset.hour.split(':').map(Number);
+    clock.style.setProperty('--deg', ((hh % 12) * 30 + mm / 2) + 'deg');
+    $$('#jump a').forEach(a => a.setAttribute('aria-current', String(a.dataset.for === h.id)));
   };
-  const stopAuto = () => { if (!auto) return; auto = false; tabs.forEach(t => t.style.setProperty('--prog', 0)); };
-  const tick = t => {
-    if (auto && inView && !document.hidden) { const k = (t - t0) / TAB_MS; tabs[cur].style.setProperty('--prog', Math.min(1, k)); if (k >= 1) pick(cur + 1); }
-    else t0 = t - (parseFloat(tabs[cur].style.getPropertyValue('--prog')) || 0) * TAB_MS;
-    if (auto) rafT = requestAnimationFrame(tick);
+  /* the last hour (in page order) that has reached the middle of the screen */
+  let curHour = null, ticking = false;
+  const pickHour = () => {
+    ticking = false; const mid = innerHeight / 2; let cur = hours[0];
+    for (const h of hours) if (h.getBoundingClientRect().top <= mid) cur = h;
+    if (cur !== curHour) { curHour = cur; setHour(cur); }
   };
-  tabs.forEach((t, i) => t.addEventListener('click', () => { stopAuto(); pick(i); }));
-  $('.tabs').addEventListener('keydown', e => {
-    const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key]; if (k) { e.preventDefault(); stopAuto(); pick(cur + k, true); }
-    if (e.key === 'Home') { e.preventDefault(); stopAuto(); pick(0, true); } if (e.key === 'End') { e.preventDefault(); stopAuto(); pick(tabs.length - 1, true); }
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(pickHour); } }, { passive: true });
+  addEventListener('resize', pickHour); pickHour();
+  $('#jump').addEventListener('click', e => { if (e.target.closest('a')) clock.open = false; });
+  document.addEventListener('click', e => { if (clock.open && !clock.contains(e.target)) clock.open = false; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && clock.open) { clock.open = false; clock.querySelector('summary').focus(); } });
+  /* the dock shows once you scroll past the first screen */
+  const dockOn = () => dock.classList.toggle('on', scrollY > innerHeight * .6);
+  addEventListener('scroll', dockOn, { passive: true }); dockOn();
+
+  /* ============ share: the phone's own share sheet, or copy the link ============ */
+  const shareBtn = $('#share');
+  shareBtn.addEventListener('click', async () => {
+    const data = { title: 'Penny', text: 'Penny tells you what\'s safe to spend today. No bank login, nothing leaves your device.', url: 'https://penny.akrot.app/' };
+    try {
+      if (navigator.share) { await navigator.share(data); return; }
+      await navigator.clipboard.writeText(data.url);
+      const t = shareBtn.textContent; shareBtn.textContent = 'Link copied'; setTimeout(() => { shareBtn.textContent = t; }, 2000);
+    } catch {}
   });
-  $('.stage').addEventListener('pointerdown', stopAuto); $('.stage').addEventListener('focusin', stopAuto);
-  if ('IntersectionObserver' in window) new IntersectionObserver(es => { inView = es[0].isIntersecting; }, { threshold: .35 }).observe($('.show'));
-  else inView = true;
-  if (auto) rafT = requestAnimationFrame(tick);
-
-  /* Ask Penny, cycling through the languages it speaks */
-  const ASK = [['English', 'How much did I spend on dining last month?', '$291.66 across 14 visits. That\'s $71.66 over your budget.'],
-    ['Español', '¿Cuánto gasté en restaurantes el mes pasado?', '$291.66 en 14 visitas. Son $71.66 más de tu presupuesto.'],
-    ['Français', 'Combien ai-je dépensé au restaurant le mois dernier ?', '291,66 $ en 14 visites, soit 71,66 $ de plus que votre budget.'],
-    ['العربية', 'كم أنفقت على المطاعم الشهر الماضي؟', '‏$291.66 في 14 زيارة، أي $71.66 فوق ميزانيتك.', 'rtl'],
-    ['Português', 'Quanto gastei em restaurantes no mês passado?', '$291.66 em 14 visitas. São $71.66 acima do seu orçamento.'],
-    ['中文', '上个月我在餐饮上花了多少钱？', '14 次共 $291.66，比预算多 $71.66。'],
-    ['Русский', 'Сколько я потратил на рестораны в прошлом месяце?', '$291.66 за 14 визитов. Это на $71.66 больше бюджета.'],
-    ['हिन्दी', 'पिछले महीने मैंने खाने-पीने पर कितना खर्च किया?', '14 बार में $291.66, आपके बजट से $71.66 ज़्यादा।'],
-    ['Bahasa Indonesia', 'Berapa pengeluaran saya untuk makan di luar bulan lalu?', '$291.66 dari 14 kunjungan, $71.66 di atas anggaran Anda.']];
-  let askI = 0;
-  const drawAsk = swap => {
-    const [l, q, a, dir] = ASK[askI], el = $('#askChat'), hide = s => masked ? s.replace(/\d+[.,]\d{2}/g, '•••') : s;
-    el.setAttribute('dir', dir || 'ltr');
-    el.innerHTML = `<span class="lang">${esc(l)}</span><span class="bubble me">${esc(q)}</span><span class="bubble">${esc(hide(a))}</span>`;
-    if (swap) { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); }
-  };
-  if (!reduce) setInterval(() => { if (document.hidden) return; askI = (askI + 1) % ASK.length; drawAsk(true); }, 4200);
-
-  window.__drawNew = () => { drawPay(); drawCal(); drawSplit(); drawAsk(false); };
-  window.__drawNew();
 
   /* ============ phone frames: the status and gesture bars take the colour of the screenshot's top and bottom edge ============ */
   const edge = (img, top) => {
@@ -1345,14 +959,6 @@ footer .social svg{width:18px;height:18px}
     if (img.complete && img.naturalWidth) paint(); else img.addEventListener('load', paint, { once: true });
   });
 
-  /* ============ reveal on scroll, bento visuals ============ */
-  const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return; const t = e.target; t.classList.add('in'); io.unobserve(t);
-    if (t.id === 'paceTile') $$('#paceTile .tr i').forEach(i => { i.style.width = i.dataset.w + '%'; });
-  }), { rootMargin: '0px 0px -12% 0px', threshold: .08 }) : null;
-  $$('.rv').forEach(el => io ? io.observe(el) : el.classList.add('in'));
-  if (!io) $$('#paceTile .tr i').forEach(i => { i.style.width = i.dataset.w + '%'; });
-  window.__rvReady = true;
   /* the top bar gets a line once you scroll */
   const bar = $('#bar'); addEventListener('scroll', () => bar.classList.toggle('scrolled', scrollY > 8), { passive: true });
 })();
