@@ -1,0 +1,27 @@
+# Penny
+
+> Penny is a private budget app for Windows and Android by Akrot Studio. It plans every paycheck and shows what is safe to spend today. There is no account, no bank login and no cloud: data is encrypted on the device. Available in 13 languages. Free during the beta.
+
+Key facts:
+- Platforms: Windows (Microsoft Store and installer) and Android (Google Play, in testing).
+- Data: stored only on the device, encrypted with AES-256. Optional passcode, recovery key, and Windows Hello or fingerprint unlock.
+- Getting transactions in: bank statement files (CSV, OFX, QFX), Mint/YNAB/Monarch exports, plain-language entry, and on Android purchases from bank notifications and receipt photos.
+- Planning: safe to spend today, payday plan, cash-flow calendar, budgets, savings goals, subscription watch, monthly checkup, what-if scenarios, debt planner, Financial Health Report.
+- Languages: English, Spanish, Portuguese, French, German, Italian, Hungarian, Turkish, Russian, Indonesian, Chinese, Hindi, Arabic.
+- Penny never asks for bank credentials and has no servers or analytics.
+
+## Pages
+- [Features](https://penny.akrot.app/features): everything Penny does
+- [Security](https://penny.akrot.app/security): how data is encrypted and protected
+- [Privacy](https://penny.akrot.app/privacy): privacy notice
+- [Download](https://penny.akrot.app/download): Windows and Android
+- [What's new](https://penny.akrot.app/changelog): release notes
+- [Support](https://penny.akrot.app/support): help and contact (support@akrot.app)
+- [Budget app without bank login](https://penny.akrot.app/budget-app-without-bank-login)
+- [Mint alternative](https://penny.akrot.app/mint-alternative)
+- [YNAB alternative](https://penny.akrot.app/ynab-alternative)
+- [Budget app for irregular income](https://penny.akrot.app/budget-app-irregular-income)
+- [Expense tracker for Windows](https://penny.akrot.app/expense-tracker-windows)
+
+## Company
+- [Akrot Studio](https://akrot.app): the independent software studio that makes Penny
