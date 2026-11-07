@@ -522,6 +522,12 @@ body.blurred .appwin .num,body.blurred .card .num{filter:blur(7px)}
   footer{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
 }
 @media(prefers-reduced-motion:reduce){.sky i,.dial i,.num{transition:none}}
+/* phone screens: a plain rounded rectangle, no device. Radius 32 with 12px of the app's own edge colour around the screenshot,
+   so the curve (it cuts in 0.29 x radius = 9.4px) never reaches anything in the app */
+.pixel{padding:12px;border-radius:32px;background:var(--sb,#10201D);box-shadow:0 0 0 1.5px var(--rule),0 50px 70px -38px rgba(20,33,31,.6),0 18px 30px -18px rgba(20,33,31,.35)}
+.pixel .key,.pixel .cam,.pixel .sb,.pixel .nav{display:none}
+.pixel .glass{padding:0;border-radius:0;background:none;box-shadow:none}
+.pixel .scr{border-radius:0;background:none;overflow:visible}
 
 </style>
 </head>
@@ -955,7 +961,7 @@ body.blurred .appwin .num,body.blurred .card .num{filter:blur(7px)}
     const [r, g, b] = x.getImageData(0, 0, 1, 1).data; return `rgb(${r},${g},${b})`;
   };
   $$('.pixel .scr img').forEach(img => {
-    const paint = () => { try { const s = img.closest('.scr'); s.style.setProperty('--sb', edge(img, true)); s.style.setProperty('--nb', edge(img, false)); } catch {} };
+    const paint = () => { try { const s = img.closest('.pixel'); s.style.setProperty('--sb', edge(img, true)); s.style.setProperty('--nb', edge(img, false)); } catch {} };
     if (img.complete && img.naturalWidth) paint(); else img.addEventListener('load', paint, { once: true });
   });
 
