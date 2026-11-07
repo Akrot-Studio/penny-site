@@ -109,12 +109,12 @@ h2{font-size:clamp(34px,4.3vw,58px);max-width:15ch}
 
 /* the window */
 .appwin{--a-bg:#FBF6EF;--a-side:#F5EEE4;--a-line:#E8DDCD;--a-ink:#14211F;--a-mute:#6A7270;
-  position:relative;margin-top:clamp(40px,5vw,64px);border-radius:14px;background:var(--a-bg);color:var(--a-ink);
+  position:relative;margin-top:clamp(40px,5vw,64px);border-radius:var(--r,14px);background:var(--a-bg);color:var(--a-ink);
   box-shadow:0 0 0 1px rgba(255,255,255,.10),0 2px 0 rgba(255,255,255,.08) inset,0 60px 120px -40px rgba(0,0,0,.75),0 0 120px -30px rgba(201,99,47,.35)}
-.appwin::before{content:"";position:absolute;inset:-1px;border-radius:15px;padding:1px;pointer-events:none;
+.appwin::before{content:"";position:absolute;inset:-1px;border-radius:calc(var(--r,14px) + 1px);padding:1px;pointer-events:none;
   background:linear-gradient(140deg,rgba(238,154,92,.7),transparent 30%,transparent 70%,rgba(43,184,154,.6));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
-.aw-bar{height:36px;display:flex;align-items:center;gap:8px;padding-left:14px;border-radius:14px 14px 0 0;background:#F0E8DC;border-bottom:1px solid var(--a-line);
+.aw-bar{height:36px;display:flex;align-items:center;gap:8px;padding-left:14px;border-radius:var(--r,14px) var(--r,14px) 0 0;background:#F0E8DC;border-bottom:1px solid var(--a-line);
   font:12px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;color:#4B5351}
 .aw-bar>svg{width:15px;height:15px}
 .aw-saved{display:flex;align-items:center;gap:7px;margin-left:auto;color:var(--a-mute)}
@@ -522,9 +522,10 @@ body.blurred .appwin .num,body.blurred .card .num{filter:blur(7px)}
   footer{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
 }
 @media(prefers-reduced-motion:reduce){.sky i,.dial i,.num{transition:none}}
-/* phone screens: a plain rounded rectangle, no device. Radius 32 with 12px of the app's own edge colour around the screenshot,
-   so the curve (it cuts in 0.29 x radius = 9.4px) never reaches anything in the app */
-.pixel{padding:12px;border-radius:32px;background:var(--sb,#10201D);box-shadow:0 0 0 1.5px var(--rule),0 50px 70px -38px rgba(20,33,31,.6),0 18px 30px -18px rgba(20,33,31,.35)}
+/* every screenshot and app window: corner radius = 3.5% of its shorter side, border = 1.5% of its shorter side, in the app's own edge colour
+   (the same ratio as akrot.app's Penny window). The border is wider than the 0.29 x radius the curve cuts in, so no corner reaches the app.
+   A phone's shorter side is its width, the .device box (a size container) */
+.pixel{padding:1.5cqw;border-radius:3.5cqw;background:var(--sb,#10201D);box-shadow:0 0 0 1.5px var(--rule),0 50px 70px -38px rgba(20,33,31,.6),0 18px 30px -18px rgba(20,33,31,.35)}
 .pixel .key,.pixel .cam,.pixel .sb,.pixel .nav{display:none}
 .pixel .glass{padding:0;border-radius:0;background:none;box-shadow:none}
 .pixel .scr{border-radius:0;background:none;overflow:visible}
@@ -965,6 +966,9 @@ body.blurred .appwin .num,body.blurred .card .num{filter:blur(7px)}
     if (img.complete && img.naturalWidth) paint(); else img.addEventListener('load', paint, { once: true });
   });
 
+  /* the app window's corner follows the same rule: 3.5% of its shorter side */
+  const aw = $('.appwin'), awR = () => aw.style.setProperty('--r', (Math.min(aw.offsetWidth, aw.offsetHeight) * .035).toFixed(1) + 'px');
+  if ('ResizeObserver' in window) new ResizeObserver(awR).observe(aw); awR();
   /* the top bar gets a line once you scroll */
   const bar = $('#bar'); addEventListener('scroll', () => bar.classList.toggle('scrolled', scrollY > 8), { passive: true });
 })();
