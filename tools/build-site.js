@@ -7,6 +7,11 @@
 const path = require('path'), fs = require('fs');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'site'), OUT = path.join(ROOT, 'dist', 'site');
 const SITE = 'https://penny.akrot.app';
+const VERSION = require(path.join(ROOT, 'package.json')).version;
+/* the app's version, wherever a page states it, always matches package.json (the pages went stale at 1.0.0 and 1.1.1) */
+const stampVersion = t => t.replace(/("softwareVersion":")[\d.]+/g, `$1${VERSION}`).replace(/(class="ver"><i><\/i>Version )[\d.]+/g, `$1${VERSION}`).replace(/(Available now · version )[\d.]+/g, `$1${VERSION}`);
+module.exports = { stampVersion, VERSION };
+if (require.main !== module) return;
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(SRC, OUT, { recursive: true });
@@ -19,7 +24,7 @@ for (const f of PAGES) {
   const p = path.join(OUT, f), t = fs.readFileSync(p, 'utf8');
   /* Cloudflare Pages serves /features.html at /features (308 otherwise), so links and canonicals use the clean address */
   const pages = PAGES.filter(x => x !== 'index.html').map(x => x.replace('.html', '')).join('|');
-  fs.writeFileSync(p, t.replace(/<!--header:(\w+)(?::(\w+))?-->/, (_, cur, lang) => part('header', lang).replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace(/<!--footer(?::(\w+))?-->/, (_, lang) => part('footer', lang))
+  fs.writeFileSync(p, stampVersion(t).replace(/<!--header:(\w+)(?::(\w+))?-->/, (_, cur, lang) => part('header', lang).replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace(/<!--footer(?::(\w+))?-->/, (_, lang) => part('footer', lang))
     .replace('</head>', '<link rel="stylesheet" href="theme.css?v=1">\n</head>')   /* the 2026 redesign layer, last so it wins */
     .replace(new RegExp(`(href="(?:${SITE.replace(/\./g, '\\.')}/)?)(${pages})\\.html([#"])`, 'g'), '$1$2$3'));
 }
