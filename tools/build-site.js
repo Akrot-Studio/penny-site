@@ -26,6 +26,7 @@ for (const f of PAGES) {
 require('esbuild').buildSync({ entryPoints: [path.join(ROOT, 'renderer', 'penny-core.js')], minify: true, charset: 'utf8', outfile: path.join(OUT, 'penny-core.js'), logLevel: 'warning' });
 
 fs.writeFileSync(path.join(OUT, '_headers'), `/*
+  Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
