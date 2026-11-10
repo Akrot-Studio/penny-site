@@ -10,9 +10,16 @@ const SITE = 'https://penny.akrot.app';
 const VERSION = require(path.join(ROOT, 'package.json')).version;
 /* the app's version, wherever a page states it, always matches package.json (the pages went stale at 1.0.0 and 1.1.1) */
 const stampVersion = t => t.replace(/("softwareVersion":")[\d.]+/g, `$1${VERSION}`).replace(/(class="ver"><i><\/i>Version )[\d.]+/g, `$1${VERSION}`).replace(/(Available now · version )[\d.]+/g, `$1${VERSION}`);
-module.exports = { stampVersion, VERSION };
+/* headlines that announce a release are written by hand: fail the build until they name the current major.minor */
+const staleHeadlines = (pages, version = VERSION) => { const mm = version.split('.').slice(0, 2).join('.'), bad = [];
+  if (!new RegExp(`class="news"[^>]*>(?:<b>[^<]*</b>)?Penny ${mm.replace('.', '\\.')}\\b`).test(pages['index.html'] || '')) bad.push(`index.html: the NEW banner must announce Penny ${mm}`);
+  if (!new RegExp(`<h1>Penny ${mm.replace('.', '\\.')}\\b`).test(pages['changelog.html'] || '')) bad.push(`changelog.html: the heading must say Penny ${mm}`);
+  return bad; };
+module.exports = { stampVersion, staleHeadlines, VERSION };
 if (require.main !== module) return;
 
+const stale = staleHeadlines(Object.fromEntries(['index.html', 'changelog.html'].map(f => [f, fs.readFileSync(path.join(SRC, f), 'utf8')])));
+if (stale.length) { console.error('Out-of-date release headlines:\n  ' + stale.join('\n  ')); process.exit(1); }
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(SRC, OUT, { recursive: true });
 /* the shared header and footer (site/partials) go into every page: <!--header:features--> marks Features as the current page.
