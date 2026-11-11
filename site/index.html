@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Penny – Spend freely. Nobody's watching.</title>
-<meta name="description" content="Penny is a private budget app for Windows and Android. It plans every paycheck and shows what's safe to spend today. No account, no bank login, no cloud.">
+<meta name="description" content="Penny is a private budget app for Windows and Android. It plans every paycheck and shows what's safe to spend today. No account, no bank login, no Penny servers.">
 <meta property="og:title" content="Penny – Spend freely. Nobody's watching.">
-<meta property="og:description" content="A private budget app for Windows and Android. It reads your bank alerts and receipts on your device. No account, no bank login, no cloud.">
+<meta property="og:description" content="A private budget app for Windows and Android. It reads your bank alerts and receipts on your device. No account, no bank login, no Penny servers.">
 <meta property="og:image" content="https://penny.akrot.app/img/og.jpg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://penny.akrot.app/">
@@ -16,11 +16,11 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Penny","alternateName":"Penny – Budget & Money Tracker","applicationCategory":"FinanceApplication","operatingSystem":"Windows 10, Windows 11, Android 7+",
  "description":"A private budget app for Windows and Android. Type what you spent in plain words, add purchases from bank notifications and receipt photos, import statements, and keep every number encrypted on your own device.",
- "url":"https://penny.akrot.app/","downloadUrl":"https://apps.microsoft.com/detail/9NZJGZ0X9VDT","softwareVersion":"1.1.1",
+ "url":"https://penny.akrot.app/","downloadUrl":"https://apps.microsoft.com/detail/9NZJGZ0X9VDT","softwareVersion":"2.3.0",
  "inLanguage":["en","es","pt","fr","de","it","hu","tr","ru","id","zh-Hans","hi","ar"],"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Akrot Studio","url":"https://akrot.app"}}
 </script>
 <link rel="icon" type="image/svg+xml" href="img/penny-mark.svg">
-<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script>/* reveal-on-scroll only when scripts run; if they fail, everything shows after a moment */
 document.documentElement.classList.add('js');setTimeout(()=>{if(!window.__rvReady)document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'))},3000);</script>
@@ -597,7 +597,7 @@ body.blurred .appwin .num,body.blurred .card .num{filter:blur(7px)}
   <div class="wrap">
     <div class="h-top">
       <div>
-        <a class="news" href="changelog.html"><b>NEW</b>Penny 1.1: Windows Hello and fingerprint unlock<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a>
+        <a class="news" href="changelog.html#v2.3.0"><b>NEW</b>Penny 2.3: sync between your PC and phone, encrypted<svg class="ic" aria-hidden="true"><use href="#i-next"/></svg></a>
         <h1 id="h1"><span class="l1">Spend <em>freely.</em></span> <span class="l2">Nobody's watching.</span></h1>
       </div>
       <div class="h-side">
@@ -720,7 +720,7 @@ body.blurred .appwin .num,body.blurred .card .num{filter:blur(7px)}
       <div>
         <span class="eyebrow hr"><b>22:00</b>Lights off</span>
         <h2 id="h2b">Nobody watching. Not even us.</h2>
-        <p class="sub">No bank login, no account, no cloud. It all stays on your device. The lights just went off and every number on this page blurred. Switch it back if you like.</p>
+        <p class="sub">No bank login, no account, no Penny servers. It all stays on your device, and optional sync keeps only encrypted copies in your own Google Drive. The lights just went off and every number on this page blurred. Switch it back if you like.</p>
       </div>
       <button class="switch" id="privSwitch" role="switch" aria-checked="false" type="button">
         <span class="track"><span class="knob"><svg class="ic on" aria-hidden="true"><use href="#i-eye"/></svg><svg class="ic off" aria-hidden="true"><use href="#i-eyeoff"/></svg></span></span>
@@ -743,7 +743,7 @@ body.blurred .appwin .num,body.blurred .card .num{filter:blur(7px)}
       <span class="eyebrow hr"><b>00:00</b>Tomorrow</span>
       <h2 id="h2f">Tomorrow, it starts again. Calmly.</h2>
       <p class="sub">Free during the beta. No card, no catch, no account. Windows today, Android soon.</p>
-      <p class="ver"><i></i>Version 1.1.1</p>
+      <p class="ver"><i></i>Version 2.3.0</p>
       <p class="shareline">Know someone who's always broke by the 25th? <button type="button" class="linkbtn" id="share">Send them Penny</button></p>
     </div>
     <div class="btns">

@@ -7,7 +7,19 @@
 const path = require('path'), fs = require('fs');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'site'), OUT = path.join(ROOT, 'dist', 'site');
 const SITE = 'https://penny.akrot.app';
+const VERSION = require(path.join(ROOT, 'package.json')).version;
+/* the app's version, wherever a page states it, always matches package.json (the pages went stale at 1.0.0 and 1.1.1) */
+const stampVersion = t => t.replace(/("softwareVersion":")[\d.]+/g, `$1${VERSION}`).replace(/(class="ver"><i><\/i>Version )[\d.]+/g, `$1${VERSION}`).replace(/(Available now · version )[\d.]+/g, `$1${VERSION}`);
+/* headlines that announce a release are written by hand: fail the build until they name the current major.minor */
+const staleHeadlines = (pages, version = VERSION) => { const mm = version.split('.').slice(0, 2).join('.'), bad = [];
+  if (!new RegExp(`class="news"[^>]*>(?:<b>[^<]*</b>)?Penny ${mm.replace('.', '\\.')}\\b`).test(pages['index.html'] || '')) bad.push(`index.html: the NEW banner must announce Penny ${mm}`);
+  if (!new RegExp(`<h1>Penny ${mm.replace('.', '\\.')}\\b`).test(pages['changelog.html'] || '')) bad.push(`changelog.html: the heading must say Penny ${mm}`);
+  return bad; };
+module.exports = { stampVersion, staleHeadlines, VERSION };
+if (require.main !== module) return;
 
+const stale = staleHeadlines(Object.fromEntries(['index.html', 'changelog.html'].map(f => [f, fs.readFileSync(path.join(SRC, f), 'utf8')])));
+if (stale.length) { console.error('Out-of-date release headlines:\n  ' + stale.join('\n  ')); process.exit(1); }
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.cpSync(SRC, OUT, { recursive: true });
 /* the shared header and footer (site/partials) go into every page: <!--header:features--> marks Features as the current page.
@@ -19,13 +31,14 @@ for (const f of PAGES) {
   const p = path.join(OUT, f), t = fs.readFileSync(p, 'utf8');
   /* Cloudflare Pages serves /features.html at /features (308 otherwise), so links and canonicals use the clean address */
   const pages = PAGES.filter(x => x !== 'index.html').map(x => x.replace('.html', '')).join('|');
-  fs.writeFileSync(p, t.replace(/<!--header:(\w+)(?::(\w+))?-->/, (_, cur, lang) => part('header', lang).replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace(/<!--footer(?::(\w+))?-->/, (_, lang) => part('footer', lang))
+  fs.writeFileSync(p, stampVersion(t).replace(/<!--header:(\w+)(?::(\w+))?-->/, (_, cur, lang) => part('header', lang).replace(`data-p="${cur}"`, `data-p="${cur}" aria-current="page"`)).replace(/<!--footer(?::(\w+))?-->/, (_, lang) => part('footer', lang))
     .replace('</head>', '<link rel="stylesheet" href="theme.css?v=1">\n</head>')   /* the 2026 redesign layer, last so it wins */
     .replace(new RegExp(`(href="(?:${SITE.replace(/\./g, '\\.')}/)?)(${pages})\\.html([#"])`, 'g'), '$1$2$3'));
 }
 require('esbuild').buildSync({ entryPoints: [path.join(ROOT, 'renderer', 'penny-core.js')], minify: true, charset: 'utf8', outfile: path.join(OUT, 'penny-core.js'), logLevel: 'warning' });
 
 fs.writeFileSync(path.join(OUT, '_headers'), `/*
+  Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin

@@ -1,6 +1,6 @@
 # Penny
 
-> Penny is a private budget app for Windows and Android by Akrot Studio. It plans every paycheck and shows what is safe to spend today. There is no account, no bank login and no cloud: data is encrypted on the device. Available in 13 languages. Free during the beta.
+> Penny is a private budget app for Windows and Android by Akrot Studio. It plans every paycheck and shows what is safe to spend today. There is no account, no bank login and no Penny server: data is encrypted on the device, and optional sync keeps only end-to-end encrypted copies in the user's own Google Drive. Available in 13 languages. Free during the beta.
 
 Key facts:
 - Platforms: Windows (Microsoft Store and installer) and Android (Google Play, in testing).

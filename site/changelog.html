@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>What's new – Penny</title>
-<meta name="description" content="Penny's release notes. New in 1.2: payday plan, cash-flow calendar, goal autopilot, subscription watch, split a bill, trip mode and four new languages.">
+<meta name="description" content="Penny's release notes. New in 2.3: encrypted sync between your PC and phone, through your own Google Drive. Also every currency in the world and a steadier Android app.">
 <link rel="canonical" href="https://penny.akrot.app/changelog.html">
-<meta property="og:title" content="What's new in Penny"><meta property="og:description" content="Payday plan, cash-flow calendar, subscription watch, split a bill, trip mode, Windows Hello unlock and 13 languages."><meta property="og:image" content="https://penny.akrot.app/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="What's new in Penny"><meta property="og:description" content="Encrypted sync between your PC and phone, every currency in the world, payday plan, cash-flow calendar and 13 languages."><meta property="og:image" content="https://penny.akrot.app/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#10201D">
-<link rel="icon" type="image/svg+xml" href="img/penny-mark.svg"><link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="icon" type="image/svg+xml" href="img/penny-mark.svg"><link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="preload" href="fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="site.css">
 <script>document.documentElement.classList.add('js');setTimeout(()=>{if(!window.__rvReady)document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'))},3000);</script>
@@ -27,12 +27,12 @@
 <section class="phero">
   <div class="wrap">
     <span class="eyebrow">What's new</span>
-    <h1>Penny 1.1.<br>From tracking money to planning it.</h1>
-    <p class="sub">The biggest update yet: Penny now plans each paycheck, sees the tight days coming, keeps an eye on subscriptions and handles shared costs and trips. It unlocks with Windows Hello or your fingerprint, and it speaks eight more languages.</p>
+    <h1>Penny 2.3.<br>Your money, on every device.</h1>
+    <p class="sub">Turn on Sync and your PC and phone stay in step. Everything is encrypted on your device first and kept only in your own Google Drive, never on our servers, because Penny has none. Penny now also knows every currency in the world, and opens reliably on Android.</p>
     <div class="hl">
-      <div class="tile dark rv"><svg class="ic" aria-hidden="true"><use href="img/icons.svg#i-coins"/></svg><h3>Payday plan</h3><p>Each paycheck split into bills, goals, a cushion and everyday money.</p></div>
-      <div class="tile dark rv d1"><svg class="ic" aria-hidden="true"><use href="img/icons.svg#i-calendar"/></svg><h3>Cash-flow calendar</h3><p>Your expected balance every day, tight days marked.</p></div>
-      <div class="tile dark rv d2"><svg class="ic" aria-hidden="true"><use href="img/icons.svg#i-globe"/></svg><h3>13 languages</h3><p>German, Italian, Hungarian, Turkish, Portuguese, French, Russian and Indonesian join the five.</p></div>
+      <div class="tile dark rv"><svg class="ic" aria-hidden="true"><use href="img/icons.svg#i-swap"/></svg><h3>Sync</h3><p>Link your devices with a QR code. A change on one shows up on the others.</p></div>
+      <div class="tile dark rv d1"><svg class="ic" aria-hidden="true"><use href="img/icons.svg#i-lock"/></svg><h3>Only you can read it</h3><p>Sealed with a key only your devices have. Not Google, and not us.</p></div>
+      <div class="tile dark rv d2"><svg class="ic" aria-hidden="true"><use href="img/icons.svg#i-globe"/></svg><h3>Every currency</h3><p>All 155 active currencies, each with its own decimals and symbol.</p></div>
     </div>
   </div>
 </section>
@@ -41,8 +41,35 @@
 <section class="sect">
   <div class="wrap">
 
+    <article class="rel" id="v2.3.0">
+      <div class="when rv"><b>2.3.0</b><span>November 10, 2026</span><span class="badge new">Latest</span></div>
+      <div class="rv">
+        <h3>Sync between your devices</h3>
+        <ul>
+          <li><b>Your PC and your phone, in step.</b> Turn on Sync in Settings, sign in with Google once, and link your other devices with a QR code. A change on one shows up on the others.</li>
+          <li><b>Encrypted before it leaves your device.</b> Penny keeps the copies in a hidden app folder in <b>your own</b> Google Drive, sealed with a key only your linked devices have. Not Google, and not us, can read them. Penny still has no servers and no account.</li>
+          <li><b>Off until you turn it on.</b> Without Sync, nothing changes: everything stays on your device.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="rel" id="v2.2.0">
+      <div class="when rv"><b>2.2.0</b><span>November 10, 2026</span></div>
+      <div class="rv">
+        <h3>Every currency in the world, and a steadier Android app</h3>
+        <p>Penny now has one version number everywhere: the app, the Microsoft Store and Google Play all say 2.2.0.</p>
+        <ul>
+          <li><b>All 155 active currencies.</b> Including the Hungarian forint (Ft). Search by name, code or symbol, in your language. Amounts use each currency's own decimals: none for the yen, three for the Kuwaiti dinar.</li>
+          <li><b>Language and currency on the welcome screen.</b> Penny suggests your currency from your phone or PC, and you can change both later in Settings › Language &amp; money.</li>
+          <li><b>Changing your currency never changes your amounts.</b> Penny asks whether your accounts stay in the old currency or were really in the new one.</li>
+          <li><b>Android opens reliably again.</b> After allowing notifications, Penny could become slow to open or stop opening. Reminders now update only what changed, and nothing about notifications can hold Penny up when it starts.</li>
+          <li><b>Tapping the tab you're on does nothing.</b> Your place on the page, your search and your filters stay put.</li>
+        </ul>
+      </div>
+    </article>
+
     <article class="rel" id="v1.1.1">
-      <div class="when rv"><b>1.1.1</b><span>November 6, 2026</span><span class="badge new">Latest</span></div>
+      <div class="when rv"><b>1.1.1</b><span>November 6, 2026</span></div>
       <div class="rv">
         <h3>A fix for Windows</h3>
         <ul>
