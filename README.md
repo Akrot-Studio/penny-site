@@ -32,7 +32,9 @@ Serve it with `node tools/serve.js` (http://localhost:8788) and check it at phon
 Site screenshots of the real app (`site/img`) are taken by `tools/site-shots.js` in the app repo; copy them here and bump `?v=`.
 
 ## Deploy
-See `docs/CUTOVER.md` for the current state. Until the cutover, the live site is still deployed from `penny-source`.
+Cloudflare Pages project `penny-site` is connected to this GitHub repo: **every push to `main` deploys** penny.akrot.app
+(build `node tools/build-site.js`, output `dist/site`); other branches get preview addresses on `*.penny-site-3kh.pages.dev`.
+Secrets (`LICENSE_KEY`) live on the Cloudflare project. History of the move: `docs/CUTOVER.md`.
 
 ## Rules
 - Claims must match the app (`docs/` in the app repo). Privacy policy changes need the owner's approval and a new date.

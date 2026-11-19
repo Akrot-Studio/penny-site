@@ -3,11 +3,18 @@
 Status (19 Nov 2026): steps 1-3 done. Private repo `Akrot-Studio/penny-site`; Cloudflare Pages project `penny-site`
 (https://penny-site-3kh.pages.dev) builds every push to `main`; D1 binding in place; all 26 pages match live.
 Step 4 done: the owner set `LICENSE_KEY` (the only secret the old project has); `/api/redeem` answers "That code isn't
-valid" for a made-up code. Next: step 6, moving the domain.
+valid" for a made-up code.
+Step 6 done (19 Nov 2026, 17:51): penny.akrot.app moved from project `penny` to `penny-site` (DNS `penny` CNAME ->
+`penny-site-3kh.pages.dev`); about 2 minutes of 522 errors. Checked live afterwards: all pages 200 with version 2.4.0,
+`/api/redeem` and `/unsubscribe` answer, headers set; studdit.app, www.studdit.app and penny-32k.pages.dev still 301 to
+penny.akrot.app (they stay on project `penny`, whose middleware forwards them).
+**penny.akrot.app now deploys from this repo.** Site changes in `penny-source` no longer reach it; its Deploy website
+workflow still uploads to the old `penny` project (harmless, but its final live check will fail) until step 8 removes it.
+Next: steps 8-10 (clean up penny-source, delete its Cloudflare token secret, update the studio docs).
 
 It was split from `penny-source` at commit `36269c8` with the history of the
 site kept (53 commits touching `site/`, `functions/`, `tools/build-site.js`, `tools/newsletter-schema.sql`, `wrangler.toml`,
-`tests/site.test.js`). The live site is still deployed from `penny-source` by its **Deploy website** workflow.
+`tests/site.test.js`).
 
 ## What was checked
 - `node tools/build-site.js` here produces a `dist/site` **byte-identical** to the build of `penny-source` at `36269c8`.
