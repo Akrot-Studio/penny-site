@@ -2,7 +2,10 @@
 
 Status (19 Nov 2026): steps 1-3 done. Private repo `Akrot-Studio/penny-site`; Cloudflare Pages project `penny-site`
 (https://penny-site-3kh.pages.dev) builds every push to `main`; D1 binding in place; all 26 pages match live.
-Next: step 4 (`LICENSE_KEY` secret, the only one the old project has; the two Lemon Squeezy ones aren't set there either). It was split from `penny-source` at commit `36269c8` with the history of the
+Step 4 done: the owner set `LICENSE_KEY` (the only secret the old project has); `/api/redeem` answers "That code isn't
+valid" for a made-up code. Next: step 6, moving the domain.
+
+It was split from `penny-source` at commit `36269c8` with the history of the
 site kept (53 commits touching `site/`, `functions/`, `tools/build-site.js`, `tools/newsletter-schema.sql`, `wrangler.toml`,
 `tests/site.test.js`). The live site is still deployed from `penny-source` by its **Deploy website** workflow.
 
