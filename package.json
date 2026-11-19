@@ -1,0 +1,10 @@
+{
+  "name": "penny-site",
+  "private": true,
+  "description": "Penny's website, https://penny.akrot.app (Cloudflare Pages). No dependencies.",
+  "scripts": {
+    "build": "node tools/build-site.js",
+    "test": "node --test tests/site.test.js",
+    "sync": "node tools/sync-from-app.js"
+  }
+}

@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /* Builds Penny's website (site/) into dist/site, ready for Cloudflare Pages at https://penny.akrot.app.
-   The page runs Penny's real parser and health model, so a minified copy of renderer/penny-core.js goes in with it.
+   The page runs Penny's real parser and health model, so the app's core goes in with it: app/penny-core.min.js, copied from
+   the app repo (penny-source) by tools/sync-from-app.js together with the app's version (app/app.json). No packages needed.
    Also writes Cloudflare's _headers file (security headers, long caching for fonts), robots.txt and sitemap.xml.
-   Usage: node tools/build-site.js          then, from the repository root (wrangler.toml: the newsletter database):
-          npx wrangler pages deploy --branch main      (also uploads functions/, the newsletter sign-up) */
+   Usage: node tools/build-site.js    (Cloudflare Pages runs this on every push; functions/ holds the newsletter and /api/redeem) */
 const path = require('path'), fs = require('fs');
 const ROOT = path.join(__dirname, '..'), SRC = path.join(ROOT, 'site'), OUT = path.join(ROOT, 'dist', 'site');
 const SITE = 'https://penny.akrot.app';
-const VERSION = require(path.join(ROOT, 'package.json')).version;
-/* the app's version, wherever a page states it, always matches package.json (the pages went stale at 1.0.0 and 1.1.1) */
+const VERSION = require(path.join(ROOT, 'app', 'app.json')).version;
+/* the app's version, wherever a page states it, always matches the app's package.json (via app/app.json) (the pages went stale at 1.0.0 and 1.1.1) */
 const stampVersion = t => t.replace(/("softwareVersion":")[\d.]+/g, `$1${VERSION}`).replace(/(class="ver"><i><\/i>Version )[\d.]+/g, `$1${VERSION}`).replace(/(Available now · version )[\d.]+/g, `$1${VERSION}`);
 /* headlines that announce a release are written by hand: fail the build until they name the current major.minor */
 const staleHeadlines = (pages, version = VERSION) => { const mm = version.split('.').slice(0, 2).join('.'), bad = [];
@@ -35,7 +35,7 @@ for (const f of PAGES) {
     .replace('</head>', '<link rel="stylesheet" href="theme.css?v=1">\n</head>')   /* the 2026 redesign layer, last so it wins */
     .replace(new RegExp(`(href="(?:${SITE.replace(/\./g, '\\.')}/)?)(${pages})\\.html([#"])`, 'g'), '$1$2$3'));
 }
-require('esbuild').buildSync({ entryPoints: [path.join(ROOT, 'renderer', 'penny-core.js')], minify: true, charset: 'utf8', outfile: path.join(OUT, 'penny-core.js'), logLevel: 'warning' });
+fs.copyFileSync(path.join(ROOT, 'app', 'penny-core.min.js'), path.join(OUT, 'penny-core.js'));
 
 fs.writeFileSync(path.join(OUT, '_headers'), `/*
   Strict-Transport-Security: max-age=31536000

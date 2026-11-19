@@ -1,6 +1,7 @@
-# Penny's website on Cloudflare Pages (https://penny.akrot.app). Build with `node tools/build-site.js`, then:
-#   npx wrangler pages deploy --branch main
-# functions/ holds the newsletter sign-up (/api/subscribe) and /unsubscribe; sign-ups live in the D1 database below.
+# Penny's website on Cloudflare Pages (https://penny.akrot.app). Cloudflare builds it with `node tools/build-site.js`
+# into dist/site. functions/ holds the newsletter sign-up (/api/subscribe), /unsubscribe and the app's Pro code
+# redemption (/api/redeem); sign-ups and promo codes live in the D1 database below. Secrets (LICENSE_KEY, LS_STORE_ID,
+# LS_PRODUCT_ID) are set on the Cloudflare project, never here. `name` must match the Cloudflare Pages project.
 name = "penny"
 pages_build_output_dir = "dist/site"
 compatibility_date = "2026-10-01"
