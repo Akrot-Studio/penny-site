@@ -1,6 +1,6 @@
 # Moving penny.akrot.app to this repo
 
-Status (19 Nov 2026): this repo is **local only**. It was split from `penny-source` at commit `36269c8` with the history of the
+Status (19 Nov 2026): pushed to the private GitHub repo `Akrot-Studio/penny-site` (step 1 done); not connected to Cloudflare yet. It was split from `penny-source` at commit `36269c8` with the history of the
 site kept (53 commits touching `site/`, `functions/`, `tools/build-site.js`, `tools/newsletter-schema.sql`, `wrangler.toml`,
 `tests/site.test.js`). The live site is still deployed from `penny-source` by its **Deploy website** workflow.
 
